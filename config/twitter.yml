@@ -1,0 +1,11 @@
+development: &base
+  key: "335415484-ZL0iR1tTWcNWp4Td6QU5GeVVvkBjRUolj8EHlmnX"
+  secret: "XXzEIZDrnHS65PlVhHQVB9SMAyjXzeNLMAh1Mhutp6c"
+
+test:
+ <<: *base
+ key: "335415484-ZL0iR1tTWcNWp4Td6QU5GeVVvkBjRUolj8EHlmnX"
+
+production:
+  <<: *base
+  secret: "XXzEIZDrnHS65PlVhHQVB9SMAyjXzeNLMAh1Mhutp6c"
