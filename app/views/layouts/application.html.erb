@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>Chicageaux</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
@@ -14,23 +12,9 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIVdH4Z2UHtUUD4WzR6fQoW2ykiJ6iPeI&sensor=true">
     </script>
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(41.8929153,-87.6359125),
-          zoom: 12,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-      }
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
-    //   $.post('/', latitudeLongitudeData, function(response){
-    //   parkingData = [];
-    //   displayResponseToTickets(response);
-    // });
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
 </head>
 <body>
 

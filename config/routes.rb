@@ -4,6 +4,7 @@ Chicageaux::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  post '/tweets_supply' => 'home#tweet_fetcher'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
