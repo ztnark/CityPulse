@@ -19,7 +19,7 @@ class HomeController < ApplicationController
       puts "#{status[:geo][:coordinates]}"
       puts " ++++++++++++++++++++++++++"
       @tweets << [status[:geo][:coordinates], status.text, status[:user][:screen_name]]
-      client.stop if @tweets.size > 10
+      client.stop if @tweets.size > 2
     end
    render :json => @tweets
    
