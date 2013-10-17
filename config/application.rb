@@ -5,6 +5,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+ require 'eventful/api'
 # TWITTER_CONFIG = YAML.load_file("config/twitter.yml")[Rails.env]
 # require "rails/test_unit/railtie"
 

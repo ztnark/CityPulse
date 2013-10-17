@@ -33,7 +33,12 @@ function initialize() {
   tweets = []
   $.post('/tweets_supply', function(response){
     console.log(response);
-  
+
+  // convertTweetsToMapObjects(response);
+  });
+  $.post('/eventful', function(response){
+    console.log(response);
+    console.log(response[0].latitude);
   // convertTweetsToMapObjects(response);
   });
 
