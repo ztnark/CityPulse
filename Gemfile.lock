@@ -51,6 +51,8 @@ GEM
       http_parser.rb (~> 0.5)
       simple_oauth (~> 0.1)
     erubis (2.7.0)
+    eventfulapi (2.2.1)
+      mime-types (> 0.0.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
     faraday (0.8.8)
@@ -141,6 +143,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  eventfulapi
   jbuilder (~> 1.2)
   jquery-rails
   pg
