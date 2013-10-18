@@ -29,7 +29,6 @@ GEM
     arel (4.0.0)
     atomic (1.1.14)
     builder (3.1.4)
-    coffee-rails (4.0.1)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     coffee-rails (4.0.0)
