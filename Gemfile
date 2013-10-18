@@ -15,6 +15,8 @@ gem 'eventfulapi'
 
 gem 'instagram'
 
+gem 'redis'
+
 # switched to thin server in order to support websockets.
 gem 'thin'
 
@@ -32,6 +34,8 @@ gem 'websocket-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'sidekiq'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

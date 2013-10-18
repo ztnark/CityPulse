@@ -29,4 +29,22 @@ class EventController < WebsocketRails::BaseController
      
   end
 
+  def instagram
+    Instagram.configure do |config|
+      config.client_id = "c20b0e71c0ae4c9092810007096d9217"
+    end
+
+   instagrams =Instagram.media_search("41.8929153","-87.6359125")
+   @instagrams = []
+   instagrams.each do |ig|
+     @instagrams << {latitude: ig.to_hash['location']['latitude'],
+                   longitude: ig.to_hash['location']['longitude'],
+                   url: ig.to_hash['images']['low_resolution']['url'],
+                   # text: ig.to_hash['caption']['text']
+                 }
+   end
+    HardWorker.perform_async(send_message :success, @instagrams, namespace: :events)
+  end
+
+
 end
