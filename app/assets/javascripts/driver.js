@@ -2,9 +2,9 @@ var map = undefined;
 $(document).ready(function(){
   map = loadMap();
   var marker;
-  getTweets();
+  // getTweets();
   instagram(map)
-  events(map);
+  // events(map);
 
   
   var dispatcher = new WebSocketRails('localhost:3000/websocket');
