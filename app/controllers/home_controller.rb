@@ -27,6 +27,7 @@ class HomeController < ApplicationController
                    eventful_id: event['id']
                  }
     end
+    p @events
     render :json => @events
   end
 
