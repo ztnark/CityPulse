@@ -4,7 +4,7 @@ $(document).ready(function(){
   var marker;
   // getTweets();
   instagram(map)
-  // events(map);
+  events(map);
 
   
   var dispatcher = new WebSocketRails('localhost:3000/websocket');
