@@ -9,6 +9,8 @@ Chicageaux::Application.routes.draw do
   post '/instagram' => 'home#instagram_fetcher'
 
 
+  # post '/web_socket' => 'chat#initialize_session'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

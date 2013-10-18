@@ -5,3 +5,5 @@
 //= require driver.js
 //= require_tree .
 
+//= require websocket_rails/main
+
