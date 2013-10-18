@@ -13,13 +13,12 @@ function loadMap() {
 
 
 var mapObjectArray = [];
-function convertTweetsToMapObjects(array_of_tweets){
-    for (var i=0; i<array_of_tweets.length; i++){
-      tweet = [new google.maps.LatLng(array_of_tweets[i][0][0], array_of_tweets[i][0][1]), array_of_tweets[i][1], array_of_tweets[i][2]]
+function convertTweetsToMapObjects(tweet_from_socket){
+
+      tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
       mapObjectArray.push(tweet);
-    };
-    console.log(mapObjectArray);
-    convertToMarkers(mapObjectArray);
+      console.log(mapObjectArray);
+      convertToMarkers(mapObjectArray);
 };
 
 function convertToMarkers(googleMapArray){
@@ -45,21 +44,21 @@ function addInfoWindow(marker, message) {
             });
 }
 
-function getTweets() {
-  $.post('/tweets_supply', function(response){
-  console.log(response);
-  convertTweetsToMapObjects(response);
-});
-
-
-
-$(document).ajaxStop(function () {
-    google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
-  });
+// function getTweets() {
+//   $.post('/tweets_supply', function(response){
+//   console.log(response);
  
-});
-}
+// });
+
+
+
+// $(document).ajaxStop(function () {
+//     google.maps.event.addListener(marker, 'click', function() {
+//     infowindow.open(map,marker);
+//   });
+
+// });
+// }
 
 
 
