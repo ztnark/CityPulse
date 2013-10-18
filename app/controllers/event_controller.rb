@@ -4,7 +4,7 @@ class EventController < WebsocketRails::BaseController
   end
 
   def dispatch
-    send_message :success, "hello from the server", namespace: :events 
+    send_message :success, "hello from the server", namespace: :events
   end
 
   def tweets
@@ -16,7 +16,7 @@ class EventController < WebsocketRails::BaseController
       config.oauth_token_secret = 'XXzEIZDrnHS65PlVhHQVB9SMAyjXzeNLMAh1Mhutp6c'
       config.auth_method        = :oauth
     end
-  @tweets = []
+    @tweets = []
     TweetStream::Client.new.locations(-87.87, 41.72, -87.52, 42.02) do |status, client|
       puts "#{status.text}"
       puts "#{status[:user][:screen_name]}"
@@ -26,25 +26,55 @@ class EventController < WebsocketRails::BaseController
       send_message :success, @tweet, namespace: :events
       # client.stop if @tweets.size > 2
     end
-     
+
   end
 
   def instagram
+    @t ||= Thread.new do
     Instagram.configure do |config|
       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
     end
+      instagrams =Instagram.media_search("41.8929153","-87.6359125",{radius: 4500})
 
-   instagrams =Instagram.media_search("41.8929153","-87.6359125")
-   @instagrams = []
-   instagrams.each do |ig|
-     @instagrams << {latitude: ig.to_hash['location']['latitude'],
-                   longitude: ig.to_hash['location']['longitude'],
-                   url: ig.to_hash['images']['low_resolution']['url'],
-                   # text: ig.to_hash['caption']['text']
-                 }
-   end
-    HardWorker.perform_async(send_message :success, @instagrams, namespace: :events)
+      @instagrams = []
+      Instagram.media_search("41.909012","-87.634206",{radius: 4500}).each {|x| instagrams.push(x)}
+      Instagram.media_search("41.878107","-87.627490",{radius: 4500}).each {|x| instagrams.push(x)}
+      instagrams.shuffle.each do |ig|
+        @instagrams << {latitude: ig.to_hash['location']['latitude'],
+                        longitude: ig.to_hash['location']['longitude'],
+                        url: ig.to_hash['images']['low_resolution']['url'],
+                        # text: ig.to_hash['caption']['text']
+                       }
+
+      end
+      while @instagrams.length > 0
+        send_message :success, @instagrams.pop, namespace: :events
+        sleep 4
+      end
+    end
   end
 
 
+
+
+
+    # Instagram.configure do |config|
+    #   config.client_id = "c20b0e71c0ae4c9092810007096d9217"
+    # end
+
+    # running = true
+    # while running
+    #   instagrams =Instagram.media_search("41.8929153","-87.6359125")
+    #   @instagrams = []
+    #   instagrams.each do |ig|
+    #     @instagrams << {latitude: ig.to_hash['location']['latitude'],
+    #                     longitude: ig.to_hash['location']['longitude'],
+    #                     url: ig.to_hash['images']['low_resolution']['url'],
+    #                     # text: ig.to_hash['caption']['text']
+    #                    }
+    #   end
+    #   sleep 1
+    #   send_message :success, @instagrams, namespace: :events
+    #   running = false
+    # end
 end
