@@ -53,9 +53,20 @@ class HomeController < ApplicationController
                                 :user => 'josephjames890',
                                 :password => 'veveve122'
     @events = []
-    number_of_queries?
-    daily_queries(@total_queries)
+    # number_of_queries?
+    daily_queries(3)
 
+    results['events']['event'].each do |event|
+      @events << { title: event['title'],
+                   venue_name: event['venue_name'],
+                   latitude: event['latitude'],
+                   longitude: event['longitude'],
+                   start_time: event['start_time'],
+                   stop_time: event['stop_time'],
+                   eventful_id: event['id']
+                 }
+    end
+    p @events
     render :json => @events
   end
 

@@ -1,4 +1,4 @@
-function setMarker(lat, lon, map, val) {
+function getMarker(lat, lon, map, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
   function getCircle(size) {
@@ -28,9 +28,10 @@ function setMarker(lat, lon, map, val) {
 
 function events(map) {
   $.post('/eventful', function(response){
+    console.log(response);
     $.each(response, function(index, value){
 
-      setMarker(value.latitude, value.longitude, map, value);
+      getMarker(value.latitude, value.longitude, map, value);
     });
   });
 };
