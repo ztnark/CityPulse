@@ -84,6 +84,7 @@ class HomeController < ApplicationController
     render :json => @current_events
   end
 
+
   def instagram_fetcher
     Instagram.configure do |config|
       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
