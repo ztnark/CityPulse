@@ -10,7 +10,6 @@ class HomeController < ApplicationController
       :location  => 'Chicago',
       :date      => Date.today,
       :page_size => 1
-    puts @first_query['total_items']
     @total_events = @first_query['total_items']
   end
 
@@ -22,17 +21,13 @@ class HomeController < ApplicationController
     @total_queries
   end
 
-  def daily_queries(query)
-    # queries.times { |page|
-    #   if (page + 1) % 3 == 1
-    #     sleep(15)
-    #   end
+  def daily_queries(queries)
+    queries.times { |page|
       results = @eventful.call 'events/search',
         :location    => 'Chicago',
         :date        => Date.today,
-        :sort_order  => 'popularity',
         :page_size   => 100,
-        :page_number => query
+        :page_number => page + 1
 
       results['events']['event'].each { |event|
         @events << { title:       event['title'],
@@ -44,29 +39,19 @@ class HomeController < ApplicationController
                      eventful_id: event['id'] }
       }
       puts @events.length
-    # }
+      sleep(15)
+    }
     @events
   end
 
   def eventful_fetcher
     @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-                                :user => 'josephjames890',
-                                :password => 'veveve122'
+      :user => 'josephjames890',
+      :password => 'veveve122'
     @events = []
-    # number_of_queries?
-    daily_queries(3)
-
-    results['events']['event'].each do |event|
-      @events << { title: event['title'],
-                   venue_name: event['venue_name'],
-                   latitude: event['latitude'],
-                   longitude: event['longitude'],
-                   start_time: event['start_time'],
-                   stop_time: event['stop_time'],
-                   eventful_id: event['id']
-                 }
-    end
-    p @events
+    number_of_queries?
+    puts @total_events
+    daily_queries(@total_queries)
     render :json => @events
   end
 
