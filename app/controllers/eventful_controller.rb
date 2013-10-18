@@ -2,25 +2,25 @@
                                 :user => 'josephjames890',
                                 :password => 'veveve122'
 
-def total_items
+@events = []
+
+def total_events_today
   first_query = @eventful.call 'events/search',
     :location  => 'Chicago',
     :date      => Date.today,
     :page_size => 1
-  @total_items = first_query['total_items']
+  @total_events = first_query['total_items']
 end
 
-def number_of_queries
-  total_queries = total_items / 100
-  if @total_items % 100 > 0
-    total_queries += 1
+def number_of_queries?
+  @total_queries = total_events_today / 100
+  if @total_events % 100 > 0
+    @total_queries += 1
   end
-  total_queries
+  @total_queries
 end
 
-def daily_queries
-  @events = []
-  queries = number_of_queries
+def daily_queries(queries)
   queries.times { |page|
     results = @eventful.call 'events/search',
       :location    => 'Chicago',
@@ -30,7 +30,7 @@ def daily_queries
       :page_number => page + 1
 
     results['events']['event'].each { |event|
-      @events << { title: event['title'],
+      @events << { title:       event['title'],
                    venue_name:  event['venue_name'],
                    latitude:    event['latitude'],
                    longitude:   event['longitude'],
@@ -42,4 +42,16 @@ def daily_queries
   @events
 end
 
-daily_queries
+number_of_queries?
+
+while @total_queries > 4
+  @total_queries -= 4
+  daily_queries(4)
+  puts @events.length
+  sleep(5)
+end
+
+daily_queries(@total_queries)
+
+
+
