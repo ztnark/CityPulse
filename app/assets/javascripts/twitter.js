@@ -51,10 +51,13 @@ function getTweets() {
   convertTweetsToMapObjects(response);
 });
 
+
+
 $(document).ajaxStop(function () {
     google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });
+ 
 });
 }
 
