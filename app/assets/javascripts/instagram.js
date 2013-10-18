@@ -2,19 +2,6 @@ function setMarker(lat, lon, map, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
 
-  function getCircle(size) {
-    return {
-      path: google.maps.SymbolPath.CIRCLE,
-      fillColor: 'blue',
-      fillOpacity: .2,
-      scale: Math.pow(2, size) / Math.PI,
-      strokeColor: 'white',
-      strokeWeight: .5
-    };
-  }
-
-
-
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
@@ -30,12 +17,10 @@ function setMarker(lat, lon, map, val) {
 };
 
 
-function instagram(map) {
-  $.post('/instagram', function(response){
-    $.each(response, function(index, value){
-      setMarker(value.latitude, value.longitude, map);
-      console.log()
-    });
-  });
-};
+// function instagram(map) {
+//     $.each(response, function(index, value){
+//       setMarker(value.latitude, value.longitude, map);
+//       console.log()
+//     });
+// };
 

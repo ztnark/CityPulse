@@ -54,7 +54,7 @@ class HomeController < ApplicationController
                                 :password => 'veveve122'
     @events = []
     # number_of_queries?
-    daily_queries(3)
+    daily_queries(1)
 
     results['events']['event'].each do |event|
       @events << { title: event['title'],
