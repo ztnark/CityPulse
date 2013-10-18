@@ -3,5 +3,6 @@ $(document).ready(function(){
   map = loadMap();
   var marker;
   getTweets();
-  events(map);
+  // events(map);
+  instagram(map)
 })

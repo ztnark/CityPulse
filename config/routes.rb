@@ -6,6 +6,8 @@ Chicageaux::Application.routes.draw do
   root 'home#index'
   post '/tweets_supply' => 'home#tweet_fetcher'
   post '/eventful' => 'home#eventful_fetcher'
+  post '/instagram' => 'home#instagram_fetcher'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
