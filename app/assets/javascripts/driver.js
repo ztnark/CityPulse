@@ -14,9 +14,12 @@ $(document).ready(function(){
   dispatcher.trigger("events.instagram")
 
   dispatcher.bind("events.success", function(message){
+    var offset = 0;
      $.each(message, function(index, value){
+      setTimeout(function(){
         setMarker(value.latitude, value.longitude, map);
-      console.log(message)
+      },500 + offset);
+      offset += 500;
     });
   })
 

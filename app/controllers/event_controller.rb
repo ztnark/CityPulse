@@ -43,10 +43,7 @@ class EventController < WebsocketRails::BaseController
                    # text: ig.to_hash['caption']['text']
                  }
    end
-
-  send_message :success, @instagrams, namespace: :events
-
-
+    HardWorker.perform_async(send_message :success, @instagrams, namespace: :events)
   end
 
 
