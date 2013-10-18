@@ -8,7 +8,7 @@ function setMarker(lat, lon, map, val) {
     icon: 'http://icons.iconarchive.com/icons/designcontest/vintage/32/Camera-icon.png'
   });
   var infoWindowOptions = {
-    content:  val
+    //content:  val.
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
