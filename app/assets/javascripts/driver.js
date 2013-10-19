@@ -41,7 +41,7 @@ $(document).ready(function(){
     console.log(message);
         $.each(message.ctatt.route,function(index, value){
           $.each(value.train,function(ind, val){
-            trainMarker(val.lat.$, val.lon.$, map, index);
+            trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.heading.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
           })
         })
   })
