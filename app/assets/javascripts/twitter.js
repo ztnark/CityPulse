@@ -7,6 +7,8 @@ function loadMap() {
   };
    var map = new google.maps.Map(document.getElementById("map-canvas"),
     mapOptions);
+   var transitLayer = new google.maps.TransitLayer();
+transitLayer.setMap(map);
    return map;
 };
 
@@ -16,21 +18,20 @@ var mapObjectArray = [];
 function convertTweetsToMapObjects(tweet_from_socket){
 
       tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
-      mapObjectArray.push(tweet);
-      console.log(mapObjectArray);
-      convertToMarkers(mapObjectArray);
+      convertToMarkers(tweet);
 };
 
-function convertToMarkers(googleMapArray){
-    for (var i=0; i<googleMapArray.length; i++){
+
+function convertToMarkers(tweet){
       marker = new google.maps.Marker({
-      position: googleMapArray[i][0],
+      animation: google.maps.Animation.DROP,
+      position: tweet[0],
       map: map,
+      icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
       title: 'tweet'
     });
-     addInfoWindow(marker, googleMapArray[i][1])
-   };
-} 
+     addInfoWindow(marker, tweet[1])
+}
 
 function addInfoWindow(marker, message) {
             var info = message;
@@ -47,7 +48,7 @@ function addInfoWindow(marker, message) {
 // function getTweets() {
 //   $.post('/tweets_supply', function(response){
 //   console.log(response);
- 
+
 // });
 
 
