@@ -29,7 +29,7 @@ class HomeController < ApplicationController
       end
       results = @eventful.call 'events/search',
         :location    => '41.8819, -87.6278',
-        :within      => 5,
+        :within      => 6,
         :date        => Date.today,
         :sort_order  => 'date',
         :sort_direction => 'ascending',
@@ -56,30 +56,33 @@ class HomeController < ApplicationController
     @today_events
   end
 
-  def current_events
-    @current_events = []
-    Event.all.each { |event|
-      if Time.at(event.start_time) > Time.now && Time.at(event.start_time) - Time.now < 3600
-        @current_events << event
-      end
-    }
-    @current_events.delete_if { |event| Time.at(event.stop_time) == nil & Time.now - Time.at(event.start_time) > 10800 }
-    @current_events.delete_if { |event| Time.now > Time.at(event.stop_time) }
-  end
+  # def current_events
+  #   @current_events = Event.all.each { |event|
+  #     if Time.at(event.start_time) > Time.now && Time.at(event.start_time) - Time.now < 3600
+  #       @current_events << event
+  #     end
+  #   }
+  #   @current_events.delete_if { |event| Time.at(event.stop_time) == nil & Time.now - Time.at(event.start_time) > 10800 }
+  #   @current_events.delete_if { |event| Time.now > Time.at(event.stop_time) }
+  # end
 
   def eventful_fetcher
     @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
       :user => 'josephjames890',
       :password => 'veveve122'
     
-    current_events
-    if @current_events.length == 0 || Time.at(Event.last.start_time) < Time.now
+    @today_events = []
+    @today_events = Event.all.each { |event| @today_events << event }
+    if @today_events.length < 1
       total_events_today
       number_of_queries?
       puts @total_events
       daily_queries(@total_queries)
     end
+    @current_events = []
+    @today_events.each { |event| @current_events << event if (Time.at(event.start_time) - Time.now) < 3600 && (Time.at(event.start_time) - Time.now) > 0 }
 
+    puts @today_events.length
     puts @current_events.length
 
     render :json => @current_events

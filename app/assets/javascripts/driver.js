@@ -3,7 +3,7 @@ $(document).ready(function(){
   map = loadMap();
   var marker;
   // instagram(map)
-  // events(map);
+  events(map);
 
   
 
@@ -16,14 +16,14 @@ $(document).ready(function(){
  //     convertTweetsToMapObjects(message);
  //  })
 
- // var dispatcher = new WebSocketRails('localhost:3000/websocket');
+ var dispatcher = new WebSocketRails('localhost:3000/websocket');
 
- //  dispatcher.trigger("events.instagram")
+  dispatcher.trigger("events.instagram")
 
- //  dispatcher.bind("events.success", function(message){
- //        setMarker(message.latitude, message.longitude, map);
- //        console.log(message)
- //  })
+  dispatcher.bind("events.success", function(message){
+        setMarker(message.latitude, message.longitude, map);
+        console.log(message)
+  })
 
 
 
