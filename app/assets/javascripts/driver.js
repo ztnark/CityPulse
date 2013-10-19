@@ -10,6 +10,9 @@ $(document).ready(function(){
 
 
 
+
+
+
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
 
@@ -22,9 +25,21 @@ $(document).ready(function(){
   instagram.trigger("events.instagram")
 
   instagram.bind("events.success", function(message){
+        var message = JSON.parse(message);
         setMarker(message.latitude, message.longitude, map, message.url);
         console.log(message)
-  })
+
+
+  var off = 0
+  for (var i=0; i<5; i++){
+  setTimeout(function(){
+     dispatcher.trigger("events.instagram")
+     console.log("new")
+  },0+ off);
+  off += 30000;
+}
+
+ 
 
 
 

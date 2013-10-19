@@ -15,7 +15,11 @@ gem 'eventfulapi'
 
 gem 'instagram'
 
+# added as a new db option
 gem 'redis'
+
+# added because redis is a goddamn mess
+gem 'redis-kit'
 
 # switched to thin server in order to support websockets.
 gem 'thin'

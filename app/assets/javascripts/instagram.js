@@ -1,4 +1,5 @@
 function setMarker(lat, lon, map, val) {
+  console.log(lat, lon, map);
   var latLng = new google.maps.LatLng(lat, lon);
 
 
@@ -19,6 +20,10 @@ function setMarker(lat, lon, map, val) {
   });
 
   setTimeout(function(){marker.setMap(null)},120000);
+
+};
+  
+
 
 
 };

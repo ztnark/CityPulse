@@ -1,15 +1,18 @@
 class EventController < WebsocketRails::BaseController
+
   require 'open-uri'
   before_filter do
     puts "an event handled by this controller was called"
   end
+  # before_filter do
+  #   puts "an event handled by this controller was called"
+  # end
 
   def dispatch
     send_message :success, "hello from the server", namespace: :events
   end
 
   def tweets
-    puts "we are in"
     TweetStream.configure do |config|
       config.consumer_key       = 'f4VHcj4lCvhg3JpK4sEORQ'
       config.consumer_secret    = 'eVLGY5qoI4e3B2VAt02vHaiXy4yN0wflN2NaaV0iVdI'
@@ -24,11 +27,11 @@ class EventController < WebsocketRails::BaseController
       puts "#{status[:geo][:coordinates]}"
       puts " ++++++++++++++++++++++++++"
       @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name]]
-      send_message :success, @tweet, namespace: :events
-      # client.stop if @tweets.size > 2
+      send_message :tweet_success, @tweet, namespace: :events
     end
 
   end
+
 
   def instagram
     @t ||= Thread.new do
@@ -56,6 +59,34 @@ class EventController < WebsocketRails::BaseController
         sleep 10
       end
     end
+
+
+   def instagram_fetcher
+    puts "instragram coming"
+   Instagram.configure do |config|
+      config.client_id = "c20b0e71c0ae4c9092810007096d9217"
+    end
+   puts "request has been made"
+   puts instagrams = Instagram.media_search("41.8929153","-87.6359125")
+   @instagrams = []
+   instagrams.each do |ig|
+     @instagrams << {latitude: ig.to_hash['location']['latitude'],
+                   longitude: ig.to_hash['location']['longitude'],
+                   url: ig.to_hash['images']['low_resolution']['url'],
+                   # text: ig.to_hash['caption']['text']
+                 }
+   end
+   $redis.set("instagrams", @instagrams)
+  end
+
+
+  def instagram
+      instagram_fetcher
+      # puts $redis.get("instagrams")
+      grams = eval($redis.get("instagrams")).pop
+      gram = grams.to_json
+      p gram
+      send_message :instagram_success, gram, namespace: :events
   end
 
   def trains
