@@ -27,13 +27,14 @@ function convertTweetsToMapObjects(tweet_from_socket){
 
 function convertToMarkers(tweet){
       marker = new google.maps.Marker({
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.BOUNCE,
       position: tweet[0],
       map: map,
       icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
       title: 'tweet'
     });
      addInfoWindow(marker, tweet[1])
+     setTimeout(function(){ marker.setAnimation(null); }, 750);
      removeMarker(marker);
 }
 

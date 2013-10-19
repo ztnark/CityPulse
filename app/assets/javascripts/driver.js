@@ -32,6 +32,11 @@ $(document).ready(function(){
 
   trains.trigger("events.trains")
 
+  setInterval(function(){
+    trains.trigger("events.trains")
+  },15000);
+
+
   trains.bind("events.success", function(message){
     console.log(message);
         $.each(message.ctatt.route,function(index, value){

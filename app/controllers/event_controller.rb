@@ -53,12 +53,13 @@ class EventController < WebsocketRails::BaseController
       end
       while @instagrams.length > 0
         send_message :success, @instagrams.pop, namespace: :events
-        sleep 4
+        sleep 10
       end
     end
   end
 
   def trains
+
       puts "we are in the train fetcher"
       api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
       line = ['red','g','blue','brn','pink','org','p','y']

@@ -30,6 +30,10 @@ function trainMarker(lat, lon, map, line) {
     map: map,
     icon: pics[line],
   });
+  removeMarker(marker);
 }
 
+function removeMarker(marker){
+  setTimeout(function(){marker.setMap(null)},14750);
+}
 

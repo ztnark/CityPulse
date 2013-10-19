@@ -6,8 +6,10 @@ function setMarker(lat, lon, map, val) {
     position: latLng,
     map: map,
     icon: 'http://www.charlestonstems.com/wp-content/themes/stems/images/instagram_icon_22x22.png',
-    animation: google.maps.Animation.DROP,
+    animation: google.maps.Animation.BOUNCE,
+
   });
+   setTimeout(function(){ marker.setAnimation(null); }, 750);
   var infoWindowOptions = {
     content:  val
   };
