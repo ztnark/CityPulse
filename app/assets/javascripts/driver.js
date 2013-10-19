@@ -3,28 +3,43 @@ $(document).ready(function(){
   map = loadMap();
   var marker;
   // instagram(map)
-  trains(map);
+  // trains(map);
   // events(map);
 
 
 
 
 
- //  var test = new WebSocketRails('localhost:3000/websocket');
- //  test.trigger("events.tweets")
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
- //  test.bind("events.success", function(message){
- //     convertTweetsToMapObjects(message);
- //  })
+  tweets.bind("events.success", function(message){
+     convertTweetsToMapObjects(message);
+  })
 
- // var dispatcher = new WebSocketRails('localhost:3000/websocket');
+ var instagram = new WebSocketRails('localhost:3000/websocket');
 
- //  dispatcher.trigger("events.instagram")
+  instagram.trigger("events.instagram")
 
- //  dispatcher.bind("events.success", function(message){
- //        setMarker(message.latitude, message.longitude, map);
- //        console.log(message)
- //  })
+  instagram.bind("events.success", function(message){
+        setMarker(message.latitude, message.longitude, map);
+        console.log(message)
+  })
+
+
+
+  var trains = new WebSocketRails('localhost:3000/websocket');
+
+  trains.trigger("events.trains")
+
+  trains.bind("events.success", function(message){
+    console.log(message);
+        $.each(message.ctatt.route,function(index, value){
+          $.each(value.train,function(index, val){
+            trainMarker(val.lat.$, val.lon.$, map);
+          })
+        })
+  })
 
 
 

@@ -16,7 +16,7 @@ function setMarker(lat, lon, map, val,text) {
     infoWindow.open(map,marker);
   });
 
-  setTimeout(function(){marker.setMap(null)},30000);
+  setTimeout(function(){marker.setMap(null)},120000);
 
 
 };
