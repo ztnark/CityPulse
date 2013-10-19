@@ -11,3 +11,33 @@
  *= require_self
  *= require_tree .
  */
+
+#map-canvas{
+  width: 100%;
+  float: left;
+}
+
+#feed{
+  width: 200px;
+  height: 1000px;
+  position: fixed;
+  right: 0;
+  background-color: #222;
+  overflow: scroll;
+}
+
+#item{
+  margin: 0 auto;
+  width:200px;
+  height:125px;
+  padding-top: 20px;
+  background-color: #222;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid #bbb;
+}
+
+#tweet{
+  padding-right: 10px;
+  background-color: #333;
+}

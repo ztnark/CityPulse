@@ -15,6 +15,7 @@ $(document).ready(function(){
 
   tweets.bind("events.success", function(message){
      convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'><div id='tweet'>" + message[1] + "</div></div>");
   })
 
  var instagram = new WebSocketRails('localhost:3000/websocket');
@@ -23,6 +24,7 @@ $(document).ready(function(){
 
   instagram.bind("events.success", function(message){
         setMarker(message.latitude, message.longitude, map, message.url);
+        $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
         console.log(message)
   })
 
