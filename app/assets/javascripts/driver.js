@@ -22,7 +22,7 @@ $(document).ready(function(){
   instagram.trigger("events.instagram")
 
   instagram.bind("events.success", function(message){
-        setMarker(message.latitude, message.longitude, map);
+        setMarker(message.latitude, message.longitude, map, message.url);
         console.log(message)
   })
 
@@ -35,8 +35,8 @@ $(document).ready(function(){
   trains.bind("events.success", function(message){
     console.log(message);
         $.each(message.ctatt.route,function(index, value){
-          $.each(value.train,function(index, val){
-            trainMarker(val.lat.$, val.lon.$, map);
+          $.each(value.train,function(ind, val){
+            trainMarker(val.lat.$, val.lon.$, map, index);
           })
         })
   })

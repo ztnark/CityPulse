@@ -20,13 +20,16 @@
 //   });
 // };
 
-function trainMarker(lat, lon, map) {
+function trainMarker(lat, lon, map, line) {
   var latLng = new google.maps.LatLng(lat, lon);
 
+  pics = ['http://i.picresize.com/images/2013/10/19/i4oAj.png','http://i.picresize.com/images/2013/10/19/hVDo.png','http://i.picresize.com/images/2013/10/19/NwQW.png','http://i.picresize.com/images/2013/10/19/5Jtbk.png','http://i.picresize.com/images/2013/10/19/Hl1uv.png','http://i.picresize.com/images/2013/10/19/JcLw.png','http://i.picresize.com/images/2013/10/19/LtVwe.png', 'http://i.picresize.com/images/2013/10/19/0rLaI.png']
 
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
-    icon: 'http://i.picresize.com/images/2013/10/19/W4Z7P.png',
+    icon: pics[line],
   });
 }
+
+

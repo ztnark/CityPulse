@@ -1,4 +1,4 @@
-function setMarker(lat, lon, map, val,text) {
+function setMarker(lat, lon, map, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
 
@@ -20,12 +20,4 @@ function setMarker(lat, lon, map, val,text) {
 
 
 };
-
-
-// function instagram(map) {
-//     $.each(response, function(index, value){
-//       setMarker(value.latitude, value.longitude, map);
-//       console.log()
-//     });
-// };
 
