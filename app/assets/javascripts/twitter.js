@@ -4,10 +4,15 @@ function loadMap() {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
     zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    
+
   };
-   var map = new google.maps.Map(document.getElementById("map-canvas"),
+  var map = new google.maps.Map(document.getElementById("map-canvas"),
     mapOptions);
-   return map;
+  var transitLayer = new google.maps.TransitLayer();
+  transitLayer.setMap(map);
+  return map;
 };
 
 
