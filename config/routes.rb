@@ -8,6 +8,10 @@ Chicageaux::Application.routes.draw do
   post '/eventful'      => 'home#eventful_fetcher'
   post '/instagram'     => 'home#instagram_fetcher'
   get  '/trains'        => 'trains#train_fetcher'
+  # post '/tweets_supply' => 'home#tweet_fetcher'
+  # post '/eventful' => 'home#eventful_fetcher'
+  get '/instagramfetcher' => 'home#instagram'
+
 
 
   # post '/web_socket' => 'chat#initialize_session'

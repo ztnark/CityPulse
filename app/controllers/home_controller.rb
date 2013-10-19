@@ -1,7 +1,8 @@
-
+require 'redis'
 class HomeController < ApplicationController
   
   def index
+<<<<<<< HEAD
   end
 
   def total_events_today
@@ -12,6 +13,21 @@ class HomeController < ApplicationController
       :count_only => true
     @total_events = first_query['total_items']
   end
+=======
+     
+  end
+
+
+
+  # def total_events_today
+  #   @first_query = @eventful.call 'events/search',
+  #     :location  => 'Chicago',
+  #     :date      => Date.today,
+  #     :page_size => 1
+  #   puts @first_query['total_items']
+  #   @total_events = @first_query['total_items']
+  # end
+>>>>>>> redis is putting stuff on the board
 
   def number_of_queries?
     @total_queries = @total_events / 100
@@ -88,7 +104,28 @@ class HomeController < ApplicationController
     render :json => @current_events
   end
 
+  # def instagram_fetcher
+  #   Instagram.configure do |config|
+  #     config.client_id = "c20b0e71c0ae4c9092810007096d9217"
+  #   end
+
+  #  instagrams =Instagram.media_search("41.8929153","-87.6359125")
+  #  @instagrams = []
+  #  instagrams.each do |ig|
+  #    @instagrams << {latitude: ig.to_hash['location']['latitude'],
+  #                  longitude: ig.to_hash['location']['longitude'],
+  #                  url: ig.to_hash['images']['low_resolution']['url'],
+  #                  # text: ig.to_hash['caption']['text']
+  #                }
+  #  end
+
+  # render :json => @instagrams
+
+
+  # end
+
   def instagram_fetcher
+    puts "instragram coming"
     Instagram.configure do |config|
       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
     end
@@ -103,5 +140,33 @@ class HomeController < ApplicationController
     end
     render :json => @instagrams
   end
+
+   instagrams =Instagram.media_search("41.8929153","-87.6359125")
+   @instagrams = [1,2,3,4,5]
+
+
+   instagrams.each do |ig|
+     @instagrams << {latitude: ig.to_hash['location']['latitude'],
+                   longitude: ig.to_hash['location']['longitude'],
+                   # url: ig.to_hash['images']['low_resolution']['url'],
+                  
+                 }
+   end
+   puts 'this is inside instragram_fetcher'
+   p @instagrams
+   $redis.set("instagrams", @instagrams)
+  end
+
+
+  def instagram
+      instagram_fetcher
+      grams = $redis.get("instagrams")
+      puts "this is above the redis.get call"
+      # puts $redis.get("instagrams")
+      # send_message :instagram_success, $redis.get("instagrams"), namespace: :events
+      puts "this is in instragram"
+      p grams
+      render :json => "helo"
+   end
 
 end

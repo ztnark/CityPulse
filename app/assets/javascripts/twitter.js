@@ -22,6 +22,7 @@ function convertTweetsToMapObjects(tweet_from_socket){
 
       tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
       convertToMarkers(tweet);
+
 };
 
 
