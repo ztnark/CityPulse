@@ -17,7 +17,7 @@ class EventController < WebsocketRails::BaseController
       config.auth_method        = :oauth
     end
     @tweets = []
-    TweetStream::Client.new.locations(-87.87, 41.72, -87.52, 42.02) do |status, client|
+    TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
       puts "#{status.text}"
       puts "#{status[:user][:screen_name]}"
       puts "#{status[:geo][:coordinates]}"
@@ -34,16 +34,19 @@ class EventController < WebsocketRails::BaseController
     Instagram.configure do |config|
       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
     end
-      instagrams =Instagram.media_search("41.8929153","-87.6359125",{radius: 4500})
+      instagrams =Instagram.media_search("41.915336","-87.681413",{radius: 4500})
 
       @instagrams = []
       Instagram.media_search("41.909012","-87.634206",{radius: 4500}).each {|x| instagrams.push(x)}
       Instagram.media_search("41.878107","-87.627490",{radius: 4500}).each {|x| instagrams.push(x)}
+      Instagram.media_search("41.882498","-87.668624",{radius: 4500}).each {|x| instagrams.push(x)}
+      Instagram.media_search("41.925043","-87.652574",{radius: 4500}).each {|x| instagrams.push(x)}
+
       instagrams.shuffle.each do |ig|
         @instagrams << {latitude: ig.to_hash['location']['latitude'],
                         longitude: ig.to_hash['location']['longitude'],
-                        url: ig.to_hash['images']['low_resolution']['url'],
-                        # text: ig.to_hash['caption']['text']
+                        url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>",
+                        # text: ig.caption.text
                        }
 
       end

@@ -21,7 +21,7 @@ $(document).ready(function(){
   dispatcher.trigger("events.instagram")
 
   dispatcher.bind("events.success", function(message){
-        setMarker(message.latitude, message.longitude, map);
+        setMarker(message.latitude, message.longitude, map, message.url, message.text);
         console.log(message)
   })
 
