@@ -15,6 +15,10 @@ function setMarker(lat, lon, map, val,text) {
   google.maps.event.addListener(marker,'click', function(e){
     infoWindow.open(map,marker);
   });
+
+  setTimeout(function(){marker.setMap(null)},30000);
+
+
 };
 
 

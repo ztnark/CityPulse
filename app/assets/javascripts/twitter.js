@@ -31,7 +31,14 @@ function convertToMarkers(tweet){
       title: 'tweet'
     });
      addInfoWindow(marker, tweet[1])
+     removeMarker(marker);
 }
+
+function removeMarker(marker){
+  setTimeout(function(){marker.setMap(null)},30000);
+
+}
+
 
 function addInfoWindow(marker, message) {
             var info = message;
