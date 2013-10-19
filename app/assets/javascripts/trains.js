@@ -20,7 +20,7 @@
 //   });
 // };
 
-function trainMarker(lat, lon, map, line) {
+function trainMarker(lat, lon, map, line, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
   pics = ['http://i.picresize.com/images/2013/10/19/i4oAj.png','http://i.picresize.com/images/2013/10/19/hVDo.png','http://i.picresize.com/images/2013/10/19/NwQW.png','http://i.picresize.com/images/2013/10/19/5Jtbk.png','http://i.picresize.com/images/2013/10/19/Hl1uv.png','http://i.picresize.com/images/2013/10/19/JcLw.png','http://i.picresize.com/images/2013/10/19/LtVwe.png', 'http://i.picresize.com/images/2013/10/19/0rLaI.png']
@@ -29,6 +29,13 @@ function trainMarker(lat, lon, map, line) {
     position: latLng,
     map: map,
     icon: pics[line],
+  });
+  var infoWindowOptions = {
+    content:  val
+  };
+  var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+  google.maps.event.addListener(marker,'click', function(e){
+    infoWindow.open(map,marker);
   });
   removeMarker(marker);
 }
