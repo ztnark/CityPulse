@@ -3,31 +3,52 @@ $(document).ready(function(){
   map = loadMap();
   var marker;
   // instagram(map)
-  events(map);
+  // trains(map);
+  // events(map);
 
 
 
 
 
-  var test = new WebSocketRails('localhost:3000/websocket');
-  test.trigger("events.tweets")
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
-  test.bind("events.success", function(message){
+  tweets.bind("events.success", function(message){
      convertTweetsToMapObjects(message);
   })
 
- var dispatcher = new WebSocketRails('localhost:3000/websocket');
+ var instagram = new WebSocketRails('localhost:3000/websocket');
 
-  dispatcher.trigger("events.instagram")
+  instagram.trigger("events.instagram")
 
-  dispatcher.bind("events.success", function(message){
-        setMarker(message.latitude, message.longitude, map, message.url, message.text);
+  instagram.bind("events.success", function(message){
+        setMarker(message.latitude, message.longitude, map, message.url);
         console.log(message)
   })
 
 
 
+  var trains = new WebSocketRails('localhost:3000/websocket');
+
+  trains.trigger("events.trains")
+
+  setInterval(function(){
+    trains.trigger("events.trains")
+  },15000);
+
+
+  trains.bind("events.success", function(message){
+    console.log(message);
+        $.each(message.ctatt.route,function(index, value){
+          $.each(value.train,function(ind, val){
+            trainMarker(val.lat.$, val.lon.$, map, index);
+          })
+        })
+  })
 
 
 
-})
+
+
+
+});

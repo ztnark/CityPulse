@@ -4,12 +4,15 @@ function loadMap() {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
     zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+
   };
-   var map = new google.maps.Map(document.getElementById("map-canvas"),
+  var map = new google.maps.Map(document.getElementById("map-canvas"),
     mapOptions);
-   var transitLayer = new google.maps.TransitLayer();
-transitLayer.setMap(map);
-   return map;
+  var transitLayer = new google.maps.TransitLayer();
+  transitLayer.setMap(map);
+  return map;
 };
 
 
@@ -24,18 +27,19 @@ function convertTweetsToMapObjects(tweet_from_socket){
 
 function convertToMarkers(tweet){
       marker = new google.maps.Marker({
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.BOUNCE,
       position: tweet[0],
       map: map,
       icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
       title: 'tweet'
     });
      addInfoWindow(marker, tweet[1])
+     setTimeout(function(){ marker.setAnimation(null); }, 750);
      removeMarker(marker);
 }
 
 function removeMarker(marker){
-  setTimeout(function(){marker.setMap(null)},30000);
+  setTimeout(function(){marker.setMap(null)},120000);
 
 }
 

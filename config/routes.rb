@@ -5,8 +5,9 @@ Chicageaux::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   post '/tweets_supply' => 'home#tweet_fetcher'
-  post '/eventful' => 'home#eventful_fetcher'
-  post '/instagram' => 'home#instagram_fetcher'
+  post '/eventful'      => 'home#eventful_fetcher'
+  post '/instagram'     => 'home#instagram_fetcher'
+  get  '/trains'        => 'trains#train_fetcher'
 
 
   # post '/web_socket' => 'chat#initialize_session'

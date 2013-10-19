@@ -1,4 +1,4 @@
-function setMarker(lat, lon, map, val,text) {
+function setMarker(lat, lon, map, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
 
@@ -6,8 +6,10 @@ function setMarker(lat, lon, map, val,text) {
     position: latLng,
     map: map,
     icon: 'http://www.charlestonstems.com/wp-content/themes/stems/images/instagram_icon_22x22.png',
-    animation: google.maps.Animation.DROP,
+    animation: google.maps.Animation.BOUNCE,
+
   });
+   setTimeout(function(){ marker.setAnimation(null); }, 750);
   var infoWindowOptions = {
     content:  val
   };
@@ -16,16 +18,8 @@ function setMarker(lat, lon, map, val,text) {
     infoWindow.open(map,marker);
   });
 
-  setTimeout(function(){marker.setMap(null)},30000);
+  setTimeout(function(){marker.setMap(null)},120000);
 
 
 };
-
-
-// function instagram(map) {
-//     $.each(response, function(index, value){
-//       setMarker(value.latitude, value.longitude, map);
-//       console.log()
-//     });
-// };
 
