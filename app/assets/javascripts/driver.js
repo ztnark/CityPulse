@@ -3,7 +3,7 @@ $(document).ready(function(){
   map = loadMap();
   var marker;
   // instagram(map)
-  // events(map);
+  events(map);
 
 
 

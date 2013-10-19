@@ -1,73 +1,89 @@
 
 class HomeController < ApplicationController
   def index
-    
+
+
   end
 
-  # def total_events_today
-  #   @first_query = @eventful.call 'events/search',
-  #     :location  => 'Chicago',
-  #     :date      => Date.today,
-  #     :page_size => 1
-  #   puts @first_query['total_items']
-  #   @total_events = @first_query['total_items']
-  # end
+  def total_events_today
+    first_query = @eventful.call 'events/search',
+      :location    => '41.8819, -87.6278',
+      :within      => 5,
+      :date       => Date.today,
+      :count_only => true
+    @total_events = first_query['total_items']
+  end
 
-  # def number_of_queries?
-  #   @total_queries = total_events_today / 100
-  #   if @total_events % 100 > 0
-  #     @total_queries += 1
-  #   end
-  #   @total_queries
-  # end
+  def number_of_queries?
+    @total_queries = @total_events / 100
+    if @total_events % 100 > 0
+      @total_queries += 1
+    end
+    @total_queries
+  end
 
-  # def daily_queries(query)
-  #   # queries.times { |page|
-  #   #   if (page + 1) % 3 == 1
-  #   #     sleep(15)
-  #   #   end
-  #     results = @eventful.call 'events/search',
-  #       :location    => 'Chicago',
-  #       :date        => Date.today,
-  #       :sort_order  => 'popularity',
-  #       :page_size   => 100,
-  #       :page_number => query
+  def daily_queries(queries)
+    @today_events = []
+    queries.times { |page|
+      if page > 9 && page % 10 == 0
+        sleep(15)
+      end
+      results = @eventful.call 'events/search',
+        :location    => '41.8819, -87.6278',
+        :within      => 5,
+        :date        => Date.today,
+        :sort_order  => 'popularity',
+        :sort_direction => 'descending',
+        :page_size   => 100,
+        :page_number => page + 1
 
-  #     results['events']['event'].each { |event|
-  #       @events << { title:       event['title'],
-  #                    venue_name:  event['venue_name'],
-  #                    latitude:    event['latitude'],
-  #                    longitude:   event['longitude'],
-  #                    start_time:  event['start_time'],
-  #                    stop_time:   event['stop_time'],
-  #                    eventful_id: event['id'] }
-  #     }
-  #     puts @events.length
-  #   # }
-  #   @events
-  # end
+      results['events']['event'].each { |event|
+        @today_events << Event.create( title:         event['title'],
+                                       venue_name:    event['venue_name'],
+                                       latitude:      event['latitude'],
+                                       longitude:     event['longitude'],
+                                       start_time:    event['start_time'],
+                                       stop_time:     event['stop_time'],
+                                       eventful_id:   event['id'],
+                                       thumb:         event['thumb'],
+                                       url:           event['url'],
+                                       city_name:     event['city_name'],
+                                       venue_address: event['venue_address'],
+                                       region_abbr:   event['region_abbr'],
+                                       postal_code:   event['postal_code'] )
+      }
+      puts @today_events.length
+      # sleep(20)
+    }
+    @today_events
+  end
 
-  # def eventful_fetcher
-  #   @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-  #                               :user => 'josephjames890',
-  #                               :password => 'veveve122'
-  #   @events = []
-  #   # number_of_queries?
-  #   daily_queries(1)
+  def current_events
+    @current_events = []
+    Event.all.each { |event| @current_events << event }
+    # Event.all.each { |event| @today_events << event }
+    # @current_events.delete_if { |event| Time.at(event.stop_time) && Time.now - Time.at(event.stop_time) > 0 }
+    # @current_events.delete_if { |event| Time.now - Time.at(event.start_time) > 10800 }
+    # Event.all.each { |event|
+    #   if Time.at(event.start_time) > Time.now && Time.at(event.start_time) - Time.now < 7200
+    #     @current_events << event
+    #   end
+    # }
+  end
 
-  #   results['events']['event'].each do |event|
-  #     @events << { title: event['title'],
-  #                  venue_name: event['venue_name'],
-  #                  latitude: event['latitude'],
-  #                  longitude: event['longitude'],
-  #                  start_time: event['start_time'],
-  #                  stop_time: event['stop_time'],
-  #                  eventful_id: event['id']
-  #                }
-  #   end
-  #   p @events
-  #   render :json => @events
-  # end
+  def eventful_fetcher
+    @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
+      :user => 'josephjames890',
+      :password => 'veveve122'
+    total_events_today
+    number_of_queries?
+    puts @total_events
+    # daily_queries(@total_queries)
+    # current_events
+    # puts @current_events.length
+    render :json => @current_events
+  end
+
 
   def instagram_fetcher
     Instagram.configure do |config|
