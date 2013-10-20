@@ -11,3 +11,120 @@
  *= require_self
  *= require_tree .
  */
+
+#map-canvas{
+  width: 100%;
+  float: left;
+}
+
+#feed{
+  width: 356px;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  background-color: #222;
+  overflow: scroll;
+  margin-top: 25px;
+}
+
+#item{
+  width:356px;
+  height: 115px;
+  padding-top: 20px;
+  background-color: #222;
+  color: white;
+  border-bottom: 1px solid #bbb;
+}
+
+#tweet{
+  width: 280px;
+  display: inline-block;
+  float: right;
+  margin: 0 auto;
+  margin-right: 15px;
+}
+
+#prof {
+  width: 53px;
+  float: left;
+  display: inline-block;
+}
+
+#instagram{
+  height: 150px;
+  margin: 0 auto;
+  width: 100px;
+ /* line-height: 150px;*/
+}
+
+#timemode{
+  height: 25px;
+  background-color: #777;
+  width: 356px;
+  position: fixed;
+  right: 0;
+  color: white;
+  font-family: 'Sonsie One', cursive;
+}
+
+#timemode button{
+  float: right;
+}
+
+footer {
+  background-color: #777;
+  display: inline-block;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+footer div {
+  display: inline-block;
+  float: left;
+  height: 50px;
+  margin: 5px 15px 5px 15px;
+  text-align: center;
+  width: 60px;
+}
+
+.power {
+  color: white;
+  font-family: 'Sonsie One', cursive;
+  font-size: 12px;
+  line-height: 50px;
+  width: 107px;
+}
+
+.eventful-badge {
+  color: #ccc;
+  display: block;
+  padding-top: 5px;
+}
+
+footer div a {
+  color: #ccc;
+  display: block;
+  text-decoration: none;
+}
+
+footer div p {
+  display: block;
+  font-family: Arial;
+  line-height: 11px;
+  font-size: 11px;
+  margin: 0 auto;
+}
+
+footer div a img {
+  height: 50px;
+  line-height: 50px;
+}
+
+#facebook-logo {
+  height: 40px;
+  margin-top: 5px;
+}
+
