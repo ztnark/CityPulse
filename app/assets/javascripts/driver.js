@@ -26,39 +26,20 @@ $(document).ready(function(){
 
 
   tweets.bind("events.tweet_success", function(message){
-     convertTweetsToMapObjects(message);
+    convertTweetsToMapObjects(message);
     $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
   })
 
 
- var instagram = new WebSocketRails('localhost:3000/websocket');
+  var instagram = new WebSocketRails('localhost:3000/websocket');
 
- instagram.trigger("events.instagram")
+  instagram.trigger("events.instagram")
 
- instagram.bind("events.instagram_success", function(message){
+  instagram.bind("events.instagram_success", function(message){
     console.log(message);
-    var message = JSON.parse(message);
+    $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
- });
-
-
-  var off = 0
-  for (var i=0; i<5; i++){
-  setTimeout(function(){
-     instagram.trigger("events.instagram")
-     console.log("new")
-  },0+ off);
-  off += 30000;
-
-}
-
-
-  instagram.bind("events.success", function(message){
-        setMarker(message.latitude, message.longitude, map, message.url);
-        $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
-        console.log(message)
-  })
-
+  });
 
 
   var trains = new WebSocketRails('localhost:3000/websocket');
@@ -72,15 +53,12 @@ $(document).ready(function(){
 
   trains.bind("events.success", function(message){
     console.log(message);
-        $.each(message.ctatt.route,function(index, value){
-          $.each(value.train,function(ind, val){
-            trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.heading.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
-          })
-        })
+    $.each(message.ctatt.route,function(index, value){
+      $.each(value.train,function(ind, val){
+        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.heading.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
+      })
+    })
   })
-
-
-
 
 
   $('.timemode').on("click",function(){
