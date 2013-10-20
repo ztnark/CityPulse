@@ -2,21 +2,19 @@ var map = undefined;
 $(document).ready(function(){
   map = loadMap();
   var marker;
-  // instagram(map)
-  // trains(map);
-  // events(map);
+  events(map);
 
 
   var x = 0;
 
-  // var tweets = new WebSocketRails('localhost:3000/websocket');
-  // tweets.trigger("events.tweets")
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
 
-  // tweets.bind("events.tweet_success", function(message){
-  //    convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
-  // })
+  tweets.bind("events.tweet_success", function(message){
+     convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
+  })
 
 
  var instagram = new WebSocketRails('localhost:3000/websocket');
@@ -40,7 +38,7 @@ $(document).ready(function(){
 
 }
 
- 
+
   instagram.bind("events.success", function(message){
         setMarker(message.latitude, message.longitude, map, message.url);
         $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
@@ -69,6 +67,7 @@ $(document).ready(function(){
 
 
   $('.timemode').on("click",function(){
+    console.log("clicked");
     if (x === 0){
       var styles = [
   {

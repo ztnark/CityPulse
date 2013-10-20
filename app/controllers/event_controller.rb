@@ -27,8 +27,7 @@ class EventController < WebsocketRails::BaseController
       puts "#{status[:user][:profile_image_url_https]}"
       puts " ++++++++++++++++++++++++++"
       @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
-      send_message :success, @tweet, namespace: :events
-      # client.stop if @tweets.size > 2
+      send_message :tweet_success, @tweet, namespace: :events
     end
 
   end
@@ -59,10 +58,10 @@ class EventController < WebsocketRails::BaseController
         send_message :success, @instagrams.pop, namespace: :events
         sleep 7
       end
-      $redis.set("instagrams", @instagrams)
-      @instagrams.each do |gram|
-        $redis.sadd("instagrams", gram)
-      end  
+      # $redis.set("instagrams", @instagrams)
+      # @instagrams.each do |gram|
+      #   $redis.sadd("instagrams", gram)
+      # end
     end
   end
 
@@ -83,7 +82,7 @@ end
       $redis.del("instagrams")
   end
 
-  
+
 
   def trains
     puts "we are in the train fetcher"
@@ -95,26 +94,4 @@ end
   end
 
 
-
-
-
-    # Instagram.configure do |config|
-    #   config.client_id = "c20b0e71c0ae4c9092810007096d9217"
-    # end
-
-    # running = true
-    # while running
-    #   instagrams =Instagram.media_search("41.8929153","-87.6359125")
-    #   @instagrams = []
-    #   instagrams.each do |ig|
-    #     @instagrams << {latitude: ig.to_hash['location']['latitude'],
-    #                     longitude: ig.to_hash['location']['longitude'],
-    #                     url: ig.to_hash['images']['low_resolution']['url'],
-    #                     # text: ig.to_hash['caption']['text']
-    #                    }
-    #   end
-    #   sleep 1
-    #   send_message :success, @instagrams, namespace: :events
-    #   running = false
-    # end
 end
