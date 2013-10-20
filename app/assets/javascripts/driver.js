@@ -8,23 +8,36 @@ $(document).ready(function(){
 
 
 
-
-
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
 
-  tweets.bind("events.success", function(message){
+
+  tweets.bind("events.tweet_success", function(message){
      convertTweetsToMapObjects(message);
   })
 
+
  var instagram = new WebSocketRails('localhost:3000/websocket');
 
-  instagram.trigger("events.instagram")
+ instagram.trigger("events.instagram")
 
-  instagram.bind("events.success", function(message){
-        setMarker(message.latitude, message.longitude, map, message.url);
-        console.log(message)
-  })
+ instagram.bind("events.instagram_success", function(message){
+    console.log(message);
+    var message = JSON.parse(message);
+    setMarker(message.latitude, message.longitude, map, message.url);
+ });
+
+
+  var off = 0
+  for (var i=0; i<5; i++){
+  setTimeout(function(){
+     instagram.trigger("events.instagram")
+     console.log("new")
+  },0+ off);
+  off += 30000;
+}
+
+ 
 
 
 
