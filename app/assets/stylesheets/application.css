@@ -18,26 +18,49 @@
 }
 
 #feed{
-  width: 200px;
-  height: 1000px;
+  width: 356px;
+  height: 100%;
   position: fixed;
   right: 0;
   background-color: #222;
   overflow: scroll;
+  margin-top: 50px;
 }
 
 #item{
-  margin: 0 auto;
-  width:200px;
-  height:125px;
+  width:356px;
+  height: 115px;
   padding-top: 20px;
   background-color: #222;
-  text-align: center;
   color: white;
   border-bottom: 1px solid #bbb;
 }
 
 #tweet{
-  padding-right: 10px;
-  background-color: #333;
+  width: 280px;
+  display: inline-block;
+  float: right;
+  margin: 0 auto;
+  margin-right: 15px;
+}
+
+#prof {
+  width: 53px;
+  float: left;
+  display: inline-block;
+}
+
+#instagram{
+  height: 150px;
+  margin: 0 auto;
+  width: 100px;
+ /* line-height: 150px;*/
+}
+
+#timemode{
+  height: 50px;
+  background-color: #222;
+  width: 356px;
+  position: fixed;
+  right: 0;
 }

@@ -12,6 +12,24 @@ function loadMap() {
     mapOptions);
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
+  var styles = [
+  {
+    "stylers": [
+      { "invert_lightness": true }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "stylers": [
+      { "lightness": 19 }
+    ]
+  }
+]
+
+map.setOptions({styles: styles});
   return map;
 };
 

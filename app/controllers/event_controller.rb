@@ -19,8 +19,9 @@ class EventController < WebsocketRails::BaseController
       puts "#{status.text}"
       puts "#{status[:user][:screen_name]}"
       puts "#{status[:geo][:coordinates]}"
+      puts "#{status[:user][:profile_image_url_https]}"
       puts " ++++++++++++++++++++++++++"
-      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name]]
+      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
       send_message :success, @tweet, namespace: :events
       # client.stop if @tweets.size > 2
     end
