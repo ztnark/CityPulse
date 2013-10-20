@@ -24,7 +24,6 @@ $(document).ready(function(){
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
 
-
   tweets.bind("events.tweet_success", function(message){
     convertTweetsToMapObjects(message);
     $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
@@ -44,7 +43,7 @@ $(document).ready(function(){
 
   var trains = new WebSocketRails('localhost:3000/websocket');
 
-  trains.trigger("events.trains")
+  // trains.trigger("events.trains")
 
   setInterval(function(){
     trains.trigger("events.trains")
@@ -55,7 +54,7 @@ $(document).ready(function(){
     console.log(message);
     $.each(message.ctatt.route,function(index, value){
       $.each(value.train,function(ind, val){
-        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.heading.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
+        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
       })
     })
   })
