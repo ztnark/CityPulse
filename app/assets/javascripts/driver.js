@@ -35,7 +35,7 @@ $(document).ready(function(){
 
   instagram.trigger("events.instagram")
 
-  instagram.bind("events.instagram_success", function(message){
+  instagram.bind("events.success", function(message){
     console.log(message);
     $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);

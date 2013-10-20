@@ -64,17 +64,17 @@ class EventController < WebsocketRails::BaseController
 
 
 #this needs to be threaded
-  def instagram
-    puts "in the instragram method"
-      instagram_fetcher
-      grams = eval($redis.get("instagrams"))
-      p grams.length
-      grams.each do |g|
-        json_gram = g.to_json
-        send_message :instagram_success, json_gram, namespace: :events
-      end
-    $redis.del("instagrams")
-  end
+  # def instagram
+  #   puts "in the instragram method"
+  #     instagram_fetcher
+  #     grams = eval($redis.get("instagrams"))
+  #     p grams.length
+  #     grams.each do |g|
+  #       json_gram = g.to_json
+  #       send_message :instagram_success, json_gram, namespace: :events
+  #     end
+  #   $redis.del("instagrams")
+  # end
 
 
 
