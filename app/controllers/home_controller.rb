@@ -15,9 +15,6 @@ class HomeController < ApplicationController
   end
 
 
-  end
-
-
 
   # def total_events_today
   #   @first_query = @eventful.call 'events/search',

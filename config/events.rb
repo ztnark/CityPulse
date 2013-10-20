@@ -14,7 +14,7 @@ WebsocketRails::EventMap.describe do
 
   namespace :events do
     subscribe :tweets, 'event#tweets'
-    subscribe :instagram, 'event#instagram'
+    subscribe :instagram, 'event#instagram_fetcher'
     subscribe :trains, 'event#trains'
     subscribe :eventful, 'event#eventful_fetcher'
   end
