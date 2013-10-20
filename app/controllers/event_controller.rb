@@ -4,9 +4,6 @@ class EventController < WebsocketRails::BaseController
   before_filter do
     # puts "an event handled by the event controller was called"
   end
-  # before_filter do
-  #   puts "an event handled by this controller was called"
-  # end
 
   def dispatch
     send_message :success, "hello from the server", namespace: :events
@@ -24,12 +21,14 @@ class EventController < WebsocketRails::BaseController
     puts "cats"
     @tweets = []
     TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
-      # puts "#{status.text}"
-      # puts "#{status[:user][:screen_name]}"
-      # puts "#{status[:geo][:coordinates]}"
-      # puts " ++++++++++++++++++++++++++"
-      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name]]
-      send_message :tweet_success, @tweet, namespace: :events
+      puts "#{status.text}"
+      puts "#{status[:user][:screen_name]}"
+      puts "#{status[:geo][:coordinates]}"
+      puts "#{status[:user][:profile_image_url_https]}"
+      puts " ++++++++++++++++++++++++++"
+      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
+      send_message :success, @tweet, namespace: :events
+      # client.stop if @tweets.size > 2
     end
 
   end
@@ -43,7 +42,7 @@ class EventController < WebsocketRails::BaseController
     end
       instagrams =Instagram.media_search("41.915336","-87.681413",{radius: 4500})
       @instagrams = []
-      Instagram.media_search("41.909012","-87.634206",{radius: 4500}).each {|x| instagrams.push(x)}
+      Instagram.media_search("41.893954","-87.634056",{radius: 4500}).each {|x| instagrams.push(x)}
       Instagram.media_search("41.878107","-87.627490",{radius: 4500}).each {|x| instagrams.push(x)}
       Instagram.media_search("41.882498","-87.668624",{radius: 4500}).each {|x| instagrams.push(x)}
       Instagram.media_search("41.925043","-87.652574",{radius: 4500}).each {|x| instagrams.push(x)}
@@ -54,6 +53,11 @@ class EventController < WebsocketRails::BaseController
                         url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>",
                         # text: ig.caption.text
                        }
+
+      end
+      while @instagrams.length > 0
+        send_message :success, @instagrams.pop, namespace: :events
+        sleep 7
       end
       $redis.set("instagrams", @instagrams)
       @instagrams.each do |gram|
@@ -65,26 +69,6 @@ class EventController < WebsocketRails::BaseController
 
 def redis_setter(points)
 end
-
-
-
-  #  def instagram_fetcher
-  #   puts "instragram coming"
-  #  Instagram.configure do |config|
-  #     config.client_id = "c20b0e71c0ae4c9092810007096d9217"
-  #   end
-  #  puts "request has been made"
-  #  puts instagrams = Instagram.media_search("41.8929153","-87.6359125")
-  #  @instagrams = []
-  #  instagrams.each do |ig|
-  #    @instagrams << {latitude: ig.to_hash['location']['latitude'],
-  #                  longitude: ig.to_hash['location']['longitude'],
-  #                  url: ig.to_hash['images']['low_resolution']['url'],
-  #                  # text: ig.to_hash['caption']['text']
-  #                }
-  #  end
-  #  $redis.set("instagrams", @instagrams)
-  # end
 
 #this needs to be threaded
   def instagram
@@ -102,12 +86,12 @@ end
   
 
   def trains
-      puts "we are in the train fetcher"
-      api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
-      line = ['red','g','blue','brn','pink','org','p','y']
-      trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
-      @trains = CobraVsMongoose.xml_to_hash(trains)
-      send_message :success, @trains, namespace: :events
+    puts "we are in the train fetcher"
+    api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
+    line = ['red','g','blue','brn','pink','org','p','y']
+    trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
+    @trains = CobraVsMongoose.xml_to_hash(trains)
+    send_message :success, @trains, namespace: :events
   end
 
 

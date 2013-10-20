@@ -12,6 +12,24 @@ function loadMap() {
     mapOptions);
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
+  var styles = [
+  {
+    "stylers": [
+      { "invert_lightness": true }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "stylers": [
+      { "lightness": 19 }
+    ]
+  }
+]
+
+map.setOptions({styles: styles});
   return map;
 };
 
@@ -27,7 +45,7 @@ function convertTweetsToMapObjects(tweet_from_socket){
 
 
 function convertToMarkers(tweet){
-      marker = new google.maps.Marker({
+      var marker = new google.maps.Marker({
       animation: google.maps.Animation.BOUNCE,
       position: tweet[0],
       map: map,
@@ -36,13 +54,13 @@ function convertToMarkers(tweet){
     });
      addInfoWindow(marker, tweet[1])
      setTimeout(function(){ marker.setAnimation(null); }, 750);
-     removeMarker(marker);
+     // removeMarker(marker);
 }
 
-function removeMarker(marker){
-  setTimeout(function(){marker.setMap(null)},120000);
+// function removeMarker(marker){
+//   setTimeout(function(){marker.setMap(null)},360000);
 
-}
+// }
 
 
 function addInfoWindow(marker, message) {

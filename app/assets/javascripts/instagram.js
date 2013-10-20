@@ -14,10 +14,11 @@ function setMarker(lat, lon, map, val) {
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
+    // $('.gm-style-iw').close();
     infoWindow.open(map,marker);
   });
 
-  setTimeout(function(){marker.setMap(null)},120000);
+  setTimeout(function(){marker.setMap(null)},360000);
 
 };
 
