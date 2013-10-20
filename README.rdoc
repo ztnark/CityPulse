@@ -3,6 +3,13 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+
+SETTING UP CRON JOBS
+after bundle update add maintenance tasks to Cron tab by running 
+on unix system, from console in this app's root directory run "whenever -i" to see path to cron task log location.
+
+run 'whenever -w' to setup crontab
+
 Things you may want to cover:
 
 * Ruby version

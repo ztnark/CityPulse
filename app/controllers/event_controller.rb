@@ -67,6 +67,7 @@ class EventController < WebsocketRails::BaseController
       trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
       puts "Here we are"
       @trains = CobraVsMongoose.xml_to_hash(trains)
+      p @trains
       # puts trains
       send_message :success, @trains, namespace: :events
   end
