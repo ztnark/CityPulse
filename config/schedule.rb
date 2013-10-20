@@ -25,10 +25,10 @@ set :output, 'log/cron.log'
 #   runner "Aggregator.eventful"
 # end
 
-every 2.minute do 
-  runner "Aggregator.trains"
-end
+# every 3.minutes do 
+#   runner "Aggregator.trains"
+# end
 
-every 3.minute do
-  runner "Aggregator.instagram"
-end
+# every 5.minutes do
+#   runner "Aggregator.instagram"
+# end

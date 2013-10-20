@@ -10,6 +10,11 @@ on unix system, from console in this app's root directory run "whenever -i" to s
 
 run 'whenever -w' to setup crontab
 
+run 'whenever --update-crontab chicageaux(or the name you have changed project to locally)' from the  
+root of your project to apply changes you have make to the schedule.rb file.
+
+run 'whenever --clear-crontab chicageaux(or the name you have changed project to locally) from the root of your project to apply changes you have to make to the scehdule.rb file.
+
 Things you may want to cover:
 
 * Ruby version

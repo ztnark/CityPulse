@@ -11,7 +11,12 @@ eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
     :location  => 'Chicago',
     :date      => Date.today,
     :page_size => 1
-  @total_events = first_query
+  total_events = first_query
+
+  p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
+  p Time.now
+  p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
+  p total_events
 end
 
 def self.trains
@@ -21,6 +26,9 @@ trains_api = "345d187dc00d467f9f2d1307b6e4b6c3"
       puts "Here we go"
       puts "Here we are"
   @trains = CobraVsMongoose.xml_to_hash(trains)
+  p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
+  p Time.now
+  p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
   p @trains
 end
 
@@ -42,6 +50,9 @@ def self.instagram
                         url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>",
                         # text: ig.caption.text
                        }
+      p "+++++++++++++++++    this is a new request    +++++++++++++++++++++++"
+      p Time.now 
+      p "+++++++++++++++++    this is a new request"                
       p instagrams
     end
 end
