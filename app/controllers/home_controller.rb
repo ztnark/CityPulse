@@ -57,16 +57,6 @@ class HomeController < ApplicationController
     @today_events
   end
 
-  # def current_events
-  #   @current_events = Event.all.each { |event|
-  #     if Time.at(event.start_time) > Time.now && Time.at(event.start_time) - Time.now < 3600
-  #       @current_events << event
-  #     end
-  #   }
-  #   @current_events.delete_if { |event| Time.at(event.stop_time) == nil & Time.now - Time.at(event.start_time) > 10800 }
-  #   @current_events.delete_if { |event| Time.now > Time.at(event.stop_time) }
-  # end
-
   def eventful_fetcher
     @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
       :user => 'josephjames890',
@@ -74,9 +64,9 @@ class HomeController < ApplicationController
 
     # @today_events = Event.all.each { |event| @today_events << event }
     # if @today_events.length < 1
-    total_events_today
-    number_of_queries?
-    daily_queries(@total_queries)
+    # total_events_today
+    # number_of_queries?
+    daily_queries(3)
     # end
     @current_events = []
     @today_events.each { |event| @current_events << event if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -7200 }
@@ -84,72 +74,6 @@ class HomeController < ApplicationController
     puts @today_events.length
     puts @current_events.length
 
-    render :json => @current_events
+    send_message :tweet_success, @current_events, namespace: :events
   end
-
-  # def instagram_fetcher
-  #   Instagram.configure do |config|
-  #     config.client_id = "c20b0e71c0ae4c9092810007096d9217"
-  #   end
-
-  #  instagrams =Instagram.media_search("41.8929153","-87.6359125")
-  #  @instagrams = []
-  #  instagrams.each do |ig|
-  #    @instagrams << {latitude: ig.to_hash['location']['latitude'],
-  #                  longitude: ig.to_hash['location']['longitude'],
-  #                  url: ig.to_hash['images']['low_resolution']['url'],
-  #                  # text: ig.to_hash['caption']['text']
-  #                }
-  #  end
-
-  # render :json => @instagrams
-
-
-  # end
-
-#   def instagram_fetcher
-#     puts "instragram coming"
-#     Instagram.configure do |config|
-#       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
-#     end
-#     instagrams =Instagram.media_search("41.8929153","-87.6359125")
-#     @instagrams = []
-#     instagrams.each do |ig|
-#       @instagrams << { latitude: ig.to_hash['location']['latitude'],
-#                        longitude: ig.to_hash['location']['longitude'],
-#                        url: ig.to_hash['images']['low_resolution']['url'],
-#                        # text: ig.to_hash['caption']['text']
-#                      }
-#     end
-#     render :json => @instagrams
-#   end
-
-#    instagrams =Instagram.media_search("41.8929153","-87.6359125")
-#    @instagrams = [1,2,3,4,5]
-
-
-#    instagrams.each do |ig|
-#      @instagrams << {latitude: ig.to_hash['location']['latitude'],
-#                    longitude: ig.to_hash['location']['longitude'],
-#                    # url: ig.to_hash['images']['low_resolution']['url'],
-
-#                  }
-#    end
-#    puts 'this is inside instragram_fetcher'
-#    p @instagrams
-#    $redis.set("instagrams", @instagrams)
-#   end
-
-
-#   def instagram
-#       instagram_fetcher
-#       grams = $redis.get("instagrams")
-#       puts "this is above the redis.get call"
-#       # puts $redis.get("instagrams")
-#       # send_message :instagram_success, $redis.get("instagrams"), namespace: :events
-#       puts "this is in instragram"
-#       p grams
-#       render :json => "helo"
-#    end
-
 end

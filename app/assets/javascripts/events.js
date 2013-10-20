@@ -4,11 +4,11 @@ function getMarker(lat, lon, map, val) {
   function getCircle(size) {
     return {
       path: google.maps.SymbolPath.CIRCLE,
-      fillColor: 'red',
-      fillOpacity: .2,
+      fillColor: '#FF5757',
+      fillOpacity: .23,
       scale: Math.pow(2, size) / Math.PI,
-      strokeColor: 'white',
-      strokeWeight: .5
+      strokeColor: 'red',
+      strokeWeight: 0
     };
   }
 
@@ -26,12 +26,10 @@ function getMarker(lat, lon, map, val) {
   });
 };
 
-function events(map) {
-  $.post('/eventful', function(response){
-    console.log(response);
-    $.each(response, function(index, value){
+// function events(map) {
 
-      getMarker(value.latitude, value.longitude, map, value);
-    });
-  });
-};
+//     $.each(response, function(index, value){
+//       getMarker(value.latitude, value.longitude, map, value);
+//     });
+
+// };
