@@ -54,12 +54,14 @@ class EventController < WebsocketRails::BaseController
       # @instagrams.each do |gram|
       #   $redis.sadd("instagrams", gram)
       # end
+
     end
   end
 
 
-def redis_setter(points)
-end
+
+
+
 
 #this needs to be threaded
   def instagram
@@ -71,7 +73,7 @@ end
         json_gram = g.to_json
         send_message :instagram_success, json_gram, namespace: :events
       end
-      $redis.del("instagrams")
+    $redis.del("instagrams")
   end
 
 

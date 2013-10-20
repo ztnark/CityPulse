@@ -14,6 +14,20 @@ class HomeController < ApplicationController
     @total_events = first_query['total_items']
   end
 
+
+  end
+
+
+
+  # def total_events_today
+  #   @first_query = @eventful.call 'events/search',
+  #     :location  => 'Chicago',
+  #     :date      => Date.today,
+  #     :page_size => 1
+  #   puts @first_query['total_items']
+  #   @total_events = @first_query['total_items']
+  # end
+
   def number_of_queries?
     @total_queries = @total_events / 100
     if @total_events % 100 > 0
@@ -77,3 +91,4 @@ class HomeController < ApplicationController
     send_message :tweet_success, @current_events, namespace: :events
   end
 end
+
