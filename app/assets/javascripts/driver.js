@@ -32,9 +32,9 @@ $(document).ready(function(){
 
   var instagram = new WebSocketRails('localhost:3000/websocket');
 
-  instagram.trigger("events.instagram")
+  instagram.trigger("events.instagram_initialize")
 
-  instagram.bind("events.success", function(message){
+  instagram.bind("events.instagram_success", function(message){
     console.log(message);
     $("#feed").prepend("<div id='item'><div id='instagram'>" + message.url + "</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);

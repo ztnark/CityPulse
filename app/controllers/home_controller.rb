@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   def total_events_today
     first_query = @eventful.call 'events/search',
       :location    => '41.8819, -87.6278',
-      :within      => 5,
+      :within      => 6,
       :date       => Date.today,
       :count_only => true
     @total_events = first_query['total_items']
