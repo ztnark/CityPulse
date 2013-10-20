@@ -19,7 +19,6 @@ $(document).ready(function(){
 
  var instagram = new WebSocketRails('localhost:3000/websocket');
 
- instagram.trigger("events.instagram")
 
  instagram.bind("events.instagram_success", function(message){
     console.log(message);
@@ -28,11 +27,13 @@ $(document).ready(function(){
  });
 
 
+// instagram.trigger("events.instagram")
+
   var off = 0
   for (var i=0; i<5; i++){
   setTimeout(function(){
+    instagram.trigger("events.instagram_initialize")
      instagram.trigger("events.instagram")
-     console.log("new")
   },0+ off);
   off += 30000;
 }
@@ -43,14 +44,14 @@ $(document).ready(function(){
 
   var trains = new WebSocketRails('localhost:3000/websocket');
 
-  trains.trigger("events.trains")
+  // trains.trigger("events.trains")
 
   setInterval(function(){
     trains.trigger("events.trains")
   },15000);
 
 
-  trains.bind("events.success", function(message){
+  trains.bind("events.train_success", function(message){
     console.log(message);
         $.each(message.ctatt.route,function(index, value){
           $.each(value.train,function(ind, val){

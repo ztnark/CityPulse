@@ -8,12 +8,12 @@ class EventController < WebsocketRails::BaseController
   #   puts "an event handled by this controller was called"
   # end
 
-  def dispatch
-    send_message :success, "hello from the server", namespace: :events
-  end
+  # def dispatch
+  #   send_message :success, "hello from the server", namespace: :events
+  # end
 
   def tweets
-    puts "dog"
+    # puts "dog"
     TweetStream.configure do |config|
       config.consumer_key       = 'f4VHcj4lCvhg3JpK4sEORQ'
       config.consumer_secret    = 'eVLGY5qoI4e3B2VAt02vHaiXy4yN0wflN2NaaV0iVdI'
@@ -21,7 +21,7 @@ class EventController < WebsocketRails::BaseController
       config.oauth_token_secret = 'XXzEIZDrnHS65PlVhHQVB9SMAyjXzeNLMAh1Mhutp6c'
       config.auth_method        = :oauth
     end
-    puts "cats"
+    # puts "cats"
     @tweets = []
     TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
       # puts "#{status.text}"
@@ -36,8 +36,8 @@ class EventController < WebsocketRails::BaseController
 
 
   def instagram_fetcher
-   puts "in the instagram fetcher"
-    @t ||= Thread.new do
+   # puts "in the instagram fetcher"
+    # @fetcher ||= Thread.new do
     Instagram.configure do |config|
       config.client_id = "c20b0e71c0ae4c9092810007096d9217"
     end
@@ -55,16 +55,17 @@ class EventController < WebsocketRails::BaseController
                         # text: ig.caption.text
                        }
       end
+      # p @instagrams
       $redis.set("instagrams", @instagrams)
-      @instagrams.each do |gram|
-        $redis.sadd("instagrams", gram)
-      end  
-    end
+    
+      # @instagrams.each do |gram|
+      #   time =Time.now
+      #   $redis.hmset("object","","{fetch:dog}")
+      #   $redis.sadd("instagrams",time, gram)
+      # end  
+    # end
   end
 
-
-def redis_setter(points)
-end
 
 
 
@@ -87,27 +88,47 @@ end
   # end
 
 #this needs to be threaded
-  def instagram
-    puts "in the instragram method"
-      instagram_fetcher
+
+def instagram_initialize
+  $redis.set("instagrams", "")
+  instagram_fetcher
+end
+
+def instagram
+  $thread ||= Thread.new do
       grams = eval($redis.get("instagrams"))
-      p grams.length
-      grams.each do |g|
-        json_gram = g.to_json
-        send_message :instagram_success, json_gram, namespace: :events
+      grams.each do |gram|
+        json_gram = gram.to_json
+        send_message :instagram_success, json_gram, namespace: :events 
+        sleep(2)
       end
-      $redis.del("instagrams")
+      # $thread
   end
+end
+
+
+  # def instagram
+  #   puts "in the instragram method"
+  #     instagram_fetcher
+  #     grams = eval($redis.get("instagrams"))
+  #     p grams.length
+  #     grams.each do |g|
+  #       json_gram = g.to_json
+  #       send_message :instagram_success, json_gram, namespace: :events
+  #     end
+  #     $redis.del("instagrams")
+  # end
 
   
 
   def trains
-      puts "we are in the train fetcher"
-      api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
-      line = ['red','g','blue','brn','pink','org','p','y']
-      trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
-      @trains = CobraVsMongoose.xml_to_hash(trains)
-      send_message :success, @trains, namespace: :events
+      @train_thread ||= Thread.new do
+        api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
+        line = ['red','g','blue','brn','pink','org','p','y']
+        trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
+        @trains = CobraVsMongoose.xml_to_hash(trains)
+        send_message :train_success, @trains, namespace: :events
+    end
   end
 
 
