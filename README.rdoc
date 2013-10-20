@@ -8,6 +8,8 @@ SETTING UP CRON JOBS
 after bundle update add maintenance tasks to Cron tab by running 
 on unix system, from console in this app's root directory run "whenever -i" to see path to cron task log location.
 
+from console run 'whenever -h' for help 
+
 run 'whenever -w' to setup crontab
 
 run 'whenever --update-crontab chicageaux(or the name you have changed project to locally)' from the  
