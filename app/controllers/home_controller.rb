@@ -1,6 +1,6 @@
 require 'redis'
 class HomeController < ApplicationController
-  
+
   def index
 
   end
@@ -13,20 +13,6 @@ class HomeController < ApplicationController
       :count_only => true
     @total_events = first_query['total_items']
   end
-
-     
-  end
-
-
-
-  # def total_events_today
-  #   @first_query = @eventful.call 'events/search',
-  #     :location  => 'Chicago',
-  #     :date      => Date.today,
-  #     :page_size => 1
-  #   puts @first_query['total_items']
-  #   @total_events = @first_query['total_items']
-  # end
 
   def number_of_queries?
     @total_queries = @total_events / 100
@@ -46,8 +32,8 @@ class HomeController < ApplicationController
         :location    => '41.8819, -87.6278',
         :within      => 6,
         :date        => Date.today,
-        :sort_order  => 'date',
-        :sort_direction => 'ascending',
+        :sort_order  => 'popularity',
+        :sort_direction => 'descending',
         :page_size   => 100,
         :page_number => page + 1
 
@@ -85,17 +71,15 @@ class HomeController < ApplicationController
     @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
       :user => 'josephjames890',
       :password => 'veveve122'
-    
-    @today_events = []
-    @today_events = Event.all.each { |event| @today_events << event }
-    if @today_events.length < 1
-      total_events_today
-      number_of_queries?
-      puts @total_events
-      daily_queries(@total_queries)
-    end
+
+    # @today_events = Event.all.each { |event| @today_events << event }
+    # if @today_events.length < 1
+    total_events_today
+    number_of_queries?
+    daily_queries(@total_queries)
+    # end
     @current_events = []
-    @today_events.each { |event| @current_events << event if (Time.at(event.start_time) - Time.now) < 3600 && (Time.at(event.start_time) - Time.now) > 0 }
+    @today_events.each { |event| @current_events << event if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -7200 }
 
     puts @today_events.length
     puts @current_events.length
@@ -148,7 +132,7 @@ class HomeController < ApplicationController
 #      @instagrams << {latitude: ig.to_hash['location']['latitude'],
 #                    longitude: ig.to_hash['location']['longitude'],
 #                    # url: ig.to_hash['images']['low_resolution']['url'],
-                  
+
 #                  }
 #    end
 #    puts 'this is inside instragram_fetcher'
@@ -168,4 +152,4 @@ class HomeController < ApplicationController
 #       render :json => "helo"
 #    end
 
-# end
+end
