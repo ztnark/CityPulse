@@ -56,13 +56,11 @@ class EventController < WebsocketRails::BaseController
           $redis.hmset("object",time,object)  
         end
           p "info"
-          Time.now.strftime("%3N")[1..2]
+          time =Time.now.strftime("%3N")[1..2]
           info = $redis.hmget("object",time)
           first = info.first
           eval = eval(first)
-          p "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
           p eval
-          p "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
           send_message :instagram_success, eval, namespace: :events 
 
 
