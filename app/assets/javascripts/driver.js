@@ -2,58 +2,7 @@ var map = undefined;
 $(document).ready(function(){
   map = loadMap();
   var marker;
-
-// I am working on this --Krantz
-//   var x = 0;
-//   var styles = undefined;
-
-// $('.timemode').on("click",function(){
-//     if (x === 0){
-//       x = 1
-//     }
-//     else{
-//       x = 0
-//     }
-//    var style = [
-//   {
-//     "stylers": [
-//       { "invert_lightness": true },
-//       { "lightness": 23 }
-//     ]
-//   },{
-//     "featureType": "road",
-//     "stylers": [
-//       { "visibility": "off" }
-//     ]
-//   },{
-//     "stylers": [
-//       { "lightness": 19 }
-//     ]
-//   }
-// , {
-//     "stylers": [
-//       { "invert_lightness": true }
-//     ]
-//   },{
-//     "featureType": "road",
-//     "stylers": [
-//       { "visibility": "off" }
-//     ]
-//   },{
-//     "stylers": [
-//       { "lightness": 19 }
-//     ]
-//   }];
-
-//   var styles = style[x]
-//   console.log(style[x])
-
-
-// });
-
-// map.setOptions({styles: styles});
-
-
+  var x = 0;
 
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
@@ -92,6 +41,49 @@ $(document).ready(function(){
           })
         })
   })
+
+  $('.timemode').on("click",function(){
+    if (x === 0){
+      var styles = [
+  {
+    "stylers": [
+      { "invert_lightness": true },
+      { "lightness": 23 }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "stylers": [
+      { "lightness": 19 }
+    ]
+  }]
+  x = 1
+    }
+    else{
+      var styles = [
+      {
+    "stylers": [
+      { "invert_lightness": true }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "stylers": [
+      { "lightness": 19 }
+    ]
+  }];
+  x = 0;
+}
+  console.log(x)
+
+map.setOptions({styles: styles});
+});
 
 
 
