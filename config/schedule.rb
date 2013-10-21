@@ -31,9 +31,3 @@ end
 every 15.minutes do
   runner "Aggregator.eventful", environment: 'development'
 end
-
-# every 2.minutes do
-#   runner "Aggregator.eventful_queries"
-# end
-
-
