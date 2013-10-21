@@ -38,7 +38,7 @@ def self.instagram
       p Time.now
       p "+++++++++++++++++    this is a new request    +++++++++++++++++++++++"
     end
-end
+
     
 
   @@query = 17
