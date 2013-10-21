@@ -43,6 +43,6 @@ function trainMarker(lat, lon, map, line, val) {
 }
 
 function removeMarker(marker){
-  setTimeout(function(){marker.setMap(null)},14750);
+  setTimeout(function(){marker.setMap(null)},4750);
 }
 
