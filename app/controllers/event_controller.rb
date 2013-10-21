@@ -31,7 +31,7 @@ class EventController < WebsocketRails::BaseController
       100.times do
         p "info"
         time =Time.now.strftime("%3N")[1..2]
-        info = $redis.hmget("object",time)
+        info = $redis.hmget("object", time)
         first = info.first
         eval = eval(first)
         p eval
@@ -50,12 +50,18 @@ class EventController < WebsocketRails::BaseController
 
 
   def trains
-    puts "we are in the train fetcher"
-    api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
-    line = ['red','g','blue','brn','pink','org','p','y']
-    trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
-    @trains = CobraVsMongoose.xml_to_hash(trains)
-    send_message :success, @trains, namespace: :events
+    # puts "we are in the train fetcher"
+    # api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
+    # line = ['red','g','blue','brn','pink','org','p','y']
+    # trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
+    # @trains = CobraVsMongoose.xml_to_hash(trains)
+    train_data = $redis.hmget("trains", "train_times")
+    p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
+    train = train_data.first
+    p train
+    p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
+
+    send_message :success, train[:ctatt], namespace: :events
   end
 
 
