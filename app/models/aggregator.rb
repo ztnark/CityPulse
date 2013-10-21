@@ -61,7 +61,8 @@ class Aggregator
     2.times do |query|
     # total_queries.times do |query|
       results = eventful.call 'events/search',
-        :location    => 'Chicago',
+        :location    => '41.8819, -87.6278',
+        :within      => 6,
         :date        => Date.today,
         :sort_order  => 'popularity',
         :page_size   => 100,
@@ -81,6 +82,7 @@ class Aggregator
                       region_abbr:   event['region_abbr'],
                       postal_code:   event['postal_code'] )
       }
+      puts Event.count
       sleep(120)
     end
     p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"

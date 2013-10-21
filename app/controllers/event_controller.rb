@@ -56,10 +56,10 @@ class EventController < WebsocketRails::BaseController
     # trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
     # @trains = CobraVsMongoose.xml_to_hash(trains)
     train_data = $redis.hmget("trains", "train_times")
-    p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
+    # p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
     train = train_data.first
-    p train
-    p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
+    # p train
+    # p "<<<<<<<<<<<<<<<< trains has been called >>>>>>>>>>>>>>>>>>"
 
     send_message :success, train[:ctatt], namespace: :events
   end

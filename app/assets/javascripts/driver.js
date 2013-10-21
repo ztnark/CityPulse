@@ -8,18 +8,18 @@ $(document).ready(function(){
 
   var eventful = new WebSocketRails('localhost:3000/websocket');
 
-  eventful.trigger("events.eventful")
+  // eventful.trigger("events.eventful")
 
-  setInterval(function(){
-    trains.trigger("events.eventful")
-  },900000);
+  // setInterval(function(){
+  //   eventful.trigger("events.eventful")
+  // },900000);
 
-  eventful.bind("events.success", function(message){
-    console.log(message);
-    $.each(message, function(index, value){
-      getMarker(value.latitude, value.longitude, map, value);
-    });
-  })
+  // eventful.bind("events.success", function(message){
+  //   console.log(message);
+  //   $.each(message, function(index, value){
+  //     getMarker(value.latitude, value.longitude, map, value);
+  //   });
+  // })
 
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")

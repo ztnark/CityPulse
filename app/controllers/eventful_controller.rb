@@ -44,18 +44,18 @@ def daily_queries(queries)
   @events
 end
 
-number_of_queries?
+# number_of_queries?
 
-while @total_queries > 4
-  @total_queries -= 4
-  daily_queries(4)
-  puts @events.length
-  sleep(5)
-end
+# while @total_queries > 4
+#   @total_queries -= 4
+#   daily_queries(4)
+#   puts @events.length
+#   sleep(5)
+# end
 
-daily_queries(@total_queries)
+# daily_queries(@total_queries)
 
-p total_events_today
+# p total_events_today
 
 
 
