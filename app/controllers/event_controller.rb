@@ -27,10 +27,8 @@ class EventController < WebsocketRails::BaseController
   def instagram_fetcher
    puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
-<<<<<<< HEAD
       counter = 0
         p $redis.hgetall("object").count
-
       while true
         counter += 1
         counter = 1 if counter > 100
@@ -61,7 +59,6 @@ class EventController < WebsocketRails::BaseController
   end
 
   def trains
-<<<<<<< HEAD
     train_handler ||= Thread.new do
       while true
       train_data = $redis.hmget("trains", "train_times")
