@@ -58,8 +58,12 @@ class Aggregator
       total_queries += 1
     end
 
-    2.times do |query|
-    # total_queries.times do |query|
+    if Event.count == total_events
+      sleep(43200)
+      Event.destroy_all
+    end
+
+    total_queries.times do |query|
       results = eventful.call 'events/search',
         :location    => '41.8819, -87.6278',
         :within      => 6,
