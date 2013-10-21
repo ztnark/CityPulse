@@ -28,7 +28,7 @@ every 1.minutes do
   runner "Aggregator.trains", environment: 'development'
 end
 
-every 2.minutes do
+every 15.minutes do
   runner "Aggregator.eventful", environment: 'development'
 end
 
