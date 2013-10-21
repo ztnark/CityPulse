@@ -111,6 +111,12 @@ footer div {
   margin-right: 5px;
   width: 107px;
 }
+.twitter-logo a img {
+  height: 30px;
+  width: 30px;
+  margin-top: -5px;
+  padding-left: 5px;
+}
 
 .eventful-badge {
   color: #ccc;
