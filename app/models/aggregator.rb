@@ -43,7 +43,7 @@ class Aggregator
     eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
                                 :user => 'josephjames890',
                                 :password => 'veveve122'
-    puts 'eventful initiated'
+    puts 'eventful API initiated'
 
     first_query = eventful.call 'events/search',
       :location    => '41.8819, -87.6278',
@@ -58,7 +58,8 @@ class Aggregator
       total_queries += 1
     end
 
-    total_queries.times  do |query|
+    2.times do |query|
+    # total_queries.times do |query|
       results = eventful.call 'events/search',
         :location    => 'Chicago',
         :date        => Date.today,
@@ -80,49 +81,44 @@ class Aggregator
                       region_abbr:   event['region_abbr'],
                       postal_code:   event['postal_code'] )
       }
+      sleep(120)
     end
-
-
-    # query ||= 1
-    # if query > total_queries
-    #   query = 1
-    # end
     p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
   end
 
-  def self.eventful_queries
-    puts "Hey there"
-    puts @@query
-    # eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-    #                             :user => 'josephjames890',
-    #                             :password => 'veveve122'
-    if query <= total_queries
-      results = eventful.call 'events/search',
-        :location    => 'Chicago',
-        :date        => Date.today,
-        :sort_order  => 'popularity',
-        :page_size   => 100,
-        :page_number => @@query
-      results['events']['event'].each { |event|
-        Event.create( title:         event['title'],
-                      venue_name:    event['venue_name'],
-                      latitude:      event['latitude'],
-                      longitude:     event['longitude'],
-                      start_time:    event['start_time'],
-                      stop_time:     event['stop_time'],
-                      eventful_id:   event['id'],
-                      thumb:         event['thumb'],
-                      url:           event['url'],
-                      city_name:     event['city_name'],
-                      venue_address: event['venue_address'],
-                      region_abbr:   event['region_abbr'],
-                      postal_code:   event['postal_code'] )
-      }
-      query += 1
-    end
-    puts 'Hi'
-    puts Event.count
-  end
+  # def self.eventful_queries
+  #   puts "Hey there"
+  #   puts @@query
+  #   # eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
+  #   #                             :user => 'josephjames890',
+  #   #                             :password => 'veveve122'
+  #   if query <= total_queries
+  #     results = eventful.call 'events/search',
+  #       :location    => 'Chicago',
+  #       :date        => Date.today,
+  #       :sort_order  => 'popularity',
+  #       :page_size   => 100,
+  #       :page_number => @@query
+  #     results['events']['event'].each { |event|
+  #       Event.create( title:         event['title'],
+  #                     venue_name:    event['venue_name'],
+  #                     latitude:      event['latitude'],
+  #                     longitude:     event['longitude'],
+  #                     start_time:    event['start_time'],
+  #                     stop_time:     event['stop_time'],
+  #                     eventful_id:   event['id'],
+  #                     thumb:         event['thumb'],
+  #                     url:           event['url'],
+  #                     city_name:     event['city_name'],
+  #                     venue_address: event['venue_address'],
+  #                     region_abbr:   event['region_abbr'],
+  #                     postal_code:   event['postal_code'] )
+  #     }
+  #     query += 1
+  #   end
+  #   puts 'Hi'
+  #   puts Event.count
+  # end
 
 
 end

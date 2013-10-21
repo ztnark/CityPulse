@@ -27,3 +27,13 @@ end
 every 1.minutes do
   runner "Aggregator.trains"
 end
+
+every 2.minutes do
+  runner "Aggregator.eventful"
+end
+
+# every 2.minutes do
+#   runner "Aggregator.eventful_queries"
+# end
+
+
