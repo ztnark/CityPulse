@@ -46,6 +46,7 @@ $(document).ready(function(){
   // trains.trigger("events.trains")
 
   setInterval(function(){
+    console.log("trains is triggered");
     trains.trigger("events.trains")
   },15000);
 

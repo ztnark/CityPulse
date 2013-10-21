@@ -20,15 +20,10 @@
 # sends all output to this file. check here if you are not sure how crons are running
 set :output, 'log/cron.log'
 
-# # Learn more: http://github.com/javan/whenever
-# every 2.hours do
-#   runner "Aggregator.eventful"
-# end
-
-# every 3.minutes do
-#   runner "Aggregator.trains"
-# end
-
 every 2.minutes do
   runner "Aggregator.instagram"
+end
+
+every 1.minutes do
+  runner "Aggregator.trains"
 end
