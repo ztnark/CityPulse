@@ -11,10 +11,10 @@ $(document).ready(function(){
   eventful.trigger("events.eventful")
 
   setInterval(function(){
-    trains.trigger("events.eventful")
-  },900000);
+    eventful.trigger("events.eventful")
+  },60000);
 
-  eventful.bind("events.success", function(message){
+  eventful.bind("events.eventful_success", function(message){
     console.log(message);
     $.each(message, function(index, value){
       getMarker(value.latitude, value.longitude, map, value);
