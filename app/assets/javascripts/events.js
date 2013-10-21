@@ -24,6 +24,8 @@ function getMarker(lat, lon, map, val) {
   google.maps.event.addListener(marker,'click', function(e){
     infoWindow.open(map,marker);
   });
+
+  setTimeout(function(){marker.setMap(null)},180100);
 };
 
 // function events(map) {

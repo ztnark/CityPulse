@@ -15,7 +15,7 @@ $(document).ready(function(){
 
   setInterval(function(){
     eventful.trigger("events.eventful")
-  },60000);
+  },180000);
 
   eventful.bind("events.eventful_success", function(message){
     console.log(message);
