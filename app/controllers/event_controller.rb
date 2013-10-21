@@ -3,12 +3,11 @@ class EventController < WebsocketRails::BaseController
   require 'open-uri'
 
   def tweets
-    puts "dog"
     TweetStream.configure do |config|
-      config.consumer_key       = 'f4VHcj4lCvhg3JpK4sEORQ'
-      config.consumer_secret    = 'eVLGY5qoI4e3B2VAt02vHaiXy4yN0wflN2NaaV0iVdI'
-      config.oauth_token        = '335415484-ZL0iR1tTWcNWp4Td6QU5GeVVvkBjRUolj8EHlmnX'
-      config.oauth_token_secret = 'XXzEIZDrnHS65PlVhHQVB9SMAyjXzeNLMAh1Mhutp6c'
+      config.consumer_key       = ENV['TWITTER_CONSUMER']
+      config.consumer_secret    = ENV['TWITTER_CONSUMER_SECRET']
+      config.oauth_token        = ENV['TWITTER_OAUTH_TOKEN']
+      config.oauth_token_secret = ENV['TWITTER_SECRET']
       config.auth_method        = :oauth
     end
     # puts "cats"
@@ -28,18 +27,28 @@ class EventController < WebsocketRails::BaseController
   def instagram_fetcher
    puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
-      no_error = true
-      while no_error
-        time =Time.now.strftime("%3N")[1..2]
-        info = $redis.hmget("object", time)
-        first = info.first
-        eval = eval(first)
-        ######error check######################
-        # if eval.class != hash
-        #   no_error =false
-        # end  
-        send_message :instagram_success, eval, namespace: :events
-        sleep 5
+      counter = 0
+        p $redis.hgetall("object").count
+
+      while true
+        counter += 1
+        counter = 1 if counter > 100
+        p counter
+        an_instagram = $redis.hmget("object", counter.to_s)
+        p an_instagram
+        first = an_instagram.first 
+        if first != nil
+          # p an_instagram 
+          an_instagram = an_instagram.first
+          # p an_instagram
+          eval = eval(an_instagram)
+          # p eval
+          send_message :instagram_success, eval, namespace: :events
+          sleep (1)
+        else
+          sleep (2)
+          puts "no_photo"  
+        end
       end
 
 
@@ -52,19 +61,10 @@ class EventController < WebsocketRails::BaseController
 
 
   def trains
-    # puts "we are in the train fetcher"
-    # api_key = "345d187dc00d467f9f2d1307b6e4b6c3"
-    # line = ['red','g','blue','brn','pink','org','p','y']
-    # trains = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{api_key}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
-    # @trains = CobraVsMongoose.xml_to_hash(trains)
     train_handler ||= Thread.new do
       while true
       train_data = $redis.hmget("trains", "train_times")
-      # p "<<<<<<<<<<<<<<<< data is set >>>>>>>>>>>>>>>>>>"
       train = eval(train_data.first)
-      # p "<<<<<<<<<<<<<<<<< after pulling first"
-      # p train
-   
       send_message :success, train, namespace: :events
       sleep(5)
       end
@@ -109,9 +109,9 @@ class EventController < WebsocketRails::BaseController
 
   def eventful_fetcher
     puts "We are in events"
-    @eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-      :user => 'josephjames890',
-      :password => 'veveve122'
+    @eventful = Eventful::API.new ENV['EVENTFUL_KEY'],
+      :user => ENV['USER_NAME'],
+      :password => ENV['PASSWORD']
 
     # @today_events = Event.all.each { |event| @today_events << event }
     # if @today_events.length < 1
