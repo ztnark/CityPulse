@@ -10,9 +10,9 @@ $(document).ready(function(){
 
   eventful.trigger("events.eventful")
 
-  // setInterval(function(){
-  //   eventful.trigger("events.eventful")
-  // },900000);
+  setInterval(function(){
+    eventful.trigger("events.eventful")
+  },60000);
 
   eventful.bind("events.eventful_success", function(message){
     console.log(message);

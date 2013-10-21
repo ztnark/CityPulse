@@ -57,11 +57,9 @@ class Aggregator
     if total_events % 100 > 0
       total_queries += 1
     end
+    puts total_queries
 
-    if Event.count >= total_events
-      sleep(3600)
-    end
-
+    Event.destroy_all
     total_queries.times do |query|
       results = eventful.call 'events/search',
         :location    => '41.8819, -87.6278',

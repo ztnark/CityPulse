@@ -5,8 +5,8 @@ function getMarker(lat, lon, map, val) {
     return {
       path: google.maps.SymbolPath.CIRCLE,
       fillColor: '#FF5757',
-      fillOpacity: .23,
-      scale: Math.pow(2, size) / Math.PI,
+      fillOpacity: .5,
+      scale: Math.pow(1.7, size) / Math.PI,
       strokeColor: 'red',
       strokeWeight: 0
     };
