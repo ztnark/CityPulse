@@ -58,9 +58,8 @@ class Aggregator
       total_queries += 1
     end
 
-    if Event.count == total_events
-      sleep(43200)
-      Event.destroy_all
+    if Event.count >= total_events
+      sleep(3600)
     end
 
     total_queries.times do |query|
@@ -91,41 +90,6 @@ class Aggregator
     end
     p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
   end
-
-  # def self.eventful_queries
-  #   puts "Hey there"
-  #   puts @@query
-  #   # eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-  #   #                             :user => 'josephjames890',
-  #   #                             :password => 'veveve122'
-  #   if query <= total_queries
-  #     results = eventful.call 'events/search',
-  #       :location    => 'Chicago',
-  #       :date        => Date.today,
-  #       :sort_order  => 'popularity',
-  #       :page_size   => 100,
-  #       :page_number => @@query
-  #     results['events']['event'].each { |event|
-  #       Event.create( title:         event['title'],
-  #                     venue_name:    event['venue_name'],
-  #                     latitude:      event['latitude'],
-  #                     longitude:     event['longitude'],
-  #                     start_time:    event['start_time'],
-  #                     stop_time:     event['stop_time'],
-  #                     eventful_id:   event['id'],
-  #                     thumb:         event['thumb'],
-  #                     url:           event['url'],
-  #                     city_name:     event['city_name'],
-  #                     venue_address: event['venue_address'],
-  #                     region_abbr:   event['region_abbr'],
-  #                     postal_code:   event['postal_code'] )
-  #     }
-  #     query += 1
-  #   end
-  #   puts 'Hi'
-  #   puts Event.count
-  # end
-
 
 end
 
