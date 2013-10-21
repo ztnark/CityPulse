@@ -1,5 +1,7 @@
 class Aggregator
 
+  @@query = 17
+
   def self.trains
   trains_api = "345d187dc00d467f9f2d1307b6e4b6c3"
     line = ['red','g','blue','brn','pink','org','p','y']
@@ -30,69 +32,98 @@ class Aggregator
       time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object" ,time ,object)
     end
-    p "+++++++++++++++++    this is a new request    +++++++++++++++++++++++"
+    p "+++++++++++++++++    this is a new Instagram request    +++++++++++++++++++++++"
     p Time.now
-    p "+++++++++++++++++    this is a new request    +++++++++++++++++++++++"
+    p "+++++++++++++++++    this is a new Instagram request    +++++++++++++++++++++++"
   end
 
   def self.eventful
+    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
+    p Time.now
     eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
                                 :user => 'josephjames890',
                                 :password => 'veveve122'
+    puts 'eventful initiated'
+
     first_query = eventful.call 'events/search',
       :location    => '41.8819, -87.6278',
       :within      => 6,
-      :date      => Date.today,
-      :count_only => true
+      :date        => Date.today,
+      :count_only  => true
     total_events = first_query['total_items']
-    p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
-    p Time.now
-    p "+++++++++++++++++++     this is a new request    +++++++++++++++++++++++++"
-    p total_events
-  end
+    puts "#{total_events} events in Chicago today."
 
-  def number_of_queries?
-    @total_queries = total_events_today / 100
-    if @total_events % 100 > 0
-      @total_queries += 1
+    total_queries = total_events / 100
+    if total_events % 100 > 0
+      total_queries += 1
     end
-    @total_queries
-  end
 
-  def daily_queries(queries)
-    queries.times { |page|
-      results = @eventful.call 'events/search',
+    total_queries.times  do |query|
+      results = eventful.call 'events/search',
         :location    => 'Chicago',
         :date        => Date.today,
         :sort_order  => 'popularity',
         :page_size   => 100,
-        :page_number => page + 1
+        :page_number => query + 1
       results['events']['event'].each { |event|
-        @events << { title:       event['title'],
-                    venue_name:  event['venue_name'],
-                    latitude:    event['latitude'],
-                    longitude:   event['longitude'],
-                    start_time:  event['start_time'],
-                    stop_time:   event['stop_time'],
-                    eventful_id: event['id'] }
+        Event.create( title:         event['title'],
+                      venue_name:    event['venue_name'],
+                      latitude:      event['latitude'],
+                      longitude:     event['longitude'],
+                      start_time:    event['start_time'],
+                      stop_time:     event['stop_time'],
+                      eventful_id:   event['id'],
+                      thumb:         event['thumb'],
+                      url:           event['url'],
+                      city_name:     event['city_name'],
+                      venue_address: event['venue_address'],
+                      region_abbr:   event['region_abbr'],
+                      postal_code:   event['postal_code'] )
       }
-    }
-    @events
+    end
+
+
+    # query ||= 1
+    # if query > total_queries
+    #   query = 1
+    # end
+    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
   end
 
-  number_of_queries?
-  while @total_queries > 4
-    @total_queries -= 4
-    daily_queries(4)
-    puts @events.length
-    sleep(5)
+  def self.eventful_queries
+    puts "Hey there"
+    puts @@query
+    # eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
+    #                             :user => 'josephjames890',
+    #                             :password => 'veveve122'
+    if query <= total_queries
+      results = eventful.call 'events/search',
+        :location    => 'Chicago',
+        :date        => Date.today,
+        :sort_order  => 'popularity',
+        :page_size   => 100,
+        :page_number => @@query
+      results['events']['event'].each { |event|
+        Event.create( title:         event['title'],
+                      venue_name:    event['venue_name'],
+                      latitude:      event['latitude'],
+                      longitude:     event['longitude'],
+                      start_time:    event['start_time'],
+                      stop_time:     event['stop_time'],
+                      eventful_id:   event['id'],
+                      thumb:         event['thumb'],
+                      url:           event['url'],
+                      city_name:     event['city_name'],
+                      venue_address: event['venue_address'],
+                      region_abbr:   event['region_abbr'],
+                      postal_code:   event['postal_code'] )
+      }
+      query += 1
+    end
+    puts 'Hi'
+    puts Event.count
   end
 
-  daily_queries(@total_queries)
-
-  every 2.hours do
-    runner "Aggregator.eventful"
-  end
 
 end
 
