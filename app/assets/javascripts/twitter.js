@@ -2,7 +2,7 @@ function loadMap() {
 
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
-    zoom: 12,
+    zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 
 

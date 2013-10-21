@@ -27,6 +27,7 @@ class EventController < WebsocketRails::BaseController
   def instagram_fetcher
    puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
+<<<<<<< HEAD
       counter = 0
         p $redis.hgetall("object").count
 
@@ -50,17 +51,17 @@ class EventController < WebsocketRails::BaseController
           puts "no_photo"  
         end
       end
-
-
     end
   end
+
+
 
   def instagram_initialize
     instagram_fetcher
   end
 
-
   def trains
+<<<<<<< HEAD
     train_handler ||= Thread.new do
       while true
       train_data = $redis.hmget("trains", "train_times")
@@ -107,25 +108,26 @@ class EventController < WebsocketRails::BaseController
     @today_events
   end
 
+
+
+
   def eventful_fetcher
     puts "We are in events"
     @eventful = Eventful::API.new ENV['EVENTFUL_KEY'],
       :user => ENV['USER_NAME'],
       :password => ENV['PASSWORD']
 
-    # @today_events = Event.all.each { |event| @today_events << event }
-    # if @today_events.length < 1
-    # total_events_today
-    # number_of_queries?
     daily_queries(1)
-    # end
+
+
     @current_events = []
-    @today_events.each { |event| @current_events << event if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -7200 }
-
-    puts @today_events.length
+    Event.all.each do |event|
+      if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
+        @current_events << event
+      end
+    end
     puts @current_events.length
-
-    send_message :success, @current_events, namespace: :events
+    send_message :eventful_success, @current_events, namespace: :events
   end
 
 end

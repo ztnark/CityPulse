@@ -23,7 +23,7 @@
 function trainMarker(lat, lon, map, line, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
-  pics = ['http://i.picresize.com/images/2013/10/19/i4oAj.png','http://i.picresize.com/images/2013/10/19/hVDo.png','http://i.picresize.com/images/2013/10/19/NwQW.png','http://i.picresize.com/images/2013/10/19/5Jtbk.png','http://i.picresize.com/images/2013/10/19/Hl1uv.png','http://i.picresize.com/images/2013/10/19/JcLw.png','http://i.picresize.com/images/2013/10/19/LtVwe.png', 'http://i.picresize.com/images/2013/10/19/0rLaI.png']
+  pics = ['http://i.minus.com/i0Z9qdPy5IU2s.png','http://i.minus.com/iQYEMTvag7M9M.png','http://i.minus.com/i9HL1ZvZtUxY5.png','http://i.minus.com/ibhqt7KRLhLcvy.png','http://i.minus.com/ibr37gQx3MaLRa.png','http://i.minus.com/ibjvmM2q09xH51.png','http://i.minus.com/inig7zodNJGHU.png', 'http://i.minus.com/i86yX9RMFh2zo.png']
 
   var marker = new google.maps.Marker({
     position: latLng,

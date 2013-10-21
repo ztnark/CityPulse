@@ -21,9 +21,13 @@
 set :output, 'log/cron.log'
 
 every 2.minutes do
-  runner "Aggregator.instagram"
+  runner "Aggregator.instagram", environment: 'development'
 end
 
 every 1.minutes do
-  runner "Aggregator.trains"
+  runner "Aggregator.trains", environment: 'development'
+end
+
+every 15.minutes do
+  runner "Aggregator.eventful", environment: 'development'
 end

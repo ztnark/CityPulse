@@ -1,5 +1,6 @@
 class Aggregator
 
+
 def self.trains
   4.times do
   trains_api = ENV['TRAINS_KEY']
@@ -39,3 +40,62 @@ def self.instagram
     end
 end
     
+
+  @@query = 17
+
+
+
+  def self.eventful
+    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
+    p Time.now
+    eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
+                                :user => 'josephjames890',
+                                :password => 'veveve122'
+    puts 'eventful API initiated'
+
+    first_query = eventful.call 'events/search',
+      :location    => '41.8819, -87.6278',
+      :within      => 6,
+      :date        => Date.today,
+      :count_only  => true
+    total_events = first_query['total_items']
+    puts "#{total_events} events in Chicago today."
+
+    total_queries = total_events / 100
+    if total_events % 100 > 0
+      total_queries += 1
+    end
+    puts total_queries
+
+    Event.destroy_all
+    total_queries.times do |query|
+      results = eventful.call 'events/search',
+        :location    => '41.8819, -87.6278',
+        :within      => 6,
+        :date        => Date.today,
+        :sort_order  => 'popularity',
+        :page_size   => 100,
+        :page_number => query + 1
+      results['events']['event'].each { |event|
+        Event.create( title:         event['title'],
+                      venue_name:    event['venue_name'],
+                      latitude:      event['latitude'],
+                      longitude:     event['longitude'],
+                      start_time:    event['start_time'],
+                      stop_time:     event['stop_time'],
+                      eventful_id:   event['id'],
+                      thumb:         event['thumb'],
+                      url:           event['url'],
+                      city_name:     event['city_name'],
+                      venue_address: event['venue_address'],
+                      region_abbr:   event['region_abbr'],
+                      postal_code:   event['postal_code'] )
+      }
+      puts Event.count
+      sleep(120)
+    end
+    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
+  end
+
+end
+
