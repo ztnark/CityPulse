@@ -12,19 +12,40 @@
  *= require_tree .
  */
 
+ body {
+  overflow: hidden;
+ }
+
 #map-canvas{
   width: calc(100% - 356px);
   float: left;
 }
 
 #feed{
+
   width: 356px;
-  height: 100%;
-  position: fixed;
-  right: 0;
+  height: calc(50% - 42.5px);
+  position: relative;
+  float: left;
+  /*right: 0;*/
   background-color: #222;
+    overflow: scroll;
+    overflow: hidden;
+  /*  margin-top: 35px;*/
+  margin: 0 0 0 0;
+
+}
+
+#instafeed{
+  width: 356px;
+  height: calc(50% - 42.5px);
+  position: relative;
+  margin: 0 0 0 0;
+  background: #222;
+  float: left;
   overflow: scroll;
-  margin-top: 35px;
+  overflow: hidden;
+
 }
 
 #item{
@@ -34,6 +55,17 @@
   background-color: #222;
   color: white;
   border-bottom: 1px solid #bbb;
+}
+
+#instaitem{
+  width: 90%;
+  margin: 0 auto;
+  height: 100px;
+  background-color: #222;
+  color: white;
+  padding: 0px;
+
+  /*border-bottom: 1px solid #bbb;*/
 }
 
 #tweet{
@@ -63,7 +95,8 @@
   padding-left: 10px;
   padding-top: 6px;
   width: 346px;
-  position: fixed;
+  position: relative;
+  float: left;
   right: 0;
   color: white;
   font-family: 'Sonsie One', cursive;
@@ -84,11 +117,13 @@
 }
 
 footer {
+
   background-color: #777;
   display: inline-block;
   height: 50px;
   width: 356px;
-  position: fixed;
+  position: relative;
+  float: left;
   bottom: 0;
   right: 0;
 }
@@ -152,5 +187,32 @@ footer div a img {
 
 .lon {
   display: none;
+}
+
+#column1{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#column2{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#column3{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#centerer{
+  width: 350px;
+  margin-left: 6%;
+  height: 100%;
 }
 
