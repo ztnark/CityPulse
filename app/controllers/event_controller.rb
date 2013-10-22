@@ -43,7 +43,7 @@ class EventController < WebsocketRails::BaseController
           eval = eval(an_instagram)
           # p eval
           send_message :instagram_success, eval, namespace: :events
-          sleep (1)
+          sleep (5)
         else
           sleep (2)
           puts "no_photo"
@@ -64,21 +64,30 @@ class EventController < WebsocketRails::BaseController
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
       send_message :success, train, namespace: :events
-      sleep(5)
+      sleep(15)
       end
     end
   end
 
-  def planes
-    train_handler ||= Thread.new do
-      while true
-      plane_data = $redis.hmget("planes", "plane_times")
-      plane = eval(plane_data.first)
-      send_message :success, plane, namespace: :events
-      sleep(5)
-      end
+  def bikes
+    bike_handler ||= Thread.new do
+      bike_data = $redis.hmget("bikes", "bike_times")
+      puts bike_data
+      bike = eval(bike_data.first)
+      send_message :success, bike, namespace: :events
     end
   end
+
+  # def planes
+  #   train_handler ||= Thread.new do
+  #     while true
+  #     plane_data = $redis.hmget("planes", "plane_times")
+  #     plane = eval(plane_data.first)
+  #     send_message :success, plane, namespace: :events
+  #     sleep(15)
+  #     end
+  #   end
+  # end
 
 
   def daily_queries(queries)
