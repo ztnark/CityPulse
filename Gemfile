@@ -21,6 +21,8 @@ gem 'redis'
 # added because redis is a goddamn mess
 gem 'redis-kit'
 
+gem 'unicorn'
+
 gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 # switched to thin server in order to support websockets.
@@ -57,6 +59,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'cobravsmongoose'
+
+gem 'faye-websocket'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
