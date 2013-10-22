@@ -29,12 +29,12 @@ $(document).ready(function(){
 
 
   var tweets = new WebSocketRails('localhost:3000/websocket');
-  tweets.trigger("events.tweets")
+  // tweets.trigger("events.tweets")
 
-  tweets.bind("events.tweet_success", function(message){
-    convertTweetsToMapObjects(message);
-    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
-  })
+  // tweets.bind("events.tweet_success", function(message){
+  //   convertTweetsToMapObjects(message);
+  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'>@" +message[2] +"<br>" + message[1] + "</div></div>");
+  // })
 
 ////////INSTAGRAMS/////////////////////////////////////
 

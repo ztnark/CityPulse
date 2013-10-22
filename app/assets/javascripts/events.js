@@ -17,8 +17,13 @@ function getMarker(lat, lon, map, val) {
     map: map,
     icon: getCircle(6)
   });
+
+  // var time = val.start_time;
+  // var hours = time.match(/(\d{2})(:)(\d{2})/);
+  // console.log('Hello');
+
   var infoWindowOptions = {
-    content:  val.title + "<br>"+ val.venue_name + "<br>" + val.start_time
+    content:  val.title + "<br>"+ val.venue_name + "<br>" + val.start_time.match(/\d{2}:\d{2}/)
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
