@@ -35,9 +35,9 @@ class EventController < WebsocketRails::BaseController
         p counter
         an_instagram = $redis.hmget("object", counter.to_s)
         p an_instagram
-        first = an_instagram.first 
+        first = an_instagram.first
         if first != nil
-          # p an_instagram 
+          # p an_instagram
           an_instagram = an_instagram.first
           # p an_instagram
           eval = eval(an_instagram)
@@ -46,7 +46,7 @@ class EventController < WebsocketRails::BaseController
           sleep (1)
         else
           sleep (2)
-          puts "no_photo"  
+          puts "no_photo"
         end
       end
     end
@@ -64,6 +64,17 @@ class EventController < WebsocketRails::BaseController
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
       send_message :success, train, namespace: :events
+      sleep(5)
+      end
+    end
+  end
+
+  def planes
+    train_handler ||= Thread.new do
+      while true
+      plane_data = $redis.hmget("planes", "plane_times")
+      plane = eval(plane_data.first)
+      send_message :success, plane, namespace: :events
       sleep(5)
       end
     end

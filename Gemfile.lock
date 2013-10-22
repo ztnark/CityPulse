@@ -72,6 +72,7 @@ GEM
     faye-websocket (0.7.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.0)
+    flightstats-flex (0.3.0)
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
@@ -209,6 +210,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dotenv-rails
   eventfulapi
+  flightstats-flex (~> 0.3.0)
   faye-websocket
   instagram
   jbuilder (~> 1.2)

@@ -36,6 +36,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem "koala", "~> 1.7.0rc1"
 
+gem "flightstats-flex", "~> 0.3.0"
+
 # Use to manage cron jobs
 gem 'whenever'
 

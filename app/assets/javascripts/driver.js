@@ -58,13 +58,29 @@ $(document).ready(function(){
 
   trains.trigger("events.trains")
 
-
   trains.bind("events.success", function(message){
     console.log(message);
     $.each(message.ctatt.route,function(index, value){
       $.each(value.train,function(ind, val){
         trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$);
       })
+    })
+  })
+
+
+
+
+////////PLANES/////////////////////////////////////
+
+
+  var planes = new WebSocketRails('localhost:3000/websocket');
+
+  planes.trigger("events.planes")
+
+  planes.bind("events.success", function(message){
+    console.log(message);
+    $.each(message.response.flightTracks.flightTrack,function(index, value){
+        planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map, "This is a plane.");
     })
   })
 
