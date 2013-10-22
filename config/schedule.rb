@@ -28,6 +28,14 @@ every 1.minutes do
   runner "Aggregator.trains", environment: 'development'
 end
 
-every 15.minutes do
+every 2.hours do
   runner "Aggregator.eventful", environment: 'development'
+end
+
+# every 2.minutes do
+#   runner "Aggregator.planes", environment: 'development'
+# end
+
+every 5.minutes do
+  runner "Aggregator.bikes", environment: 'development'
 end

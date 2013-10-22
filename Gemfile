@@ -21,6 +21,10 @@ gem 'redis'
 # added because redis is a goddamn mess
 gem 'redis-kit'
 
+gem 'unicorn'
+
+gem 'engineyard'
+
 gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 # switched to thin server in order to support websockets.
@@ -33,6 +37,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem "koala", "~> 1.7.0rc1"
+
+gem "flightstats-flex", "~> 0.3.0"
 
 # Use to manage cron jobs
 gem 'whenever'
@@ -55,6 +61,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'cobravsmongoose'
+
+gem 'faye-websocket'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
