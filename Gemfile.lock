@@ -88,6 +88,7 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.0)
     flightstats-flex (0.3.0)
+    gemoji (1.4.0)
     hashie (2.0.5)
     highline (1.6.20)
     hike (1.2.3)
@@ -234,6 +235,7 @@ DEPENDENCIES
   eventfulapi
   faye-websocket
   flightstats-flex (~> 0.3.0)
+  gemoji
   instagram
   jbuilder (~> 1.2)
   jquery-rails
