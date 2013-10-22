@@ -60,7 +60,22 @@ GEM
       eventmachine (~> 1.0)
       http_parser.rb (~> 0.5)
       simple_oauth (~> 0.1)
+    engineyard (2.3.1)
+      engineyard-cloud-client (~> 1.0.14)
+      engineyard-serverside-adapter (= 2.2.0)
+      escape (~> 0.0.4)
+      highline (~> 1.6.1)
+      launchy (~> 2.1)
+      net-ssh (~> 2.2)
+      rest-client (~> 1.6.0)
+    engineyard-cloud-client (1.0.14)
+      multi_json (~> 1.6)
+      rest-client (~> 1.6.0)
+    engineyard-serverside-adapter (2.2.0)
+      escape (~> 0.0.4)
+      multi_json (~> 1.6)
     erubis (2.7.0)
+    escape (0.0.4)
     eventfulapi (2.2.1)
       mime-types (> 0.0.0)
     eventmachine (1.0.3)
@@ -73,6 +88,7 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.0)
     hashie (2.0.5)
+    highline (1.6.20)
     hike (1.2.3)
     hiredis (0.4.5)
     http_parser.rb (0.5.3)
@@ -94,6 +110,8 @@ GEM
       addressable
       faraday
       multi_json
+    launchy (2.3.0)
+      addressable (~> 2.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -102,6 +120,7 @@ GEM
     mock_redis (0.6.6)
     multi_json (1.8.2)
     multipart-post (1.2.0)
+    net-ssh (2.7.0)
     pg (0.17.0)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -131,6 +150,8 @@ GEM
       redis (~> 3.0.0)
     redis-namespace (1.3.1)
       redis (~> 3.0.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.2.12)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -208,6 +229,7 @@ DEPENDENCIES
   cobravsmongoose
   coffee-rails (~> 4.0.0)
   dotenv-rails
+  engineyard
   eventfulapi
   faye-websocket
   instagram
