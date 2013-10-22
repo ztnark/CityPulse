@@ -23,6 +23,8 @@ gem 'redis-kit'
 
 gem 'unicorn'
 
+gem 'engineyard'
+
 gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 # switched to thin server in order to support websockets.
