@@ -232,8 +232,8 @@ DEPENDENCIES
   dotenv-rails
   engineyard
   eventfulapi
-  flightstats-flex (~> 0.3.0)
   faye-websocket
+  flightstats-flex (~> 0.3.0)
   instagram
   jbuilder (~> 1.2)
   jquery-rails

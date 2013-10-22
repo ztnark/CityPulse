@@ -70,17 +70,30 @@ $(document).ready(function(){
 
 
 
-////////PLANES/////////////////////////////////////
+// ////////PLANES/////////////////////////////////////
 
 
-  var planes = new WebSocketRails('localhost:3000/websocket');
+//   var planes = new WebSocketRails('localhost:3000/websocket');
 
-  planes.trigger("events.planes")
+//   planes.trigger("events.planes")
 
-  planes.bind("events.success", function(message){
-    console.log(message);
-    $.each(message.response.flightTracks.flightTrack,function(index, value){
-        planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map, "This is a plane.");
+//   planes.bind("events.success", function(message){
+//     console.log(message);
+//     $.each(message.response.flightTracks.flightTrack,function(index, value){
+//         planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map, "This is a plane.");
+//     })
+//   })
+
+// ////////BIKES/////////////////////////////////////
+
+ var bikes = new WebSocketRails('localhost:3000/websocket');
+
+  bikes.trigger("events.bikes")
+
+  bikes.bind("events.success", function(message){
+    $.each(message.stationBeanList,function(index, value){
+      console.log(value)
+      bikeMarker(value.latitude, value.longitude, map, value.availableBikes);
     })
   })
 
