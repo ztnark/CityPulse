@@ -19,7 +19,7 @@ function getMarker(lat, lon, map, val) {
   });
 
   var infoWindowOptions = {
-    content:  val.title + "<br>"+ val.venue_name + "<br>" + ("Event Page").link(val.url) + "<br>" + val.at_time
+    content:  val.title + "<br>"+ val.venue_name + "<br>" + ("Event Page").link(val.url)
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
