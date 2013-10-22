@@ -110,7 +110,7 @@ end
                       latitude:      event['latitude'],
                       longitude:     event['longitude'],
                       start_time:    Time.new(event['start_time'].year,event['start_time'].month,event['start_time'].day,event['start_time'].hour,event['start_time'].min,event['start_time'].sec, '-05:00'),
-                      at_time:       event['start_time'].strftime('%l:%M%P'),
+                      at_time:       'see start_time',
                       stop_time:     event['stop_time'],
                       eventful_id:   event['id'],
                       thumb:         event['thumb'],
