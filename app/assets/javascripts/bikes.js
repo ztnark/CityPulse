@@ -5,7 +5,8 @@ function bikeMarker(lat, lon, map, val) {
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
-    icon: "http://i.picresize.com/images/2013/10/21/8NCD5.png"
+    icon: "http://i.picresize.com/images/2013/10/22/tmcab.png"
+    // icon: "http://i.picresize.com/images/2013/10/21/8NCD5.png"
   });
   var infoWindowOptions = {
     content:  "Available Bikes: " + val
