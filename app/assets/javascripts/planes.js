@@ -8,7 +8,8 @@
 //     icon: "http://i.picresize.com/images/2013/10/21/xv2Fm.png"
 //   });
 //   var infoWindowOptions = {
-//     content:  val
+//     content:  val,
+//     maxWidth: 200
 //   };
 //   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 //   google.maps.event.addListener(marker,'click', function(e){

@@ -17,9 +17,10 @@ function getMarker(lat, lon, map, val) {
     map: map,
     icon: getCircle(6)
   });
-
+  var contentString = (val.title).link(val.url) + "<br>" + val.venue_name
   var infoWindowOptions = {
-    content:  (val.title).link(val.url) + "<br>"+ val.venue_name
+    content: contentString,
+    maxWidth: 200
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
