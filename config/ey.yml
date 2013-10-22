@@ -1,0 +1,5 @@
+defaults:
+  migrate:true
+  migration_command:rake db:migrate
+  precompile_assests: true
+  
