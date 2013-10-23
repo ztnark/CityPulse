@@ -15,6 +15,8 @@ gem 'eventfulapi'
 
 gem 'instagram'
 
+gem 'pusher'
+
 # added as a new db option
 gem 'redis'
 

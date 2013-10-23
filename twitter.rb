@@ -37,7 +37,9 @@
 # end
 
  gem "tweetstream"
+ gem "pusher"
  require "tweetstream"
+ require "pusher"
 
  puts "hello"
 
@@ -49,11 +51,19 @@
       config.auth_method        = :oauth
     end
  p "hello"
-    TweetStream::Daemon.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
+    TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
       puts "#{status.text}"
       puts "#{status[:user][:screen_name]}"
       puts "#{status[:geo][:coordinates]}"
       puts "#{status[:user][:profile_image_url_https]}"
       puts " ++++++++++++++++++++++++++"
+
+      Pusher.url = "http://86bccb7dee9d1aea8897:fef3061fded8a4bd2023@api.pusherapp.com/apps/57591"
+      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
+      if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
+        Pusher['twitter_channel'].trigger('twitter_event', {
+          message: @tweet
+          })
+      end
 end
 
