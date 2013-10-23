@@ -134,8 +134,6 @@ stadiumThrob(comiskeyField);
 
 
 
-
-
 // ////////EVENTFUL/////////////////////////////////////
 
   var eventful = new WebSocketRails('localhost:3000/websocket');
@@ -181,10 +179,10 @@ stadiumThrob(comiskeyField);
 
     var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
-    setTimeout(function(){
-      $that.remove();
-      console.log("test")
-    },120000)
+    // setTimeout(function(){
+    //   $that.remove();
+    //   console.log("test")
+    // },120000)
     if (colcounter===3){
       colcounter = 1
     }
@@ -194,8 +192,10 @@ stadiumThrob(comiskeyField);
 
 
   });
+
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('localhost:3000/websocket');
+
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -207,11 +207,11 @@ stadiumThrob(comiskeyField);
     })
   })
 
-
 // // ////////PLANES/////////////////////////////////////
-
-
   var planes = new WebSocketRails('localhost:3000/websocket');
+
+  planes.trigger("events.planes")
+
   planes.bind("events.success", function(message){
     // console.log(message);
     $.each(message.response.flightTracks.flightTrack,function(index, value){
@@ -233,7 +233,6 @@ stadiumThrob(comiskeyField);
       bikeMarker(value.latitude, value.longitude, map, value);
     });
   });
-
 
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
