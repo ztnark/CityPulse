@@ -76,15 +76,11 @@ var comiskeyCoords = [
   });
 
 // ////////EVENTFUL/////////////////////////////////////
-
   var eventful = new WebSocketRails('localhost:3000/websocket');
-
   eventful.trigger("events.eventful")
-
   setInterval(function(){
     eventful.trigger("events.eventful")
   },180000);
-
   eventful.bind("events.eventful_success", function(message){
     $.each(message, function(index, value){
       getMarker(value.latitude, value.longitude, map, value);
@@ -92,28 +88,18 @@ var comiskeyCoords = [
   })
 
 ////////TWEETS/////////////////////////////////////
-  
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
-
   tweets.bind("events.tweet_success", function(message){
     convertTweetsToMapObjects(message);
     $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
   })
 
 ////////INSTAGRAMS/////////////////////////////////////
-
   var instagram = new WebSocketRails('localhost:3000/websocket');
-
   instagram.trigger("events.instagram_initialize")
-
-
   var colcounter = 1;
-
   instagram.bind("events.instagram_success", function(message){
-
-    console.log(colcounter);
-
     var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
     // setTimeout(function(){
@@ -126,13 +112,10 @@ var comiskeyCoords = [
     else{
       colcounter +=1
     }
-
-
   });
 
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('localhost:3000/websocket');
-
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -146,9 +129,7 @@ var comiskeyCoords = [
 
 // // ////////PLANES/////////////////////////////////////
   var planes = new WebSocketRails('localhost:3000/websocket');
-
   planes.trigger("events.planes")
-
   planes.bind("events.success", function(message){
     $.each(message.response.flightTracks.flightTrack,function(index, value){
       var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
@@ -157,11 +138,8 @@ var comiskeyCoords = [
   })
 
 // // ////////BIKES/////////////////////////////////////
-
  var bikes = new WebSocketRails('localhost:3000/websocket');
-
   bikes.trigger("events.bikes");
-
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
       // console.log(value)
@@ -185,7 +163,6 @@ var comiskeyCoords = [
     var instaOn = $(this.children[1].nextSibling.innerText)
     var instaLat = (instaAt['selector'])
     var instaLon = (instaOn['selector'])
-    console.log(instaLat,instaLon);
     map.setCenter(new google.maps.LatLng(instaLat,instaLon));
     map.setZoom(15)
   });
