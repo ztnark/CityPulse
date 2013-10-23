@@ -1,5 +1,7 @@
+begin
  gem "tweetstream"
  require "TweetStream"
+end
 
  TweetStream.configure do |config|
       config.consumer_key       = "2LLhLNd4A8hzgnAqGQkH7Q"
