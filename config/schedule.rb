@@ -32,9 +32,9 @@ every 12.hours do
   runner "Aggregator.eventful", environment: 'development'
 end
 
-every 1.minutes do
-  runner "Aggregator.planes", environment: 'development'
-end
+# every 1.minutes do
+#   runner "Aggregator.planes", environment: 'development'
+# end
 
 every 5.minutes do
   runner "Aggregator.bikes", environment: 'development'
