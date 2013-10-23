@@ -48,12 +48,15 @@ def self.instagram
   Instagram.configure do |config|
     config.client_id = ENV['INSTAGRAM']
   end
-  instagrams =Instagram.media_search("41.915336","-87.681413",{radius: 4500})
-  @instagrams = []
+  instagrams = []
+  Instagram.media_search("41.915336","-87.681413",{radius: 4500}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.909012","-87.634206",{radius: 4500}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.878107","-87.627490",{radius: 4500}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.882498","-87.668624",{radius: 4500}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.925043","-87.652574",{radius: 4500}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.819344","-87.606354",{radius: 4500}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.858011","-87.679825",{radius: 4500}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.860985","-87.624807",{radius: 4500}).each {|x| instagrams.push(x)}
     counter=0
   instagrams.shuffle.each do |ig|
     counter += 1

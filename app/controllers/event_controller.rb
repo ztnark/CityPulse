@@ -19,7 +19,7 @@ class EventController < WebsocketRails::BaseController
       # puts "#{status[:user][:profile_image_url_https]}"
       # puts " ++++++++++++++++++++++++++"
       @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
-      if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 
+      if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
         send_message :tweet_success, @tweet, namespace: :events
       end
     end
