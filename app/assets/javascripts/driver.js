@@ -93,14 +93,6 @@ var comiskeyCoords = [
 
 ////////TWEETS/////////////////////////////////////
 
-  // var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-  // tweets.trigger("events.tweets")
-
-  // tweets.bind("events.tweet_success", function(message){
-  //   convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  // })
-
    var pusher = new Pusher('86bccb7dee9d1aea8897');
     var channel = pusher.subscribe('twitter_channel');
     channel.bind('twitter_event', function(data) {
@@ -134,43 +126,43 @@ var comiskeyCoords = [
   });
 
 // ////////TRAINS/////////////////////////////////////
-  // var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
-  // trains.trigger("events.trains")
-  // trains.bind("events.success", function(message){
-  //   // console.log(message);
-  //   $.each(message.ctatt.route,function(index, value){
-  //     $.each(value.train,function(ind, val){
-  //       trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$)
-  //       // + ' in ' + Math.round(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
-  //     });
-  //   })
-  // })
+  trains.trigger("events.trains")
+  trains.bind("events.success", function(message){
+    // console.log(message);
+    $.each(message.ctatt.route,function(index, value){
+      $.each(value.train,function(ind, val){
+        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$)
+        // + ' in ' + Math.round(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
+      });
+    })
+  })
 
 // // ////////PLANES/////////////////////////////////////
-  // var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
-  // planes.trigger("events.planes")
+  planes.trigger("events.planes")
 
-  // planes.bind("events.success", function(message){
-  //   $.each(message.response.flightTracks.flightTrack,function(index, value){
-  //     var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
-  //     planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
-  //   })
-  // })
+  planes.bind("events.success", function(message){
+    $.each(message.response.flightTracks.flightTrack,function(index, value){
+      var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
+      planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
+    })
+  })
 
 // // ////////BIKES/////////////////////////////////////
 
- // var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
- //  bikes.trigger("events.bikes");
+  bikes.trigger("events.bikes");
 
- //  bikes.bind("events.success", function(message){
- //    $.each(message.stationBeanList,function(index, value){
- //      // console.log(value)
- //      bikeMarker(value.latitude, value.longitude, map, value);
- //    });
- //  });
+  bikes.bind("events.success", function(message){
+    $.each(message.stationBeanList,function(index, value){
+      // console.log(value)
+      bikeMarker(value.latitude, value.longitude, map, value);
+    });
+  });
 
 ////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
