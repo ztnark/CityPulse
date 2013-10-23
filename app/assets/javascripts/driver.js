@@ -25,8 +25,8 @@ $(document).ready(function(){
 
 ////////TWEETS/////////////////////////////////////
 
-  // var tweets = new WebSocketRails('localhost:3000/websocket');
-  // tweets.trigger("events.tweets")
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
   tweets.bind("events.tweet_success", function(message){
     convertTweetsToMapObjects(message);
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 ////////INSTAGRAMS/////////////////////////////////////
 
-  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var instagram = new WebSocketRails('localhost:3000/websocket');
 
   instagram.trigger("events.instagram_initialize")
 
@@ -62,7 +62,6 @@ $(document).ready(function(){
 
   });
 
-
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('localhost:3000/websocket');
 
@@ -80,7 +79,6 @@ $(document).ready(function(){
 // // ////////PLANES/////////////////////////////////////
 
   var planes = new WebSocketRails('localhost:3000/websocket');
-//   var planes = new WebSocketRails('localhost:3000/websocket');
 
   planes.bind("events.success", function(message){
     // console.log(message);
