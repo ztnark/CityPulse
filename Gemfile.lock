@@ -73,6 +73,9 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.0)
     flightstats-flex (0.3.0)
+    font-awesome-rails (3.2.1.3)
+      railties (>= 3.2, < 5.0)
+    gemoji (1.4.0)
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
@@ -116,6 +119,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.0)
       sprockets-rails (~> 2.0.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.3)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
@@ -212,12 +220,15 @@ DEPENDENCIES
   eventfulapi
   faye-websocket
   flightstats-flex (~> 0.3.0)
+  font-awesome-rails
+  gemoji
   instagram
   jbuilder (~> 1.2)
   jquery-rails
   koala (~> 1.7.0rc1)
   pg
   rails (= 4.0.0)
+  rails_12factor
   redis
   redis-kit
   sass-rails (~> 4.0.0)

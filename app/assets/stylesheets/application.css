@@ -9,35 +9,67 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require font-awesome
  *= require_tree .
  */
 
+ body {
+  overflow: hidden;
+ }
+
 #map-canvas{
-  width: 100%;
+  width: calc(100% - 356px);
   float: left;
 }
 
 #feed{
+
   width: 356px;
-  height: 100%;
-  position: fixed;
-  right: 0;
+  height: calc(50% - 42.5px);
+  position: relative;
+  float: left;
+  /*right: 0;*/
   background-color: #222;
   overflow: scroll;
+  overflow: hidden;
   margin-top: 35px;
+  margin: 0 0 0 0;
+
+}
+
+#instafeed{
+  width: 356px;
+  height: calc(50% - 42.5px);
+  position: relative;
+  margin: 0 0 0 0;
+  background: #222;
+  float: left;
+  overflow: scroll;
+  overflow: hidden;
+
 }
 
 #item{
   width:356px;
-  height: 115px;
-  padding-top: 20px;
+  height: 90px;
   background-color: #222;
   color: white;
   border-bottom: 1px solid #bbb;
 }
 
+#instaitem{
+  width: 90%;
+  margin: 0 auto;
+  height: 100px;
+  background-color: #222;
+  color: white;
+  padding: 0px;
+
+  /*border-bottom: 1px solid #bbb;*/
+}
+
 #tweet{
-  width: 280px;
+  width: 270px;
   display: inline-block;
   float: right;
   margin: 0 auto;
@@ -50,7 +82,7 @@
   display: inline-block;
 }
 
-#instagram{
+.instagram{
   height: 150px;
   margin: 0 auto;
   width: 100px;
@@ -62,19 +94,14 @@
   background-color: #777;
   padding-left: 10px;
   padding-top: 6px;
-  width: 346px;
-  position: fixed;
+  position: relative;
+  float: left;
   right: 0;
   color: white;
   font-family: 'Sonsie One', cursive;
-  font-size: 20px;
-}
-
-#timemode p {
   float: left;
   margin: 0;
   margin-left: 5px;
-  width: 50px;
   letter-spacing: 2px;
 }
 
@@ -84,11 +111,13 @@
 }
 
 footer {
+
   background-color: #777;
   display: inline-block;
   height: 50px;
   width: 356px;
-  position: fixed;
+  position: relative;
+  float: left;
   bottom: 0;
   right: 0;
 }
@@ -144,5 +173,44 @@ footer div a img {
 
 .eventful-badge {
   margin-top: 10px;
+}
+
+.lat {
+  display: none;
+}
+
+.lon {
+  display: none;
+}
+
+#column1{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#column2{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#column3{
+  width: 101px;
+  float: left;
+  background: #222;
+  height: 100%;
+}
+
+#centerer{
+  width: 350px;
+  margin-left: 6%;
+  height: 100%;
+}
+
+#screenname{
+  font-weight: bold;
 }
 

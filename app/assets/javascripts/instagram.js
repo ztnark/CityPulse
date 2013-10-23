@@ -1,5 +1,5 @@
 function setMarker(lat, lon, map, val) {
-  console.log(lat, lon, map);
+  // console.log(lat, lon, map);
   var latLng = new google.maps.LatLng(lat, lon);
 
   var marker = new google.maps.Marker({
@@ -18,7 +18,7 @@ function setMarker(lat, lon, map, val) {
     infoWindow.open(map,marker);
   });
 
-  setTimeout(function(){marker.setMap(null)},360000);
+  setTimeout(function(){marker.setMap(null)},240000);
 
 };
 

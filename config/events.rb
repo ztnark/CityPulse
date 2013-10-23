@@ -1,3 +1,4 @@
+
 WebsocketRails::EventMap.describe do
   # You can use this file to map incoming events to controller actions.
   # One event can be mapped to any number of controller actions. The
@@ -12,6 +13,8 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
 
+
+
   namespace :events do
     subscribe :tweets, 'event#tweets'
     # subscribe :instagram, 'event#instagram_fetcher'
@@ -21,5 +24,6 @@ WebsocketRails::EventMap.describe do
     subscribe :eventful, 'event#eventful_fetcher'
     subscribe :planes, 'event#planes'
     subscribe :bikes, 'event#bikes'
+    subscribe :test, 'event#test'
   end
 end

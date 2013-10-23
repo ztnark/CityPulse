@@ -23,6 +23,10 @@ gem 'redis-kit'
 
 gem 'unicorn'
 
+gem 'gemoji'
+
+gem 'rails_12factor'
+
 gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 # switched to thin server in order to support websockets.
@@ -61,6 +65,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'cobravsmongoose'
 
 gem 'faye-websocket'
+
+gem "font-awesome-rails"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
