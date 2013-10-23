@@ -14,19 +14,13 @@ function setMarker(lat, lon, map, val) {
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'mouseover', function(e){
-    // console.log(e);
-    // $('.gm-style-iw').close();
     infoWindow.open(map,marker);
   });
   google.maps.event.addListener(marker,'mouseout', function(e){
-    // console.log(e);
-    // $('.gm-style-iw').close();
     infoWindow.close();
   });
   google.maps.event.addListener(marker,'click', function(e){
-    // $('.gm-style-iw').close();
     var link = val.match(/(href=)(.+)(\starget)/)[2]
-    console.log(link);
     window.open(link);
   });
 

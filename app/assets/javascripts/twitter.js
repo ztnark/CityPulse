@@ -1,4 +1,5 @@
-var styles = undefined;
+
+var styles = undefined
 function loadMap() {
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
@@ -17,27 +18,11 @@ function loadMap() {
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
 
-//   var styles = [
-//   {
-//     "stylers": [
-//       { "invert_lightness": true },
-//       { "lightness": 23 }
-//     ]
-//   },{
-//     "featureType": "road",
-//     "stylers": [
-//       { "visibility": "off" }
-//     ]
-//   },{
-//     "stylers": [
-//       { "lightness": 19 }
-//     ]
-//   }]
-var opt = { minZoom: 12, maxZoom: 16 };
-  map.setOptions(opt);
+  var opt = { minZoom: 12, maxZoom: 16 };
+    map.setOptions(opt);
 
-// map.setOptions({styles: styles});
-  return map;
+  // map.setOptions({styles: styles});
+    return map;
 };
 
 
