@@ -26,7 +26,6 @@ class EventController < WebsocketRails::BaseController
   # end
 
   def instagram_fetcher
-   puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
       counter = 0
         p $redis.hgetall("object").count
@@ -47,7 +46,6 @@ class EventController < WebsocketRails::BaseController
           sleep (5)
         else
           sleep (2)
-          puts "no_photo"
         end
       end
     end
@@ -73,7 +71,6 @@ class EventController < WebsocketRails::BaseController
   def bikes
     bike_handler ||= Thread.new do
       bike_data = $redis.hmget("bikes", "bike_times")
-      puts bike_data
       bike = eval(bike_data.first)
       send_message :success, bike, namespace: :events
     end
@@ -97,7 +94,6 @@ class EventController < WebsocketRails::BaseController
         @current_events << event
       end
     end
-    puts @current_events.length
     send_message :eventful_success, @current_events, namespace: :events
   end
 
