@@ -93,8 +93,8 @@ var comiskeyCoords = [
 
 ////////TWEETS/////////////////////////////////////
 
-  var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-  tweets.trigger("events.tweets")
+  // var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  // tweets.trigger("events.tweets")
 
   // tweets.bind("events.tweet_success", function(message){
   //   convertTweetsToMapObjects(message);
@@ -165,16 +165,16 @@ var comiskeyCoords = [
 
 // // ////////BIKES/////////////////////////////////////
 
- var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ // var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
-  bikes.trigger("events.bikes");
+ //  bikes.trigger("events.bikes");
 
-  bikes.bind("events.success", function(message){
-    $.each(message.stationBeanList,function(index, value){
-      // console.log(value)
-      bikeMarker(value.latitude, value.longitude, map, value);
-    });
-  });
+ //  bikes.bind("events.success", function(message){
+ //    $.each(message.stationBeanList,function(index, value){
+ //      // console.log(value)
+ //      bikeMarker(value.latitude, value.longitude, map, value);
+ //    });
+ //  });
 
 ////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
