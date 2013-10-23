@@ -79,5 +79,5 @@ Chicageaux::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 
-  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6789'
+  # ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6789'
 end
