@@ -25,6 +25,8 @@ gem 'unicorn'
 
 gem 'gemoji'
 
+gem 'rails_12factor'
+
 gem 'dotenv-rails', :groups => [:development, :test, :production]
 
 # switched to thin server in order to support websockets.

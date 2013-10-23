@@ -1,4 +1,4 @@
-var styles = nil
+var styles = undefined;
 function loadMap() {
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
@@ -16,15 +16,6 @@ function loadMap() {
 
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
-
-  var infowindow = new google.maps.InfoWindow({
-      // content: contentString
-  });
-
-  google.maps.event.addListener(marker, 'onmouseover', function() {
-    // $('.gm-style-iw').close();
-    infowindow.open(map,marker);
-  });
 
 //   var styles = [
 //   {
