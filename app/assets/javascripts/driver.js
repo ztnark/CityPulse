@@ -8,11 +8,19 @@ $(document).ready(function(){
 
 // ////////EVENTFUL/////////////////////////////////////
 
-  var test = new WebSocketRails('ws://limitless-temple-4888.herokuapp.com/');
+  var test = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
   test.trigger("events.test")
 
   test.bind("events.success", function(message){
+    console.log(message);
+  });
+
+  var testing = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+
+  testing.trigger("events.test")
+
+  testing.bind("events.success", function(message){
     console.log(message);
   });
 
@@ -58,7 +66,7 @@ $(document).ready(function(){
 
 ////////INSTAGRAMS/////////////////////////////////////
 
-  var instagram = new WebSocketRails('localhost:3000/websocket');
+  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
   instagram.trigger("events.instagram_initialize")
 
