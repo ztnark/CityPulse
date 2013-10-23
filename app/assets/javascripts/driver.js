@@ -5,18 +5,104 @@ $(document).ready(function(){
   var marker;
 
   var x = 0;
+  // ////////////////////////////////Playing with polygons/////////////////////
+var unitedCenter;
+var unitedCoords = [
+    new google.maps.LatLng(41.88122,-87.676477),
+    new google.maps.LatLng(41.878866,-87.676477),
+    new google.maps.LatLng(41.878866,-87.6718),
+    new google.maps.LatLng(41.88122,-87.6718)
+  ];
+    unitedCenter = new google.maps.Polygon({
+    paths: unitedCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+   unitedCenter.setMap(map);
+
+var soldierField;
+var soldierCoords = [
+    new google.maps.LatLng(41.864934,-87.618778),
+    new google.maps.LatLng(41.864934,-87.614207),
+    new google.maps.LatLng(41.860427,-87.614121),
+    new google.maps.LatLng(41.860379,-87.617404)
+  ];
+    soldierField = new google.maps.Polygon({
+    paths: soldierCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+   soldierField.setMap(map);
+
+var wrigleyField;
+var wrigleyCoords = [
+    new google.maps.LatLng(41.948997,-87.654462),
+    new google.maps.LatLng(41.947281,-87.65444),
+    new google.maps.LatLng(41.947305,-87.656372),
+    new google.maps.LatLng(41.948949,-87.657788)
+  ];
+    wrigleyField = new google.maps.Polygon({
+    paths: wrigleyCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+   wrigleyField.setMap(map);
+
+
+var comiskeyField;
+var comiskeyCoords = [
+    new google.maps.LatLng(41.83077,-87.636),
+    new google.maps.LatLng(41.8273,-87.636),
+    new google.maps.LatLng(41.8273,-87.631),
+    new google.maps.LatLng(41.83077,-87.631)
+  ];
+
+    comiskeyField = new google.maps.Polygon({
+    paths: comiskeyCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 2,
+    fillColor: 'red',
+    fillOpacity: 0.35
+  });
+
+setInterval(function(){
+    comiskeyField.setMap(null)
+  if(comiskeyField.strokeOpacity === 0.2){
+    comiskeyField.strokeOpacity = 0.4
+    comiskeyField.setMap(map);
+    console.log("if")
+  }
+  else{
+    comiskeyField.strokeOpacity = 0.4
+    console.log("else")
+    comiskeyField.setMap(map);
+  }
+},1000);
+
+// setInterval(function(){
+//   if(color === 'green'){
+//     color = 'blue';
+//     comiskeyField.setMap(map);
+//   }
+// },100)
+
+
+
 
 // ////////EVENTFUL/////////////////////////////////////
 
-  // var eventful = new WebSocketRails('localhost:3000/websocket');
-
-  // eventful.trigger("events.eventful")
-
-  // setInterval(function(){
-  //   eventful.trigger("events.eventful")
-  // },180000);
-
-  var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var eventful = new WebSocketRails('localhost:3000/websocket');
 
   eventful.trigger("events.eventful")
 
@@ -31,26 +117,19 @@ $(document).ready(function(){
     });
   })
 
-  // eventful.bind("events.eventful_success", function(message){
-  //   // console.log(message);
-  //   $.each(message, function(index, value){
-  //     getMarker(value.latitude, value.longitude, map, value);
-  //   });
-  // })
-
 ////////TWEETS/////////////////////////////////////
 
-  // var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-  // tweets.trigger("events.tweets")
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
-  // tweets.bind("events.tweet_success", function(message){
-  //   convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  // })
+  tweets.bind("events.tweet_success", function(message){
+    convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
+  })
 
 ////////INSTAGRAMS/////////////////////////////////////
 
-  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var instagram = new WebSocketRails('localhost:3000/websocket');
 
   instagram.trigger("events.instagram_initialize")
 
@@ -76,10 +155,8 @@ $(document).ready(function(){
 
 
   });
-
-
 // ////////TRAINS/////////////////////////////////////
-  var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var trains = new WebSocketRails('localhost:3000/websocket');
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -96,7 +173,7 @@ $(document).ready(function(){
 
 // // ////////PLANES/////////////////////////////////////
 
-  var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var planes = new WebSocketRails('localhost:3000/websocket');
 
   planes.bind("events.success", function(message){
     // console.log(message);
@@ -109,7 +186,7 @@ $(document).ready(function(){
 
 // // ////////BIKES/////////////////////////////////////
 
- var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ var bikes = new WebSocketRails('localhost:3000/websocket');
 
   bikes.trigger("events.bikes")
 

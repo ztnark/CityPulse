@@ -38,7 +38,7 @@ class EventController < WebsocketRails::BaseController
         p $redis.hgetall("object").count
       while true
         counter += 1
-        counter = 1 if counter > 100
+        counter = 1 if counter > 30
         p counter
         an_instagram = $redis.hmget("object", counter.to_s)
         p an_instagram
