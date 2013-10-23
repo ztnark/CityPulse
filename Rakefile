@@ -10,10 +10,3 @@ Chicageaux::Application.load_tasks
 #   gem 'tweetstream'
 #   require 'tweetstream'
 # end
-
-namespace :jobs do
-  desc "Heroku worker"
-  task :work do
-    exec('ruby twitter.rb run')
-  end
-end
