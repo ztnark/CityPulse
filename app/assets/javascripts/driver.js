@@ -16,20 +16,20 @@ $(document).ready(function(){
   //   eventful.trigger("events.eventful")
   // },180000);
 
-  // var eventful = new WebSocketRails('localhost:3000/websocket');
+  var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
-  // eventful.trigger("events.eventful")
+  eventful.trigger("events.eventful")
 
-  // setInterval(function(){
-  //   eventful.trigger("events.eventful")
-  // },180000);
+  setInterval(function(){
+    eventful.trigger("events.eventful")
+  },180000);
 
-  // eventful.bind("events.eventful_success", function(message){
-  //   console.log(message);
-  //   $.each(message, function(index, value){
-  //     getMarker(value.latitude, value.longitude, map, value);
-  //   });
-  // })
+  eventful.bind("events.eventful_success", function(message){
+    console.log(message);
+    $.each(message, function(index, value){
+      getMarker(value.latitude, value.longitude, map, value);
+    });
+  })
 
   // eventful.bind("events.eventful_success", function(message){
   //   // console.log(message);
