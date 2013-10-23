@@ -24,7 +24,7 @@ $(document).ready(function(){
   })
 
 ////////TWEETS/////////////////////////////////////
-
+  
   var tweets = new WebSocketRails('localhost:3000/websocket');
   tweets.trigger("events.tweets")
 
@@ -79,6 +79,8 @@ $(document).ready(function(){
 // // ////////PLANES/////////////////////////////////////
 
   var planes = new WebSocketRails('localhost:3000/websocket');
+
+  planes.trigger("events.planes")
 
   planes.bind("events.success", function(message){
     // console.log(message);
