@@ -52,21 +52,21 @@ def self.instagram
     # time =  Time.now.strftime("%3N")[1..2]
     $redis.hmset("object", counter.to_s, object)
 
-  def self.planes
-    4.times do
-      planes_request = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/ORD/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
-      planes_hash = CobraVsMongoose.xml_to_hash(planes_request)
-      $redis.hmset("planes", "plane_times", planes_hash)
-      planes_request2 = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/MDW/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
-      planes_hash2 = CobraVsMongoose.xml_to_hash(planes_request2)
-      $redis.hmset("planes2", "plane_times2", planes_hash2)
-      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
-      p Time.now
-      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
-          # send_message :success, train[:ctatt], namespace: :events
-      # sleep(15)
-    end
-  end
+  # def self.planes
+  #   4.times do
+  #     planes_request = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/ORD/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
+  #     planes_hash = CobraVsMongoose.xml_to_hash(planes_request)
+  #     $redis.hmset("planes", "plane_times", planes_hash)
+  #     planes_request2 = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/MDW/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
+  #     planes_hash2 = CobraVsMongoose.xml_to_hash(planes_request2)
+  #     $redis.hmset("planes2", "plane_times2", planes_hash2)
+  #     p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
+  #     p Time.now
+  #     p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
+  #         # send_message :success, train[:ctatt], namespace: :events
+  #     # sleep(15)
+  #   end
+  # end
 
 
   def self.bikes

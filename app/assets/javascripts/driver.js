@@ -188,6 +188,7 @@ setInterval(function(){
     });
   });
 
+////////////// CENTER ON TWEET & INSTA CLICK IN SIDEBAR ////////////////////
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
@@ -195,7 +196,19 @@ setInterval(function(){
     var lon = (on['selector'])
     map.setCenter(new google.maps.LatLng(lat,lon));
     map.setZoom(15)
-  })
+  });
+
+  $(document).on("click","#instaitem",function(e){
+    e.preventDefault();
+    var instaAt = $(this.children[0].nextSibling.innerText)
+    var instaOn = $(this.children[1].nextSibling.innerText)
+    var instaLat = (instaAt['selector'])
+    var instaLon = (instaOn['selector'])
+    console.log(instaLat,instaLon);
+    map.setCenter(new google.maps.LatLng(instaLat,instaLon));
+    map.setZoom(15)
+  });
+////////////////////////////////////////////////////////////////////
 
   $('.timemode').on("click",function(){
     console.log("clicked");
