@@ -75,23 +75,6 @@ var comiskeyCoords = [
     fillOpacity: 0.35
   });
 
-setInterval(function(){
-    comiskeyField.setMap(null)
-  if(comiskeyField.strokeOpacity === 0.2){
-    comiskeyField.strokeOpacity = 0.4
-    comiskeyField.setMap(map);
-    console.log("if")
-  }
-  else{
-    comiskeyField.strokeOpacity = 0.4
-    console.log("else")
-    comiskeyField.setMap(map);
-  }
-},1000);
-
-
-
-
 // ////////EVENTFUL/////////////////////////////////////
 
   var eventful = new WebSocketRails('localhost:3000/websocket');
@@ -167,9 +150,7 @@ setInterval(function(){
   planes.trigger("events.planes")
 
   planes.bind("events.success", function(message){
-    // console.log(message);
     $.each(message.response.flightTracks.flightTrack,function(index, value){
-      console.log(value);
       var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
       planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
     })
@@ -188,6 +169,7 @@ setInterval(function(){
     });
   });
 
+////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
@@ -195,7 +177,19 @@ setInterval(function(){
     var lon = (on['selector'])
     map.setCenter(new google.maps.LatLng(lat,lon));
     map.setZoom(15)
-  })
+  });
+
+  $(document).on("click","#instaitem",function(e){
+    e.preventDefault();
+    var instaAt = $(this.children[0].nextSibling.innerText)
+    var instaOn = $(this.children[1].nextSibling.innerText)
+    var instaLat = (instaAt['selector'])
+    var instaLon = (instaOn['selector'])
+    console.log(instaLat,instaLon);
+    map.setCenter(new google.maps.LatLng(instaLat,instaLon));
+    map.setZoom(15)
+  });
+////////////////////////////////////////////////////////////////////
 
   $('.timemode').on("click",function(){
     console.log("clicked");
