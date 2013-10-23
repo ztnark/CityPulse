@@ -58,7 +58,6 @@ var wrigleyCoords = [
 
    wrigleyField.setMap(map);
 
-
 var comiskeyField;
 var comiskeyCoords = [
     new google.maps.LatLng(41.83077,-87.636),
@@ -104,7 +103,6 @@ setInterval(function(){
   },180000);
 
   eventful.bind("events.eventful_success", function(message){
-    console.log(message);
     $.each(message, function(index, value){
       getMarker(value.latitude, value.longitude, map, value);
     });
@@ -159,7 +157,7 @@ setInterval(function(){
       $.each(value.train,function(ind, val){
         trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$)
         // + ' in ' + Math.round(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
-      })
+      });
     })
   })
 

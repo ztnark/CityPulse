@@ -96,54 +96,7 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
-
-  def daily_queries(queries)
-    @today_events = []
-    queries.times { |page|
-      if page > 9 && page % 10 == 0
-        sleep(15)
-      end
-      results = @eventful.call 'events/search',
-        :location    => '41.8819, -87.6278',
-        :within      => 6,
-        :date        => Date.today,
-        :sort_order  => 'popularity',
-        :sort_direction => 'descending',
-        :page_size   => 100,
-        :page_number => page + 1
-
-      results['events']['event'].each { |event|
-        @today_events << Event.create( title:         event['title'],
-                                       venue_name:    event['venue_name'],
-                                       latitude:      event['latitude'],
-                                       longitude:     event['longitude'],
-                                       start_time:    event['start_time'],
-                                       stop_time:     event['stop_time'],
-                                       eventful_id:   event['id'],
-                                       thumb:         event['thumb'],
-                                       url:           event['url'],
-                                       city_name:     event['city_name'],
-                                       venue_address: event['venue_address'],
-                                       region_abbr:   event['region_abbr'],
-                                       postal_code:   event['postal_code'] )
-      }
-      puts @today_events.length
-    }
-    @today_events
-  end
-
-
-
-
   def eventful_fetcher
-    puts "We are in events"
-    @eventful = Eventful::API.new ENV['EVENTFUL_KEY'],
-      :user => ENV['USER_NAME'],
-      :password => ENV['PASSWORD']
-
-    daily_queries(1)
-
-
     @current_events = []
     Event.all.each do |event|
       if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
