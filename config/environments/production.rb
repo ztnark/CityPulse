@@ -78,5 +78,4 @@ Chicageaux::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6789'
 end

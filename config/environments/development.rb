@@ -39,6 +39,5 @@ Chicageaux::Application.configure do
   #   $redis = Redis.new(host: redis_config['host'], port: redis_config['port'])
   # end
 
-  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6789'
 
 end
