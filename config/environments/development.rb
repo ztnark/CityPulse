@@ -39,5 +39,4 @@ Chicageaux::Application.configure do
   #   $redis = Redis.new(host: redis_config['host'], port: redis_config['port'])
   # end
 
-
 end
