@@ -62,8 +62,10 @@ $(document).ready(function(){
 
   });
 
+
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('localhost:3000/websocket');
+
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -78,8 +80,7 @@ $(document).ready(function(){
 // // ////////PLANES/////////////////////////////////////
 
   var planes = new WebSocketRails('localhost:3000/websocket');
-
-  planes.trigger("events.planes")
+//   var planes = new WebSocketRails('localhost:3000/websocket');
 
   planes.bind("events.success", function(message){
     // console.log(message);

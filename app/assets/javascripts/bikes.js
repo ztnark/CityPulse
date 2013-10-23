@@ -12,10 +12,18 @@ function bikeMarker(lat, lon, map, val) {
     maxWidth: 200
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+<<<<<<< HEAD
   google.maps.event.addListener(marker,'mouseover', function(e){
     infoWindow.open(map,marker);
   });
   google.maps.event.addListener(marker,'mouseout', function(e){
     infoWindow.close();
   });
+=======
+  google.maps.event.addListener(marker,'click', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
+    infoWindow.open(map,marker);
+  });
+>>>>>>> added stationName to divvy infoWindows
 }
