@@ -199,9 +199,13 @@ footer div {
   display: inline-block;
   float: left;
   height: 30px;
-  margin: 15px 10px 10px 0;
+  margin: 15px 13px 10px 0;
   text-align: center;
   width: 30px;
+}
+
+footer div:first-child {
+  margin-left: 18px; 
 }
 
 .power {
