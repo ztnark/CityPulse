@@ -1,25 +1,3 @@
-// function trains(map) {
-//   $.get('/trains', function(response){
-
-//     console.log(response.ctatt);
-//     response.ctatt.route[0].train[0].lat.$
-//     $.each(response.ctatt.route,function(index, value){
-//       $.each(value.train,function(index, val){
-//         trainMarker(val.lat.$, val.lon.$, map);
-//       })
-//     })
-//     // var xmlTrains = $.parseXML( response[0] ),
-//     //   $xml = $( xmlTrains ),
-//     //   $train = $xml.find( "train" );
-//     // var trains = response[0].getElementsByTagName("train");
-//     // console.log(result);
-//     // $.each(response, function(index, value){
-
-//     //
-//     // });
-//   });
-// };
-
 function trainMarker(lat, lon, map, line, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
@@ -35,15 +13,21 @@ function trainMarker(lat, lon, map, line, val) {
     maxWidth: 200
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-  google.maps.event.addListener(marker,'click', function(e){
+  google.maps.event.addListener(marker,'mouseover', function(e){
     // console.log(e);
     // $('.gm-style-iw').close();
     infoWindow.open(map,marker);
+  });
+  google.maps.event.addListener(marker,'mouseout', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
+    infoWindow.close();
   });
   removeMarker(marker);
 }
 
 function removeMarker(marker){
   setTimeout(function(){marker.setMap(null)},14750);
+  // setTimeout(function(){marker.fadeOut()});
 }
 

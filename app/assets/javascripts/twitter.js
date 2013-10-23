@@ -1,4 +1,4 @@
-var styles = undefined;
+var styles = undefined
 function loadMap() {
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
@@ -7,55 +7,40 @@ function loadMap() {
     disableDefaultUI: true,
     styles: styles
   };
+
   var map = new google.maps.Map(document.getElementById("map-canvas"),
     mapOptions);
+
+  var marker = new google.maps.Marker({
+  });
+
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
-//   var styles = [
-//   {
-//     "stylers": [
-//       { "invert_lightness": true },
-//       { "lightness": 23 }
-//     ]
-//   },{
-//     "featureType": "road",
-//     "stylers": [
-//       { "visibility": "off" }
-//     ]
-//   },{
-//     "stylers": [
-//       { "lightness": 19 }
-//     ]
-//   }]
-var opt = { minZoom: 12, maxZoom: 16 };
-  map.setOptions(opt);
 
-// map.setOptions({styles: styles});
-  return map;
+  var opt = { minZoom: 12, maxZoom: 16 };
+    map.setOptions(opt);
+
+  // map.setOptions({styles: styles});
+    return map;
 };
-
-
 
 var mapObjectArray = [];
 function convertTweetsToMapObjects(tweet_from_socket){
-
-      tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
-      convertToMarkers(tweet);
-
+  tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
+  convertToMarkers(tweet);
 };
 
-
 function convertToMarkers(tweet){
-      var marker = new google.maps.Marker({
-      animation: google.maps.Animation.BOUNCE,
-      position: tweet[0],
-      map: map,
-      icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
-      title: 'tweet'
-    });
-     addInfoWindow(marker, tweet[1])
-     setTimeout(function(){ marker.setAnimation(null); }, 750);
-     // removeMarker(marker);
+  var marker = new google.maps.Marker({
+    animation: google.maps.Animation.BOUNCE,
+    position: tweet[0],
+    map: map,
+    icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
+    title: 'tweet'
+  });
+  addInfoWindow(marker, tweet[1])
+  setTimeout(function(){ marker.setAnimation(null); }, 750);
+  // removeMarker(marker);
 }
 
 // function removeMarker(marker){
@@ -72,8 +57,13 @@ function addInfoWindow(marker, message) {
                 maxWidth: 200
             });
 
-            google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.open(map, marker);
+            google.maps.event.addListener(marker,'mouseover', function(e){
+              infoWindow.open(map,marker);
+            });
+            google.maps.event.addListener(marker,'mouseout', function(e){
+              // console.log(e);
+              // $('.gm-style-iw').close();
+              infoWindow.close();
             });
 }
 

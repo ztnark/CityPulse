@@ -13,57 +13,146 @@
  *= require_tree .
  */
 
+ @import url(http://fonts.googleapis.com/css?family=Coda+Caption:800|Baumans);
+
  body {
   overflow: hidden;
  }
 
+/*::-webkit-scrollbar              { /* 1 */ }
+::-webkit-scrollbar-button       { /* 2 */ }
+::-webkit-scrollbar-track        { /* 3 */ }
+::-webkit-scrollbar-track-piece  { /* 4 */ }
+::-webkit-scrollbar-thumb        { /* 5 */ }
+::-webkit-scrollbar-corner       { /* 6 */ }
+::-webkit-resizer*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255,0,0,0.4); 
+}
+
+ #chicago {
+  position: absolute;
+  left: 2%;
+  font-family: 'Coda Caption', sans-serif;
+  color: rgba(156, 33, 51, 0.7);
+ }
+
+ p {
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+ }
+
 #map-canvas{
-  width: calc(100% - 356px);
+  width: calc(100%);
   float: left;
+  position: relative;
+  /*z-index: 1;*/
+}
+
+#column_stable{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  right: 2%;
+  /*background-color: black;*/
+  height: 100%;
+
 }
 
 #feed{
-
   width: 356px;
-  height: calc(50% - 42.5px);
+  height: calc(50% - 32.5px);
   position: relative;
-  float: left;
+  top: 25px;
+  /*top: 35px;*/
+  overflow-x: hidden;
+  border-top-left-radius: 10px 10px;
+  border-top-right-radius: 10px 10px;
+
+  /*right: 2%;*/
+
+  /*float: right;*/
   /*right: 0;*/
-  background-color: #222;
-  overflow: scroll;
-  overflow: hidden;
-  margin-top: 35px;
+  /*background-color: #222;*/
+  overflow-y: scroll;
+  /*overflow: hidden;*/
+  /*margin-top: 35px;*/
   margin: 0 0 0 0;
+  background: rgba(59, 69, 87, 0.6);
+}
+
+#timemode{
+  /*height: 2%;*/
+  min-height: 25px;
+  /*background-color: #777;*/
+  /*padding-left: 10px;*/
+  /*padding-top: 6px;*/
+  position: absolute;
+  /*float: top;*/
+  right: 0;
+  color: white;
+  font-family: 
+  /*float: left;*/
+  margin: 0;
+  /*margin-left: 5px;*/
+  letter-spacing: 2px;
+  background: none;
 
 }
 
 #instafeed{
   width: 356px;
-  height: calc(50% - 42.5px);
-  position: relative;
+  height: calc(50% - 63px);
+  position: fixed;
+  bottom: 70px;
+  /*right: 2%;*/
+  /*bottom: 35px;*/
   margin: 0 0 0 0;
-  background: #222;
-  float: left;
-  overflow: scroll;
+  /*float: top;*/
   overflow: hidden;
+  /*float: right;*/
+  /*overflow: scroll;*/
+  /*overflow: hidden;*/
+  /*z-index: -1;*/
+  /*background: rgba(59, 69, 87, 0.6);*/
+  background: rgba(59, 69, 87, 0.6);
 
 }
 
 #item{
   width:356px;
-  height: 90px;
-  background-color: #222;
+
+  /*background-color: #222;*/
   color: white;
-  border-bottom: 1px solid #bbb;
+  /*border-bottom: 1px solid #bbb;*/
+  margin-bottom: 50pxpx;
 }
 
 #instaitem{
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   height: 100px;
-  background-color: #222;
-  color: white;
+  /*background-color: #222;*/
+  /*color: white;*/
   padding: 0px;
+  /*background: rgba(59, 69, 87, 0.6);*/
 
   /*border-bottom: 1px solid #bbb;*/
 }
@@ -74,11 +163,17 @@
   float: right;
   margin: 0 auto;
   margin-right: 15px;
+  padding-top: 8px;
+  font-family: "Verdana", Geneva, sans-serif;
+  font-size: 12px;
+  /*background: rgba(59, 69, 87, 0.6);*/
 }
 
 #prof {
   width: 53px;
   float: left;
+  padding-left: 10px; 
+  padding-top: 10px;
   display: inline-block;
 }
 
@@ -89,21 +184,7 @@
  /* line-height: 150px;*/
 }
 
-#timemode{
-  height: 35px;
-  background-color: #777;
-  padding-left: 10px;
-  padding-top: 6px;
-  position: relative;
-  float: left;
-  right: 0;
-  color: white;
-  font-family: 'Sonsie One', cursive;
-  float: left;
-  margin: 0;
-  margin-left: 5px;
-  letter-spacing: 2px;
-}
+
 
 #timemode button{
   float: right;
@@ -111,15 +192,17 @@
 }
 
 footer {
-
-  background-color: #777;
-  display: inline-block;
-  height: 50px;
+  position: absolute;
+  bottom: 15px;
+  min-height: 40px;
+  background-color: black;
+  /*display: inline-block;*/
+  /*height: 4%;*/
   width: 356px;
-  position: relative;
-  float: left;
-  bottom: 0;
-  right: 0;
+  /*float: top;*/
+  background: rgba(59, 69, 87, 0.6);
+  border-bottom-left-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
 }
 
 footer div {
@@ -132,9 +215,10 @@ footer div {
 }
 
 .power {
-  color: white;
-  font-family: 'Sonsie One', cursive;
-  font-size: 12px;
+  /*color: white;*/
+  font-family: 'Coda Caption', sans-serif;
+  color: rgba(156, 33, 51, 0.7);
+  font-size: 15px;
   line-height: 20px;
   margin-left: 10px;
   margin-right: 5px;
@@ -184,30 +268,39 @@ footer div a img {
 }
 
 #column1{
-  width: 101px;
+  padding-top: 10px;
+  width: 100px;
   float: left;
-  background: #222;
   height: 100%;
+  overflow: hidden;
 }
 
 #column2{
-  width: 101px;
+  padding-top: 10px;
+  width: 100px;
   float: left;
-  background: #222;
   height: 100%;
+  overflow: hidden;
 }
 
 #column3{
-  width: 101px;
+  padding-top: 10px;
+  width: 100px;
   float: left;
-  background: #222;
   height: 100%;
+  overflow: hidden;
 }
 
 #centerer{
-  width: 350px;
-  margin-left: 6%;
-  height: 100%;
+  width: 356px;
+  /*margin-left: 6%;
+  margin-right: 6%;*/
+  margin: 0 auto;
+  margin-left: 8%;
+  margin-right: 8%;
+  /*height: 100%;*/
+  background: rgba(59, 69, 87, 0.0);
+  height: ;
 }
 
 #screenname{
