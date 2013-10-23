@@ -33,6 +33,11 @@ function getMarker(lat, lon, map, val) {
     // $('.gm-style-iw').close();
     infoWindow.close();
   });
+  google.maps.event.addListener(marker,'click', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
+    window.open(val.url);
+  });
 
   setTimeout(function(){marker.setMap(null)},180100);
 };
