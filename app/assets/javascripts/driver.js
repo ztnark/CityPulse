@@ -24,9 +24,9 @@ $(document).ready(function(){
   })
 
 ////////TWEETS/////////////////////////////////////
-  
-  var tweets = new WebSocketRails('localhost:3000/websocket');
-  tweets.trigger("events.tweets")
+
+  // var tweets = new WebSocketRails('localhost:3000/websocket');
+  // tweets.trigger("events.tweets")
 
   tweets.bind("events.tweet_success", function(message){
     convertTweetsToMapObjects(message);
