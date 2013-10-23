@@ -8,6 +8,14 @@ $(document).ready(function(){
 
 // ////////EVENTFUL/////////////////////////////////////
 
+  var test = = new WebSocketRails('localhost:3000/websocket');
+
+  test.trigger("events.test")
+
+  test.bind("events.success", function(message){
+    console.log(message);
+  })
+
   var eventful = new WebSocketRails('localhost:3000/websocket');
 
   eventful.trigger("events.eventful")
@@ -39,7 +47,7 @@ $(document).ready(function(){
   })
 
 ////////TWEETS/////////////////////////////////////
-  
+
   // var tweets = new WebSocketRails('localhost:3000/websocket');
   // tweets.trigger("events.tweets")
 
@@ -54,7 +62,7 @@ $(document).ready(function(){
 
   instagram.trigger("events.instagram_initialize")
 
-  
+
   var colcounter = 1;
 
   instagram.bind("events.instagram_success", function(message){

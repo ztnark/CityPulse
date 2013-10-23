@@ -25,6 +25,11 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
+  def test
+    puts "we are in test"
+    send_message :success, "test", namespace: :events
+  end
+
 
   def instagram_fetcher
    puts "in the instagram fetcher"
