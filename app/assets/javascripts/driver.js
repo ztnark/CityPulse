@@ -8,15 +8,7 @@ $(document).ready(function(){
 
 // ////////EVENTFUL/////////////////////////////////////
 
-  // var eventful = new WebSocketRails('localhost:3000/websocket');
-
-  // eventful.trigger("events.eventful")
-
-  // setInterval(function(){
-  //   eventful.trigger("events.eventful")
-  // },180000);
-
-  var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var eventful = new WebSocketRails('localhost:3000/websocket');
 
   eventful.trigger("events.eventful")
 
@@ -31,26 +23,19 @@ $(document).ready(function(){
     });
   })
 
-  // eventful.bind("events.eventful_success", function(message){
-  //   // console.log(message);
-  //   $.each(message, function(index, value){
-  //     getMarker(value.latitude, value.longitude, map, value);
-  //   });
-  // })
-
 ////////TWEETS/////////////////////////////////////
+  
+  var tweets = new WebSocketRails('localhost:3000/websocket');
+  tweets.trigger("events.tweets")
 
-  // var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-  // tweets.trigger("events.tweets")
-
-  // tweets.bind("events.tweet_success", function(message){
-  //   convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  // })
+  tweets.bind("events.tweet_success", function(message){
+    convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
+  })
 
 ////////INSTAGRAMS/////////////////////////////////////
 
-  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var instagram = new WebSocketRails('localhost:3000/websocket');
 
   instagram.trigger("events.instagram_initialize")
 
@@ -63,10 +48,10 @@ $(document).ready(function(){
 
     var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
-    setTimeout(function(){
-      $that.remove();
-      console.log("test")
-    },120000)
+    // setTimeout(function(){
+    //   $that.remove();
+    //   console.log("test")
+    // },120000)
     if (colcounter===3){
       colcounter = 1
     }
@@ -77,9 +62,9 @@ $(document).ready(function(){
 
   });
 
-
 // ////////TRAINS/////////////////////////////////////
-  var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var trains = new WebSocketRails('localhost:3000/websocket');
+
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -91,10 +76,12 @@ $(document).ready(function(){
     })
   })
 
-
 // // ////////PLANES/////////////////////////////////////
 
-  var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var planes = new WebSocketRails('localhost:3000/websocket');
+
+  planes.trigger("events.planes")
+
   planes.bind("events.success", function(message){
     // console.log(message);
     $.each(message.response.flightTracks.flightTrack,function(index, value){
@@ -106,7 +93,7 @@ $(document).ready(function(){
 
 // // ////////BIKES/////////////////////////////////////
 
- var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ var bikes = new WebSocketRails('localhost:3000/websocket');
 
   bikes.trigger("events.bikes");
 
@@ -116,7 +103,6 @@ $(document).ready(function(){
       bikeMarker(value.latitude, value.longitude, map, value);
     });
   });
-
 
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
