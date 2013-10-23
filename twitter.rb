@@ -11,7 +11,7 @@ require 'tweetstream'
     # puts "cats"
     @tweets = []
     TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
-      # puts "#{status.text}"
+      puts "#{status.text}"
       # puts "#{status[:user][:screen_name]}"
       # puts "#{status[:geo][:coordinates]}"
       # puts "#{status[:user][:profile_image_url_https]}"
