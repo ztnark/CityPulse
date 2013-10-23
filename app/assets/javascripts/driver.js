@@ -85,19 +85,16 @@ $(document).ready(function(){
     // console.log(message);
     $.each(message.ctatt.route,function(index, value){
       $.each(value.train,function(ind, val){
-        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$ + ' in ' + parseInt(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
+        trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$)
+        // + ' in ' + Math.round(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
       })
     })
   })
 
 
-
-
-
 // // ////////PLANES/////////////////////////////////////
 
   var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-
   planes.bind("events.success", function(message){
     // console.log(message);
     $.each(message.response.flightTracks.flightTrack,function(index, value){
@@ -111,15 +108,14 @@ $(document).ready(function(){
 
  var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
-  bikes.trigger("events.bikes")
+  bikes.trigger("events.bikes");
 
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
-      console.log(value)
-      bikeMarker(value.latitude, value.longitude, map, value.availableBikes);
-    })
-  })
-
+      // console.log(value)
+      bikeMarker(value.latitude, value.longitude, map, value);
+    });
+  });
 
 
   $(document).on("click","#item",function(){

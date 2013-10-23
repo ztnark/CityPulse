@@ -15,7 +15,8 @@ function getMarker(lat, lon, map, val) {
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
-    icon: getCircle(6)
+    icon: 'http://eventful.com/favicon.ico'
+    // icon: getCircle(6)
   });
   var contentString = (val.title).link(val.url) + "<br>" + val.venue_name
   var infoWindowOptions = {
@@ -23,8 +24,20 @@ function getMarker(lat, lon, map, val) {
     maxWidth: 200
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-  google.maps.event.addListener(marker,'click', function(e){
+  google.maps.event.addListener(marker,'mouseover', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
     infoWindow.open(map,marker);
+  });
+  google.maps.event.addListener(marker,'mouseout', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
+    infoWindow.close();
+  });
+  google.maps.event.addListener(marker,'click', function(e){
+    // console.log(e);
+    // $('.gm-style-iw').close();
+    window.open(val.url);
   });
 
   setTimeout(function(){marker.setMap(null)},180100);
