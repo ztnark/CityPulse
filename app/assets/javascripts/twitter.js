@@ -1,4 +1,4 @@
-var styles = nil
+var styles = undefined;
 function loadMap() {
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),

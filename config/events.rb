@@ -24,5 +24,6 @@ WebsocketRails::EventMap.describe do
     subscribe :eventful, 'event#eventful_fetcher'
     subscribe :planes, 'event#planes'
     subscribe :bikes, 'event#bikes'
+    subscribe :test, 'event#test'
   end
 end
