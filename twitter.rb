@@ -1,5 +1,5 @@
 
- # gem "tweetstream"
+ gem "tweetstream"
  require "TweetStream"
 
 

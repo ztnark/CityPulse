@@ -14,6 +14,6 @@ Chicageaux::Application.load_tasks
 namespace :jobs do
   desc "Heroku worker"
   task :work do
-    exec('bundle exec ruby twitter.rb run')
+    exec('ruby twitter.rb run')
   end
 end
