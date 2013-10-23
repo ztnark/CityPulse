@@ -31,12 +31,12 @@ $(document).ready(function(){
   //   });
   // })
 
-  eventful.bind("events.eventful_success", function(message){
-    // console.log(message);
-    $.each(message, function(index, value){
-      getMarker(value.latitude, value.longitude, map, value);
-    });
-  })
+  // eventful.bind("events.eventful_success", function(message){
+  //   // console.log(message);
+  //   $.each(message, function(index, value){
+  //     getMarker(value.latitude, value.longitude, map, value);
+  //   });
+  // })
 
 ////////TWEETS/////////////////////////////////////
 
