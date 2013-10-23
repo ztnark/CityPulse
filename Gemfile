@@ -23,8 +23,6 @@ gem 'redis-kit'
 
 gem 'unicorn'
 
-gem 'engineyard'
-
 gem 'gemoji'
 
 gem 'dotenv-rails', :groups => [:development, :test, :production]

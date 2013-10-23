@@ -79,7 +79,7 @@ class EventController < WebsocketRails::BaseController
   end
 
   def planes
-    train_handler ||= Thread.new do
+    plane_handler ||= Thread.new do
       while true
       plane_data = $redis.hmget("planes", "plane_times")
       plane = eval(plane_data.first)
