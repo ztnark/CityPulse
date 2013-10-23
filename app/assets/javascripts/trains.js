@@ -36,7 +36,7 @@ function trainMarker(lat, lon, map, line, val) {
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'click', function(e){
-    console.log(e);
+    // console.log(e);
     // $('.gm-style-iw').close();
     infoWindow.open(map,marker);
   });

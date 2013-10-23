@@ -78,16 +78,16 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
-  # def planes
-  #   train_handler ||= Thread.new do
-  #     while true
-  #     plane_data = $redis.hmget("planes", "plane_times")
-  #     plane = eval(plane_data.first)
-  #     send_message :success, plane, namespace: :events
-  #     sleep(15)
-  #     end
-  #   end
-  # end
+  def planes
+    train_handler ||= Thread.new do
+      while true
+      plane_data = $redis.hmget("planes", "plane_times")
+      plane = eval(plane_data.first)
+      send_message :success, plane, namespace: :events
+      sleep(15)
+      end
+    end
+  end
 
 
   def daily_queries(queries)
