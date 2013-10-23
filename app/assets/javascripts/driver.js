@@ -8,13 +8,13 @@ $(document).ready(function(){
 
 // ////////EVENTFUL/////////////////////////////////////
 
-  var test = = new WebSocketRails('localhost:3000/websocket');
+  var test = new WebSocketRails('localhost:3000/websocket');
 
   test.trigger("events.test")
 
   test.bind("events.success", function(message){
     console.log(message);
-  })
+  });
 
   var eventful = new WebSocketRails('localhost:3000/websocket');
 
