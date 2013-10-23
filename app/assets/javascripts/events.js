@@ -15,7 +15,8 @@ function getMarker(lat, lon, map, val) {
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
-    icon: getCircle(6)
+    icon: 'http://eventful.com/favicon.ico'
+    // icon: getCircle(6)
   });
   var contentString = (val.title).link(val.url) + "<br>" + val.venue_name
   var infoWindowOptions = {
