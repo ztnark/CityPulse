@@ -24,9 +24,7 @@ function setMarker(lat, lon, map, val) {
     infoWindow.close();
   });
   google.maps.event.addListener(marker,'click', function(e){
-    // $('.gm-style-iw').close();
     var link = val.match(/(href=)(.+)(\starget)/)[2]
-    console.log(link);
     window.open(link);
   });
 
