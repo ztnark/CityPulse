@@ -167,9 +167,7 @@ setInterval(function(){
   planes.trigger("events.planes")
 
   planes.bind("events.success", function(message){
-    // console.log(message);
     $.each(message.response.flightTracks.flightTrack,function(index, value){
-      console.log(value);
       var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
       planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
     })
@@ -188,7 +186,7 @@ setInterval(function(){
     });
   });
 
-////////////// CENTER ON TWEET & INSTA CLICK IN SIDEBAR ////////////////////
+////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR ////////////////////
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
