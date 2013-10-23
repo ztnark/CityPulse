@@ -75,23 +75,6 @@ var comiskeyCoords = [
     fillOpacity: 0.35
   });
 
-setInterval(function(){
-    comiskeyField.setMap(null)
-  if(comiskeyField.strokeOpacity === 0.2){
-    comiskeyField.strokeOpacity = 0.4
-    comiskeyField.setMap(map);
-    console.log("if")
-  }
-  else{
-    comiskeyField.strokeOpacity = 0.4
-    console.log("else")
-    comiskeyField.setMap(map);
-  }
-},1000);
-
-
-
-
 // ////////EVENTFUL/////////////////////////////////////
 
   var eventful = new WebSocketRails('localhost:3000/websocket');
@@ -186,7 +169,7 @@ setInterval(function(){
     });
   });
 
-////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR ////////////////////
+////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
