@@ -199,12 +199,13 @@ footer div {
 
 .power {
   font-family: 'Coda Caption', sans-serif;
-  color: rgba(256, 33, 51, 0.7);
+  color: rgba(0, 0, 0, 0.7);
   font-size: 14px;
   line-height: 20px;
   margin-left: 10px;
   margin-right: 5px;
   width: 107px;
+
 }
 
 .twitter-logo a img {
