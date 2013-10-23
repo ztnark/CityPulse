@@ -26,7 +26,6 @@ class EventController < WebsocketRails::BaseController
   end
 
   def test
-    puts "we are in test"
     send_message :success, "test", namespace: :events
   end
 
@@ -35,13 +34,10 @@ class EventController < WebsocketRails::BaseController
    puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
       counter = 0
-        p $redis.hgetall("object").count
       while true
         counter += 1
         counter = 1 if counter > 30
-        p counter
         an_instagram = $redis.hmget("object", counter.to_s)
-        p an_instagram
         first = an_instagram.first
         if first != nil
           # p an_instagram
@@ -79,7 +75,6 @@ class EventController < WebsocketRails::BaseController
   def bikes
     bike_handler ||= Thread.new do
       bike_data = $redis.hmget("bikes", "bike_times")
-      puts bike_data
       bike = eval(bike_data.first)
       send_message :success, bike, namespace: :events
     end
@@ -127,7 +122,6 @@ class EventController < WebsocketRails::BaseController
                                        region_abbr:   event['region_abbr'],
                                        postal_code:   event['postal_code'] )
       }
-      puts @today_events.length
     }
     @today_events
   end
@@ -146,9 +140,10 @@ class EventController < WebsocketRails::BaseController
 
     @current_events = []
     Event.all.each do |event|
-      if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
+      p event
+      # if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
         @current_events << event
-      end
+      # end
     end
     puts @current_events.length
     send_message :eventful_success, @current_events, namespace: :events

@@ -56,9 +56,6 @@ var wrigleyCoords = [
     fillOpacity: 0.35
   });
 
-   wrigleyField.setMap(map);
-
-
 var comiskeyField;
 var comiskeyCoords = [
     new google.maps.LatLng(41.83077,-87.636),
@@ -71,31 +68,70 @@ var comiskeyCoords = [
     paths: comiskeyCoords,
     strokeColor: 'red',
     strokeOpacity: 0.2,
-    strokeWeight: 2,
+    strokeWeight: 0,
     fillColor: 'red',
-    fillOpacity: 0.35
+    fillOpacity: 0.2
   });
 
-setInterval(function(){
-    comiskeyField.setMap(null)
-  if(comiskeyField.strokeOpacity === 0.2){
-    comiskeyField.strokeOpacity = 0.4
-    comiskeyField.setMap(map);
-    console.log("if")
-  }
-  else{
-    comiskeyField.strokeOpacity = 0.4
-    console.log("else")
-    comiskeyField.setMap(map);
-  }
-},1000);
+function stadiumThrob(stadium){
+  setInterval(function(){
+      stadium.setMap(null)
+    if(stadium.fillOpacity === 0.2){
+      stadium.fillOpacity = 0.3
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.3){
+      stadium.fillOpacity = 0.4
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.4){
+      stadium.fillOpacity = 0.5
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.5){
+      stadium.fillOpacity = 0.6
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.6){
+      stadium.fillOpacity = 0.7
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.7){
+      stadium.fillOpacity = 0.8
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.8){
+      stadium.fillOpacity = 0.9
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.9){
+      stadium.fillOpacity = 0.81
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.81){
+      stadium.fillOpacity = 0.71
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.71){
+      stadium.fillOpacity = 0.61
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.61){
+      stadium.fillOpacity = 0.51
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.51){
+      stadium.fillOpacity = 0.41
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.41){
+      stadium.fillOpacity = 0.31
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.31){
+      stadium.fillOpacity = 0.2
+      stadium.setMap(map);
+    }
+  },100);
+}
+stadiumThrob(comiskeyField);
 
-// setInterval(function(){
-//   if(color === 'green'){
-//     color = 'blue';
-//     comiskeyField.setMap(map);
-//   }
-// },100)
 
 
 
@@ -111,11 +147,14 @@ setInterval(function(){
   },180000);
 
   eventful.bind("events.eventful_success", function(message){
-    console.log(message);
     $.each(message, function(index, value){
-      getMarker(value.latitude, value.longitude, map, value);
+      if(value.venue_name =="Chemically Imbalanced Theater"){
+        console.log(value.venue_name);
+      }else{
+        getMarker(value.latitude, value.longitude, map, value);
+      }
     });
-  })
+  });
 
 ////////TWEETS/////////////////////////////////////
 
