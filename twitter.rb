@@ -39,7 +39,8 @@
  gem "tweetstream"
  require "tweetstream"
 
-
+ puts "hello"
+ p "hello"
  TweetStream.configure do |config|
       config.consumer_key       = "2LLhLNd4A8hzgnAqGQkH7Q"
       config.consumer_secret    = "irPBysCEpUe36Zh6qSD7rKp9fAaZdFMYSZk3McbcHJg"
