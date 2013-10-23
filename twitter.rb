@@ -1,4 +1,4 @@
- gem 'TweetStream'
+ # gem 'TweetStream'
  require "TweetStream"
 
  TweetStream.configure do |config|
