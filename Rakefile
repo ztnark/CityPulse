@@ -4,3 +4,11 @@
 require File.expand_path('../config/application', __FILE__)
 
 Chicageaux::Application.load_tasks
+
+
+namespace :jobs do
+  desc "Heroku worker"
+  task :work do
+    exec('ruby twitter.rb run')
+  end
+end
