@@ -19,7 +19,9 @@ class EventController < WebsocketRails::BaseController
       # puts "#{status[:user][:profile_image_url_https]}"
       # puts " ++++++++++++++++++++++++++"
       @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
-      send_message :tweet_success, @tweet, namespace: :events
+      if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
+        send_message :tweet_success, @tweet, namespace: :events
+      end
     end
   end
 
@@ -79,7 +81,7 @@ class EventController < WebsocketRails::BaseController
   end
 
   def planes
-    train_handler ||= Thread.new do
+    plane_handler ||= Thread.new do
       while true
       plane_data = $redis.hmget("planes", "plane_times")
       plane = eval(plane_data.first)

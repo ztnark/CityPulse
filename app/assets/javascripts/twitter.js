@@ -1,9 +1,11 @@
+var styles = nil
 function loadMap() {
-
   var mapOptions = {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true,
+    styles: styles
   };
 
   var map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -26,7 +28,8 @@ function loadMap() {
 //   var styles = [
 //   {
 //     "stylers": [
-//       { "invert_lightness": true }
+//       { "invert_lightness": true },
+//       { "lightness": 23 }
 //     ]
 //   },{
 //     "featureType": "road",
@@ -37,8 +40,9 @@ function loadMap() {
 //     "stylers": [
 //       { "lightness": 19 }
 //     ]
-//   }
-// ]
+//   }]
+var opt = { minZoom: 12, maxZoom: 16 };
+  map.setOptions(opt);
 
 // map.setOptions({styles: styles});
   return map;
