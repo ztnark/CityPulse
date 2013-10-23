@@ -23,8 +23,6 @@ gem 'redis-kit'
 
 gem 'unicorn'
 
-gem 'engineyard'
-
 gem 'gemoji'
 
 gem 'dotenv-rails', :groups => [:development, :test, :production]
@@ -65,6 +63,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'cobravsmongoose'
 
 gem 'faye-websocket'
+
+gem "font-awesome-rails"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
