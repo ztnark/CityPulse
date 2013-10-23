@@ -40,13 +40,13 @@ $(document).ready(function(){
 
 ////////TWEETS/////////////////////////////////////
 
-  var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-  tweets.trigger("events.tweets")
+  // var tweets = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  // tweets.trigger("events.tweets")
 
-  tweets.bind("events.tweet_success", function(message){
-    convertTweetsToMapObjects(message);
-    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  })
+  // tweets.bind("events.tweet_success", function(message){
+  //   convertTweetsToMapObjects(message);
+  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
+  // })
 
 ////////INSTAGRAMS/////////////////////////////////////
 
