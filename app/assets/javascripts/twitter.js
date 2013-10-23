@@ -4,14 +4,25 @@ function loadMap() {
     center: new google.maps.LatLng(41.8929153,-87.6359125),
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP
-
-
-
   };
+
   var map = new google.maps.Map(document.getElementById("map-canvas"),
     mapOptions);
+
+  var marker = new google.maps.Marker({
+  });
+
   var transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
+
+  var infowindow = new google.maps.InfoWindow({
+      // content: contentString
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+  });
+
 //   var styles = [
 //   {
 //     "stylers": [
