@@ -6,6 +6,11 @@ require File.expand_path('../config/application', __FILE__)
 Chicageaux::Application.load_tasks
 
 
+begin
+  gem 'tweetstream'
+  require 'tweetstream'
+end
+
 namespace :jobs do
   desc "Heroku worker"
   task :work do

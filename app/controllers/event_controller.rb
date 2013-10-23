@@ -137,12 +137,6 @@ class EventController < WebsocketRails::BaseController
 
   def eventful_fetcher
     puts "We are in events"
-    @eventful = Eventful::API.new ENV['EVENTFUL_KEY'],
-      :user => ENV['USER_NAME'],
-      :password => ENV['PASSWORD']
-
-    daily_queries(1)
-
 
     @current_events = []
     Event.all.each do |event|
