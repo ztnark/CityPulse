@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 // ////////EVENTFUL/////////////////////////////////////
 
-  var test = new WebSocketRails('localhost:3000/websocket');
+  var test = new WebSocketRails('ws://limitless-temple-4888.herokuapp.com/');
 
   test.trigger("events.test")
 
