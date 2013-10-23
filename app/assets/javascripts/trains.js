@@ -1,25 +1,3 @@
-// function trains(map) {
-//   $.get('/trains', function(response){
-
-//     console.log(response.ctatt);
-//     response.ctatt.route[0].train[0].lat.$
-//     $.each(response.ctatt.route,function(index, value){
-//       $.each(value.train,function(index, val){
-//         trainMarker(val.lat.$, val.lon.$, map);
-//       })
-//     })
-//     // var xmlTrains = $.parseXML( response[0] ),
-//     //   $xml = $( xmlTrains ),
-//     //   $train = $xml.find( "train" );
-//     // var trains = response[0].getElementsByTagName("train");
-//     // console.log(result);
-//     // $.each(response, function(index, value){
-
-//     //
-//     // });
-//   });
-// };
-
 function trainMarker(lat, lon, map, line, val) {
   var latLng = new google.maps.LatLng(lat, lon);
 
