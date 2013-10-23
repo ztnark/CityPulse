@@ -87,8 +87,15 @@ function addInfoWindow(marker, message) {
                 maxWidth: 200
             });
 
-            google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.open(map, marker);
+            google.maps.event.addListener(marker,'mouseover', function(e){
+              // console.log(e);
+              // $('.gm-style-iw').close();
+              infoWindow.open(map,marker);
+            });
+            google.maps.event.addListener(marker,'mouseout', function(e){
+              // console.log(e);
+              // $('.gm-style-iw').close();
+              infoWindow.close();
             });
 }
 
