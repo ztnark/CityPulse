@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 ////////INSTAGRAMS/////////////////////////////////////
 
-  var instagram = new WebSocketRails('localhost:3000/websocket');
+  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
   instagram.trigger("events.instagram_initialize")
 
