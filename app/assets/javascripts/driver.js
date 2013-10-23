@@ -68,12 +68,12 @@ $(document).ready(function(){
 
     console.log(colcounter);
 
-    var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
+    $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
-    setTimeout(function(){
-      $that.remove();
-      console.log("test")
-    },120000)
+    // setTimeout(function(){
+    //   $that.remove();
+    //   console.log("test")
+    // },120000)
     if (colcounter===3){
       colcounter = 1
     }
