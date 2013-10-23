@@ -103,7 +103,6 @@ $(document).ready(function(){
     });
   });
 
-
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
