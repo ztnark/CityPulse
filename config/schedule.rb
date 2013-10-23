@@ -32,9 +32,9 @@ every 1.day, :at => '12:05 am' do
   runner "Aggregator.eventful", environment: 'development'
 end
 
-every 1.minutes do
-  runner "Aggregator.planes", environment: 'development'
-end
+# every 1.minutes do
+#   runner "Aggregator.planes", environment: 'development'
+# end
 
 every 5.minutes do
   runner "Aggregator.bikes", environment: 'development'
