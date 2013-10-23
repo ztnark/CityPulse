@@ -21,7 +21,8 @@ function loadMap() {
       // content: contentString
   });
 
-  google.maps.event.addListener(marker, 'click', function() {
+  google.maps.event.addListener(marker, 'onmouseover', function() {
+    // $('.gm-style-iw').close();
     infowindow.open(map,marker);
   });
 
