@@ -166,11 +166,11 @@ function stadiumThrob(stadium){
 ////////TWEETS/////////////////////////////////////
 
   var tweets = new WebSocketRails('localhost:3000/websocket');
-  // tweets.trigger("events.tweets")
-  // tweets.bind("events.tweet_success", function(message){
-  //   convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  // })
+  tweets.trigger("events.tweets")
+  tweets.bind("events.tweet_success", function(message){
+    convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
+  })
 
 ////////INSTAGRAMS/////////////////////////////////////
   var instagram = new WebSocketRails('localhost:3000/websocket');
@@ -178,11 +178,11 @@ function stadiumThrob(stadium){
   var colcounter = 1;
   // var idcounter = 1;
   instagram.bind("events.instagram_success", function(message){
-    var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
+    var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
     // setTimeout(function(){
       // var id_remove = '#' + (idcounter - 1)
-      //  $(id_remove).remove()
+       // $(id_remove).remove()
      // },10000);
     // setTimeout(function(){
     //   $that.remove();
@@ -225,32 +225,31 @@ function stadiumThrob(stadium){
       planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
     })
   })
-// bikeMarkers = []
+bikeMarkers = []
 // // ////////BIKES/////////////////////////////////////
  var bikes = new WebSocketRails('localhost:3000/websocket');
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
       // console.log(value)
-    bikeMarker(value.latitude, value.longitude, map, value);
-    // bikeMarkers.push();
+    bikeMarkers.push(bikeMarker(value.latitude, value.longitude, map, value));
     });
   });
 
-// google.maps.event.addListener(map, 'zoom_changed', function () {
+google.maps.event.addListener(map, 'zoom_changed', function () {
 
-//    var currentZoom = map.getZoom();
+   var currentZoom = map.getZoom();
 
-//    if (currentZoom > 14) {
-//       for(var i = 0; i <= allMarkers.length-1; i++){
-//       bikeMarkers[i].setMap(map);
-//       };
-//    };
-//    else 
-//      for(var i = 0; i <= allMarkers.length-1; i++){
-//        bikeMarkers[i].setMap(null);
-//      };
-// });
+   if (currentZoom > 14) {
+      for(var i = 0; i <= bikeMarkers.length-1; i++){
+      bikeMarkers[i].setMap(map);
+      }
+   }
+   else 
+     for(var i = 0; i <= bikeMarkers.length-1; i++){
+       (bikeMarkers[i]).setMap(null);
+     };
+});
 
 ////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){

@@ -23,6 +23,6 @@ function bikeMarker(lat, lon, map, val) {
 
     infoWindow.open(map,marker);
   });
-
+ return marker;
 }
 
