@@ -10,17 +10,17 @@ namespace :aggregator do
     Aggregator.instagram
   end
 
-  desc "run divvy"
+  desc "run bikes"
   task :bikes => :environment do
     Aggregator.bikes
   end
 
-  desc "run divvy"
+  desc "run planes"
   task :planes => :environment do
     Aggregator.planes
   end
 
-  desc "run divvy"
+  desc "run events"
   task :events => :environment do
     Aggregator.eventful
   end
