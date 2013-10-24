@@ -110,7 +110,7 @@ end
 
 
   def self.planes
-    4.times do
+    8.times do
       planes_request = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/ORD/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=10").read()
       planes_hash = CobraVsMongoose.xml_to_hash(planes_request)
       $redis.hmset("planes", "plane_times", planes_hash)
@@ -121,7 +121,7 @@ end
       p Time.now
       p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
           # send_message :success, train[:ctatt], namespace: :events
-      # sleep(15)
+      sleep(15)
     end
   end
 
