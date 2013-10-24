@@ -175,14 +175,14 @@ function stadiumThrob(stadium){
   var instagram = new WebSocketRails('localhost:3000/websocket');
   instagram.trigger("events.instagram_initialize")
   var colcounter = 1;
-  var idcounter = 1;
+  // var idcounter = 1;
   instagram.bind("events.instagram_success", function(message){
-    var $that = $("#instafeed #column" + colcounter).prepend("<div id=" + idcounter + ">" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
+    var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
-     setTimeout(function(){
-      var id_remove = '#' + (idcounter);
-        $(id_remove).remove()
-     },10000);
+    // setTimeout(function(){
+      // var id_remove = '#' + (idcounter - 1)
+       // $(id_remove).remove()
+     // },10000);
     // setTimeout(function(){
     //   $that.remove();
     //   console.log("test")
@@ -194,12 +194,12 @@ function stadiumThrob(stadium){
       colcounter +=1
     }
 
-    if (idcounter === 25){
-      idcounter = 1
-    }
-    else {
-      idcounter += 1
-    }
+    // if (idcounter === 25){
+    //   idcounter = 1
+    // }
+    // else {
+    //   idcounter += 1
+    // }
   });
 
 // ////////TRAINS/////////////////////////////////////
@@ -224,16 +224,31 @@ function stadiumThrob(stadium){
       planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
     })
   })
-
+bikeMarkers = []
 // // ////////BIKES/////////////////////////////////////
  var bikes = new WebSocketRails('localhost:3000/websocket');
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
       // console.log(value)
-      bikeMarker(value.latitude, value.longitude, map, value);
+    bikeMarkers.push(bikeMarker(value.latitude, value.longitude, map, value));
     });
   });
+
+google.maps.event.addListener(map, 'zoom_changed', function () {
+
+   var currentZoom = map.getZoom();
+
+   if (currentZoom > 14) {
+      for(var i = 0; i <= bikeMarkers.length-1; i++){
+      bikeMarkers[i].setMap(map);
+      }
+   }
+   else
+     for(var i = 0; i <= bikeMarkers.length-1; i++){
+       (bikeMarkers[i]).setMap(null);
+     };
+});
 
 ////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
@@ -247,6 +262,7 @@ function stadiumThrob(stadium){
 
   $(document).on("click","#instaitem",function(e){
     e.preventDefault();
+    console.log(this)
     var instaAt = $(this.children[0].nextSibling.innerText)
     var instaOn = $(this.children[1].nextSibling.innerText)
     var instaLat = (instaAt['selector'])

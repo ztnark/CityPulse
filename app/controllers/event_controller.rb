@@ -29,7 +29,6 @@ class EventController < WebsocketRails::BaseController
     send_message :success, "test", namespace: :events
   end
 
-
   def instagram_fetcher
    puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
@@ -51,8 +50,6 @@ class EventController < WebsocketRails::BaseController
       end
     end
   end
-
-
 
   def instagram_initialize
     instagram_fetcher
@@ -88,12 +85,10 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
-
   def eventful_fetcher
-
     @current_events = []
     Event.all.each do |event|
-      if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
+      if (event.start_time - Time.now) < 900 && (event.start_time - Time.now) > -7200
         @current_events << event
       end
     end
