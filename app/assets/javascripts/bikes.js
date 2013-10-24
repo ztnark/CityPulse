@@ -25,3 +25,4 @@ function bikeMarker(lat, lon, map, val) {
   });
 
 }
+

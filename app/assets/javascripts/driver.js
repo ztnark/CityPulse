@@ -225,16 +225,32 @@ function stadiumThrob(stadium){
       planeMarker(value.positions.position[0].lat.$,value.positions.position[0].lon.$, map,contentString)
     })
   })
-
+// bikeMarkers = []
 // // ////////BIKES/////////////////////////////////////
  var bikes = new WebSocketRails('localhost:3000/websocket');
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
       // console.log(value)
-      bikeMarker(value.latitude, value.longitude, map, value);
+    bikeMarker(value.latitude, value.longitude, map, value);
+    // bikeMarkers.push();
     });
   });
+
+// google.maps.event.addListener(map, 'zoom_changed', function () {
+
+//    var currentZoom = map.getZoom();
+
+//    if (currentZoom > 14) {
+//       for(var i = 0; i <= allMarkers.length-1; i++){
+//       bikeMarkers[i].setMap(map);
+//       };
+//    };
+//    else 
+//      for(var i = 0; i <= allMarkers.length-1; i++){
+//        bikeMarkers[i].setMap(null);
+//      };
+// });
 
 ////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
