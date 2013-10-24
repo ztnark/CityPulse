@@ -34,11 +34,8 @@ class EventController < WebsocketRails::BaseController
         an_instagram = $redis.hmget("object", counter.to_s)
         first = an_instagram.first
         if first != nil
-          # p an_instagram
           an_instagram = an_instagram.first
-          # p an_instagram
           eval = eval(an_instagram)
-          # p eval
           send_message :instagram_success, eval, namespace: :events
           sleep (5)
         else
@@ -47,8 +44,6 @@ class EventController < WebsocketRails::BaseController
       end
     end
   end
-
-
 
   def instagram_initialize
     instagram_fetcher
@@ -84,9 +79,7 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
-
   def eventful_fetcher
-
     @current_events = []
     Event.all.each do |event|
       if (event.start_time - (Time.now)) < 900 && (event.start_time - (Time.now)) > -5400
