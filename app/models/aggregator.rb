@@ -2,7 +2,7 @@ class Aggregator
 
 
   def self.trains
-    4.times do
+    40.times do
     trains_api = ENV['TRAINS_KEY']
     line = ['red','g','blue','brn','pink','org','p','y']
     trains_request = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{trains_api}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
@@ -45,6 +45,7 @@ class Aggregator
     Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
     Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
       counter=0
+      puts "hello"
     instagrams.shuffle.each do |ig|
       counter += 1
       object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
