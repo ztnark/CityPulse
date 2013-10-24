@@ -40,7 +40,7 @@
   position: absolute;
   left: 2%;
   font-family: 'Coda Caption', sans-serif;
-  color: rgb(256, 33, 51);
+  color: rgb(255, 33, 51);
   background-color: #CCC;
   padding-left: 20px;
   padding-right: 20px;
@@ -103,7 +103,6 @@
   margin-left: 8%;
   margin-right: 8%;
   background: rgba(59, 69, 87, 0.0);
-  height: ;
 }
 
 #instafeed{
@@ -262,7 +261,6 @@ footer div a img {
   display: none;
 }
 
-<<<<<<< HEAD
 #column1{
   padding-top: 10px;
   width: 100px;
