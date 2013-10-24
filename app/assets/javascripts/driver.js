@@ -3,7 +3,6 @@ var map = undefined;
 $(document).ready(function(){
   map = loadMap();
   var marker;
-
   var x = 0;
   // ////////////////////////////////Playing with polygons/////////////////////
 var unitedCenter;
@@ -180,9 +179,9 @@ function stadiumThrob(stadium){
   instagram.bind("events.instagram_success", function(message){
     var $that = $("#instafeed #column" + colcounter).prepend("<div id=" + idcounter + ">" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
-    setTimeout(function(){
-      var id_remove = '#' + (idcounter - 1)
-       $(id_remove).remove()
+     setTimeout(function(){
+      var id_remove = '#' + (idcounter);
+        $(id_remove).remove()
      },10000);
     // setTimeout(function(){
     //   $that.remove();
