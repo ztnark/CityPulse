@@ -21,7 +21,7 @@ namespace :aggregator do
   end
 
   desc "run divvy"
-  task :trains => :environment do
+  task :events => :environment do
     Aggregator.eventful
   end
 end
