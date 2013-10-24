@@ -166,7 +166,6 @@ function stadiumThrob(stadium){
         stadiumThrob(comiskeyField);
       }
       else{
-        console.log("the brown")
         getMarker(value.latitude, value.longitude, map, value);
       }
     });
