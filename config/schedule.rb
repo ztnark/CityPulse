@@ -29,7 +29,7 @@ every 1.minutes do
   runner "Aggregator.trains", environment: 'development'
 end
 
-every 12.hours development
+every 1.day, :at => '12:05 am' do
   runner "Aggregator.eventful", environment: 'development'
 end
 
