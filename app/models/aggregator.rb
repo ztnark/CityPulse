@@ -117,11 +117,6 @@ end
       planes_request2 = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/MDW/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
       planes_hash2 = CobraVsMongoose.xml_to_hash(planes_request2)
       $redis.hmset("planes2", "plane_times2", planes_hash2)
-      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
-      p Time.now
-      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
-          # send_message :success, train[:ctatt], namespace: :events
-      # sleep(15)
     end
   end
 
@@ -149,7 +144,6 @@ end
       counter += 1
       object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
       string = object.to_s
-      # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
   end
@@ -163,11 +157,9 @@ end
 
 
   def self.eventful
-    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
-    p Time.now
     eventful = Eventful::API.new 'FwPV5FkjRBWzvzvq',
-                                :user => 'josephjames890',
-                                :password => 'veveve122'
+                                :user => ENV['USER_NAME'],
+                                :password => ENV['PASSWORD']
     puts 'eventful API initiated'
 
     first_query = eventful.call 'events/search',
@@ -214,7 +206,6 @@ end
       puts Event.count
       sleep(12)
     end
-    p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
   end
 
 end
