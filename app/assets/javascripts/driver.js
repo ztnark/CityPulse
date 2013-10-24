@@ -21,6 +21,22 @@ var unitedCoords = [
     fillOpacity: 0.2
   });
 
+var dbc;
+var dbcCoords = [
+    new google.maps.LatLng(41.88988,-87.637929),
+    new google.maps.LatLng(41.889609,-87.637923),
+    new google.maps.LatLng(41.889613,-87.637119),
+    new google.maps.LatLng(41.889892,-87.637119)
+  ];
+    dbc = new google.maps.Polygon({
+    paths: dbcCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
 
 var soldierField;
 var soldierCoords = [
@@ -155,8 +171,11 @@ function stadiumThrob(stadium){
         getMarker(value.latitude, value.longitude, map, value);
         stadiumThrob(comiskeyField);
       }
+      else if(value.venue_name =="Dev Bootcamp Chicago"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(dbc);
+      }
       else{
-        console.log("the brown")
         getMarker(value.latitude, value.longitude, map, value);
       }
     });
