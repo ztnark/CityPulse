@@ -54,11 +54,13 @@ class EventController < WebsocketRails::BaseController
       while true
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
+      p train
       send_message :success, train, namespace: :events
       sleep(15)
       end
     end
   end
+
 
   def bikes
     bike_handler ||= Thread.new do
