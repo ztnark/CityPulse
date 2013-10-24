@@ -43,10 +43,10 @@ function convertToMarkers(tweet){
   // removeMarker(marker);
 }
 
-// function removeMarker(marker){
-//   setTimeout(function(){marker.setMap(null)},360000);
+function removeMarker(marker){
+  setTimeout(function(){marker.setMap(null)},360000);
 
-// }
+}
 
 
 function addInfoWindow(marker, message) {
