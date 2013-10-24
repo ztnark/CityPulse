@@ -144,15 +144,14 @@ class Aggregator
     Event.destroy_all
     total_queries.times do |query|
       p query + 1
-      results = eventful.call 'events/search',
-        :location    => '41.8819, -87.6278',
-        :within      => 6,
-        :date        => Date.today,
-        :sort_order  => 'popularity',
-        :page_size   => 100,
-        :page_number => query + 1
-      puts results.class
-      unless results.class == FalseClass
+      begin
+        results = eventful.call 'events/search',
+          :location    => '41.8819, -87.6278',
+          :within      => 6,
+          :date        => Date.today,
+          :sort_order  => 'popularity',
+          :page_size   => 100,
+          :page_number => query + 1
         results['events']['event'].each { |event|
 
           Event.create( title:         event['title'],
@@ -171,10 +170,13 @@ class Aggregator
                         postal_code:   event['postal_code'] )
         }
         puts Event.count
-        sleep(120)
+        sleep(180)
+      rescue
+        puts "false results from eventful"
+        sleep(180)
       end
+      p "+++++++++++++++++++  this is the end of an eventful request  +++++++++++++++++++"
     end
-    p "+++++++++++++++++++  this is the end of an eventful request  +++++++++++++++++++"
   end
 
 end
