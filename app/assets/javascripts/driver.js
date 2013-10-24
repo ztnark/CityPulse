@@ -177,7 +177,6 @@ function stadiumThrob(stadium){
   instagram.trigger("events.instagram_initialize")
   var colcounter = 1;
   instagram.bind("events.instagram_success", function(message){
-    console.log(colcounter);
 
     $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, message.url);
