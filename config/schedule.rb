@@ -20,15 +20,16 @@
 # sends all output to this file. check here if you are not sure how crons are running
 set :output, 'log/cron.log'
 
-every 2.minutes do
+every 10.minutes do
   runner "Aggregator.instagram", environment: 'development'
 end
+
 
 every 1.minutes do
   runner "Aggregator.trains", environment: 'development'
 end
 
-every 12.hours do
+every 12.hours development
   runner "Aggregator.eventful", environment: 'development'
 end
 

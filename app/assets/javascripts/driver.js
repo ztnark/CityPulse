@@ -15,13 +15,13 @@ var unitedCoords = [
   ];
     unitedCenter = new google.maps.Polygon({
     paths: unitedCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
-   unitedCenter.setMap(map);
+
 
 var soldierField;
 var soldierCoords = [
@@ -32,36 +32,37 @@ var soldierCoords = [
   ];
     soldierField = new google.maps.Polygon({
     paths: soldierCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
-   soldierField.setMap(map);
+
 
 var wrigleyField;
 var wrigleyCoords = [
     new google.maps.LatLng(41.948997,-87.654462),
-    new google.maps.LatLng(41.947281,-87.65444),
-    new google.maps.LatLng(41.947305,-87.656372),
+    new google.maps.LatLng(41.944532,-87.654338),
     new google.maps.LatLng(41.948949,-87.657788)
   ];
     wrigleyField = new google.maps.Polygon({
     paths: wrigleyCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
+
+
 
 var comiskeyField;
 var comiskeyCoords = [
-    new google.maps.LatLng(41.83077,-87.636),
-    new google.maps.LatLng(41.8273,-87.636),
-    new google.maps.LatLng(41.8273,-87.631),
-    new google.maps.LatLng(41.83077,-87.631)
+    new google.maps.LatLng(41.83076,-87.63869),
+    new google.maps.LatLng(41.827258,-87.638648),
+    new google.maps.LatLng(41.827326,-87.631481),
+    new google.maps.LatLng(41.830855,-87.631631)
   ];
 
     comiskeyField = new google.maps.Polygon({
@@ -72,6 +73,7 @@ var comiskeyCoords = [
     fillColor: 'red',
     fillOpacity: 0.2
   });
+
 
 function stadiumThrob(stadium){
   setInterval(function(){
@@ -130,7 +132,7 @@ function stadiumThrob(stadium){
     }
   },100);
 }
-stadiumThrob(comiskeyField);
+
 
 
 
@@ -146,9 +148,24 @@ stadiumThrob(comiskeyField);
 
   eventful.bind("events.eventful_success", function(message){
     $.each(message, function(index, value){
-      if(value.venue_name =="Chemically Imbalanced Theater"){
-        console.log(value.venue_name);
-      }else{
+      if(value.venue_name =="United Center"){
+        stadiumThrob(unitedCenter);
+        getMarker(value.latitude, value.longitude, map, value);
+      }
+      else if(value.venue_name =="Soldier Field Stadium"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(soldierField);
+      }
+      else if(value.venue_name =="Wrigley Field"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(wrigleyField);
+      }
+      else if(value.venue_name =="U.S. Cellular Field"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(comiskeyField);
+      }
+      else{
+        console.log("the brown")
         getMarker(value.latitude, value.longitude, map, value);
       }
     });

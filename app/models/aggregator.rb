@@ -28,23 +28,14 @@ def self.bikes
 end
 
 def self.instagram
+
   Instagram.configure do |config|
     config.client_id = ENV['INSTAGRAM']
   end
   instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
+  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
   instagrams.shuffle.each do |ig|
     counter += 1
     object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
@@ -52,141 +43,69 @@ def self.instagram
     # time =  Time.now.strftime("%3N")[1..2]
     $redis.hmset("object", counter.to_s, object)
   end
+  sleep(90)
+  instagrams = []
+  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
+  instagrams.shuffle.each do |ig|
+    counter += 1
+    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+    string = object.to_s
+    # time =  Time.now.strftime("%3N")[1..2]
+    $redis.hmset("object", counter.to_s, object)
+  end
+  sleep(90)
+  instagrams = []
+  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
+  instagrams.shuffle.each do |ig|
+    counter += 1
+    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+    string = object.to_s
+    # time =  Time.now.strftime("%3N")[1..2]
+    $redis.hmset("object", counter.to_s, object)
+  end
+  sleep(90)
+  instagrams = []
+  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
+  instagrams.shuffle.each do |ig|
+    counter += 1
+    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+    string = object.to_s
+    # time =  Time.now.strftime("%3N")[1..2]
+    $redis.hmset("object", counter.to_s, object)
+  end
+  sleep(90)
+  instagrams = []
+  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
+  instagrams.shuffle.each do |ig|
+    counter += 1
+    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+    string = object.to_s
+    # time =  Time.now.strftime("%3N")[1..2]
+    $redis.hmset("object", counter.to_s, object)
+  end
+  sleep(90)
+  instagrams = []
+  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  counter=0
+  instagrams.shuffle.each do |ig|
+    counter += 1
+    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+    string = object.to_s
+    # time =  Time.now.strftime("%3N")[1..2]
+    $redis.hmset("object", counter.to_s, object)
+  end
+  sleep(90)
 end
 
-def self.instagram
-  Instagram.configure do |config|
-    config.client_id = ENV['INSTAGRAM']
-  end
-  instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
-  instagrams.shuffle.each do |ig|
-    counter += 1
-    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-    string = object.to_s
-    # time =  Time.now.strftime("%3N")[1..2]
-    $redis.hmset("object", counter.to_s, object)
-  end
-end
-
-def self.instagram
-  Instagram.configure do |config|
-    config.client_id = ENV['INSTAGRAM']
-  end
-  instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
-  instagrams.shuffle.each do |ig|
-    counter += 1
-    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-    string = object.to_s
-    # time =  Time.now.strftime("%3N")[1..2]
-    $redis.hmset("object", counter.to_s, object)
-  end
-end
-
-def self.instagram
-  Instagram.configure do |config|
-    config.client_id = ENV['INSTAGRAM']
-  end
-  instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
-  instagrams.shuffle.each do |ig|
-    counter += 1
-    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-    string = object.to_s
-    # time =  Time.now.strftime("%3N")[1..2]
-    $redis.hmset("object", counter.to_s, object)
-  end
-end
-
-def self.instagram
-  Instagram.configure do |config|
-    config.client_id = ENV['INSTAGRAM']
-  end
-  instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
-  instagrams.shuffle.each do |ig|
-    counter += 1
-    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-    string = object.to_s
-    # time =  Time.now.strftime("%3N")[1..2]
-    $redis.hmset("object", counter.to_s, object)
-  end
-end
-def self.instagram
-  Instagram.configure do |config|
-    config.client_id = ENV['INSTAGRAM']
-  end
-  instagrams = []
-  Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 2}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 4}).each {|x| instagrams.push(x)}
-    counter=0
-  instagrams.shuffle.each do |ig|
-    counter += 1
-    object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-    string = object.to_s
-    # time =  Time.now.strftime("%3N")[1..2]
-    $redis.hmset("object", counter.to_s, object)
-  end
-end
 
 
   def self.planes
@@ -242,6 +161,7 @@ end
 
     Event.destroy_all
     total_queries.times do |query|
+      p query
       results = eventful.call 'events/search',
         :location    => '41.8819, -87.6278',
         :within      => 6,
@@ -267,7 +187,7 @@ end
                       postal_code:   event['postal_code'] )
       }
       puts Event.count
-      sleep(120)
+      sleep(12)
     end
     p "+++++++++++++++++++     this is a new eventful request    +++++++++++++++++++++++++"
   end
