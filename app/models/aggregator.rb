@@ -9,8 +9,6 @@ class Aggregator
     $redis.hmset("trains", "train_times", trains_hash)
     p "+++++++++++++++++++ TRAINS:    this is a new request    +++++++++++++++++++++++++"
     p Time.now
-    p "+++++++++++++++++++ TRAINS:    this is a new request    +++++++++++++++++++++++++"
-        # send_message :success, train[:ctatt], namespace: :events
     sleep(15)
    end
   end
@@ -32,12 +30,14 @@ class Aggregator
   end
 
   def self.instagram
+    duration= Time.now
     Instagram.configure do |config|
       config.client_id = ENV['INSTAGRAM']
     end
     instagrams = []
-    Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.881732","-87.63073",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.864028","-87.630301",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.882307","-87.649269",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
@@ -46,10 +46,12 @@ class Aggregator
       # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+    sleep(105)
+    p "first"
     instagrams = []
-    Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.892019","-87.652874",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.901219","-87.645063",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.934366","-87.646093",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
@@ -58,34 +60,44 @@ class Aggregator
       # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+    sleep(115)
+    p "second"
     instagrams = []
-    Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.894703","-87.632875",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.899686","-87.660427",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.913292","-87.649527",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
       object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
       string = object.to_s
-      # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+
+    sleep(105)
+    p "third"
     instagrams = []
-    Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+
+    Instagram.media_search("41.845616","-87.62043",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.85738","-87.663774",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.839989","-87.638712",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.883073","-87.672958",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
       object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
       string = object.to_s
-      # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+
+    sleep(80)
+    p "fourth"
     instagrams = []
-    Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+
+    Instagram.media_search("41.849772","-87.63545",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.891572","-87.635193",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.868758","-87.673388",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.924404","-87.654333",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
@@ -94,10 +106,14 @@ class Aggregator
       # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+    sleep(75)
+    p "fifth"
     instagrams = []
-    Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.892594","-87.670984",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.866968","-87.654676",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.905499","-87.630558",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.930599","-87.665577",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+
     counter=0
     instagrams.shuffle.each do |ig|
       counter += 1
@@ -106,7 +122,10 @@ class Aggregator
       # time =  Time.now.strftime("%3N")[1..2]
       $redis.hmset("object", counter.to_s, object)
     end
-    sleep(90)
+    sleep(10)
+    finish =Time.now - duration
+    p finish
+    p "done"
   end
 
   def self.bikes
@@ -126,7 +145,6 @@ class Aggregator
                                 :user => ENV['USER_NAME'],
                                 :password => ENV['PASSWORD']
     puts 'eventful API initiated'
-
     first_query = eventful.call 'events/search',
       :location    => '41.8819, -87.6278',
       :within      => 6,
@@ -134,13 +152,11 @@ class Aggregator
       :count_only  => true
     total_events = first_query['total_items']
     puts "#{total_events} events in Chicago today."
-
     total_queries = total_events / 100
     if total_events % 100 > 0
       total_queries += 1
     end
     puts total_queries
-
     Event.destroy_all
     total_queries.times do |query|
       p query + 1
@@ -153,7 +169,6 @@ class Aggregator
           :page_size   => 100,
           :page_number => query + 1
         results['events']['event'].each { |event|
-
           Event.create( title:         event['title'],
                         venue_name:    event['venue_name'],
                         latitude:      event['latitude'],
