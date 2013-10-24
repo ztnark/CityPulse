@@ -44,7 +44,7 @@ function convertToMarkers(tweet){
 }
 
 function removeMarker(marker){
-  setTimeout(function(){marker.setMap(null)},360000);
+  setTimeout(function(){marker.setMap(null)},10000000);
 }
 
 
