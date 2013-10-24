@@ -29,7 +29,6 @@ class Aggregator
           # send_message :success, train[:ctatt], namespace: :events
       sleep(15)
     end
-
   end
 
   def self.instagram
@@ -118,6 +117,7 @@ class Aggregator
     p Time.now
     p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
         # send_message :success, train[:ctatt], namespace: :events
+  end
 
   def self.eventful
     p "+++++++++++++++++     this is a new eventful request    ++++++++++++++++++++"
