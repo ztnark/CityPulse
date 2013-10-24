@@ -12,6 +12,7 @@ function bikeMarker(lat, lon, map, val) {
     maxWidth: 200
   };
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+
   google.maps.event.addListener(marker,'mouseover', function(e){
     infoWindow.open(map,marker);
   });
@@ -19,8 +20,8 @@ function bikeMarker(lat, lon, map, val) {
     infoWindow.close();
   });
   google.maps.event.addListener(marker,'click', function(e){
-    // console.log(e);
-    // $('.gm-style-iw').close();
+
     infoWindow.open(map,marker);
   });
+
 }

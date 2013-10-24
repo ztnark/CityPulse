@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20131018191711) do
     t.float    "longitude"
     t.datetime "start_time"
     t.datetime "stop_time"
+    t.string   "at_time"
     t.string   "eventful_id"
     t.string   "thumb"
     t.string   "url"
