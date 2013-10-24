@@ -31,8 +31,9 @@ def self.instagram
     config.client_id = ENV['INSTAGRAM']
   end
   instagrams = []
-  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.891572","-87.635193",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.830081","-87.646523",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.899115","-87.715187",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
   counter=0
   instagrams.shuffle.each do |ig|
     counter += 1
@@ -42,8 +43,10 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
+  sleep(105)
+  finish =Time.now - duration
   p "first"
-  sleep(90)
+  p finish
   instagrams = []
   Instagram.media_search("41.909012","-87.634206",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.878107","-87.627490",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
@@ -56,11 +59,14 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
+  sleep(115)
+  finish =Time.now - duration
   p "second"
-  sleep(90)
+  p finish
   instagrams = []
-  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
-  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.882498","-87.668624",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.891572,-87.635193",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
+  Instagram.media_search("41.858011","-87.679825",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
   counter=0
   instagrams.shuffle.each do |ig|
     counter += 1
@@ -70,8 +76,11 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
+
+  sleep(105)
+  finish =Time.now - duration
   p "third"
-  sleep(90)
+  p finish
   instagrams = []
   Instagram.media_search("41.860985","-87.624807",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.925043","-87.652574",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
@@ -84,8 +93,11 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
+
+  sleep(80)
+  finish =Time.now - duration
   p "fourth"
-  sleep(90)
+  p finish
   instagrams = []
   Instagram.media_search("41.819344","-87.606354",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.816477","-87.687378",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
@@ -98,11 +110,14 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
+  sleep(75)
+  finish =Time.now - duration
+  p finish
   p "fifth"
-  sleep(90)
   instagrams = []
   Instagram.media_search("41.915336","-87.681413",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
   Instagram.media_search("41.958708","-87.655792",{radius: 4500, count: 18}).each {|x| instagrams.push(x)}
+
   counter=0
   instagrams.shuffle.each do |ig|
     counter += 1
@@ -112,10 +127,14 @@ def self.instagram
     $redis.hmset("object", counter.to_s, object)
   end
   p instagrams.length
-  p "sixth"
-  sleep(90)
+
   finish =Time.now - duration
   p finish
+  p "sixth"
+  sleep(10)
+  finish =Time.now - duration
+  p finish
+  p "done"
 end
 
 
