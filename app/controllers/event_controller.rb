@@ -89,11 +89,10 @@ class EventController < WebsocketRails::BaseController
 
     @current_events = []
     Event.all.each do |event|
-      if (event.start_time - (Time.now - 18000)) < 900 && (event.start_time - (Time.now - 18000)) > -5400
+      if (event.start_time - (Time.now)) < 900 && (event.start_time - (Time.now)) > -5400
         @current_events << event
       end
     end
-    puts @current_events.length
     send_message :eventful_success, @current_events, namespace: :events
   end
 
