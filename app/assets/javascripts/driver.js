@@ -157,7 +157,7 @@ function stadiumThrob(stadium){
 }
 
 // ////////EVENTFUL/////////////////////////////////////
-  var eventful = new WebSocketRails('city-pulse.herokuapp.com/websocket');
+  var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
   eventful.trigger("events.eventful")
   setInterval(function(){
     eventful.trigger("events.eventful")
@@ -192,7 +192,7 @@ function stadiumThrob(stadium){
   });
 
 ////////INSTAGRAMS/////////////////////////////////////
-  var instagram = new WebSocketRails('city-pulse.herokuapp.com/websocket');
+  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
   instagram.trigger("events.instagram_initialize")
   var colcounter = 1;
   // var idcounter = 1;
@@ -223,7 +223,7 @@ function stadiumThrob(stadium){
   });
 
 // ////////TRAINS/////////////////////////////////////
-  var trains = new WebSocketRails('city-pulse.herokuapp.com/websocket');
+  var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -237,7 +237,7 @@ function stadiumThrob(stadium){
   })
 
 // // ////////PLANES/////////////////////////////////////
-  var planes = new WebSocketRails('city-pulse.herokuapp.com/websocket');
+  var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
   planes.trigger("events.planes")
   planes.bind("events.success", function(message){
     $.each(message.response.flightTracks.flightTrack,function(index, value){
@@ -248,7 +248,7 @@ function stadiumThrob(stadium){
 bikeMarkers = []
 // // ////////BIKES/////////////////////////////////////
 
- var bikes = new WebSocketRails('city-pulse.herokuapp.com/websocket');
+ var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
