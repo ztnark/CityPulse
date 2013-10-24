@@ -15,13 +15,13 @@ var unitedCoords = [
   ];
     unitedCenter = new google.maps.Polygon({
     paths: unitedCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
-   unitedCenter.setMap(map);
+
 
 var soldierField;
 var soldierCoords = [
@@ -32,64 +32,46 @@ var soldierCoords = [
   ];
     soldierField = new google.maps.Polygon({
     paths: soldierCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
-   soldierField.setMap(map);
+
 
 var wrigleyField;
 var wrigleyCoords = [
     new google.maps.LatLng(41.948997,-87.654462),
-    new google.maps.LatLng(41.947281,-87.65444),
-    new google.maps.LatLng(41.947305,-87.656372),
+    new google.maps.LatLng(41.944532,-87.654338),
     new google.maps.LatLng(41.948949,-87.657788)
   ];
     wrigleyField = new google.maps.Polygon({
     paths: wrigleyCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
   });
 
-   wrigleyField.setMap(map);
 
 var comiskeyField;
 var comiskeyCoords = [
-    new google.maps.LatLng(41.83077,-87.636),
-    new google.maps.LatLng(41.8273,-87.636),
-    new google.maps.LatLng(41.8273,-87.631),
-    new google.maps.LatLng(41.83077,-87.631)
+    new google.maps.LatLng(41.83076,-87.63869),
+    new google.maps.LatLng(41.827258,-87.638648),
+    new google.maps.LatLng(41.827326,-87.631481),
+    new google.maps.LatLng(41.830855,-87.631631)
   ];
 
     comiskeyField = new google.maps.Polygon({
     paths: comiskeyCoords,
     strokeColor: 'red',
     strokeOpacity: 0.2,
-    strokeWeight: 2,
+    strokeWeight: 0,
     fillColor: 'red',
-    fillOpacity: 0.35
+    fillOpacity: 0.2
   });
-
-// ////////EVENTFUL/////////////////////////////////////
-
-  // var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-
-  // eventful.trigger("events.eventful")
-
-  // setInterval(function(){
-  //   eventful.trigger("events.eventful")
-  // },180000);
-
-  // eventful.bind("events.eventful_success", function(message){
-  //   $.each(message, function(index, value){
-  //     getMarker(value.latitude, value.longitude, map, value);
-  //   });
-  // })
 
 ////////TWEETS/////////////////////////////////////
 
@@ -100,17 +82,101 @@ var comiskeyCoords = [
     $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+ data.message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" + data.message[2] +"</div>" + data.message[1] + "<div class='lat'>"+ data.message[0][0] + "</div>" + "<div class='lon'>"+ data.message[0][1] +"</div></div></div>");
   })
 
+
+function stadiumThrob(stadium){
+  setInterval(function(){
+      stadium.setMap(null)
+    if(stadium.fillOpacity === 0.2){
+      stadium.fillOpacity = 0.3
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.3){
+      stadium.fillOpacity = 0.4
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.4){
+      stadium.fillOpacity = 0.5
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.5){
+      stadium.fillOpacity = 0.6
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.6){
+      stadium.fillOpacity = 0.7
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.7){
+      stadium.fillOpacity = 0.8
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.8){
+      stadium.fillOpacity = 0.9
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.9){
+      stadium.fillOpacity = 0.81
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.81){
+      stadium.fillOpacity = 0.71
+      stadium.setMap(map);
+    }
+    else if(stadium.fillOpacity === 0.71){
+      stadium.fillOpacity = 0.61
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.61){
+      stadium.fillOpacity = 0.51
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.51){
+      stadium.fillOpacity = 0.41
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.41){
+      stadium.fillOpacity = 0.31
+      stadium.setMap(map);
+    }  else if(stadium.fillOpacity === 0.31){
+      stadium.fillOpacity = 0.2
+      stadium.setMap(map);
+    }
+  },100);
+}
+
+// ////////EVENTFUL/////////////////////////////////////
+  var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  eventful.trigger("events.eventful")
+  setInterval(function(){
+    eventful.trigger("events.eventful")
+  },180000);
+  eventful.bind("events.eventful_success", function(message){
+    $.each(message, function(index, value){
+      if(value.venue_name =="United Center"){
+        stadiumThrob(unitedCenter);
+        getMarker(value.latitude, value.longitude, map, value);
+      }
+      else if(value.venue_name =="Soldier Field Stadium"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(soldierField);
+      }
+      else if(value.venue_name =="Wrigley Field"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(wrigleyField);
+      }
+      else if(value.venue_name =="U.S. Cellular Field"){
+        getMarker(value.latitude, value.longitude, map, value);
+        stadiumThrob(comiskeyField);
+      }
+      else{
+        console.log("the brown")
+        getMarker(value.latitude, value.longitude, map, value);
+      }
+    });
+  });
+
 ////////INSTAGRAMS/////////////////////////////////////
-
   var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-
   instagram.trigger("events.instagram_initialize")
-
-
   var colcounter = 1;
-
   instagram.bind("events.instagram_success", function(message){
-
     console.log(colcounter);
 
     $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div id='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
@@ -121,13 +187,10 @@ var comiskeyCoords = [
     else{
       colcounter +=1
     }
-
-
   });
 
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -141,9 +204,7 @@ var comiskeyCoords = [
 
 // // ////////PLANES/////////////////////////////////////
   var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
-
   planes.trigger("events.planes")
-
   planes.bind("events.success", function(message){
     $.each(message.response.flightTracks.flightTrack,function(index, value){
       var contentString =  "Flight: " + value.flightNumber.$ + " (" + value.equipment.$ + ")<br>" + "Origin: " + value.departureAirportFsCode.$ + "<br>" + "Destination: " + value.arrivalAirportFsCode.$ + "<br>" + "Hdg: " + Math.round(value.heading.$) + "deg<br>" + "Spd: " + value.positions.position[0].speedMph.$ + "mph<br>" + "Alt: " + value.positions.position[0].altitudeFt.$ + "ft"
@@ -156,7 +217,6 @@ var comiskeyCoords = [
  var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
 
   bikes.trigger("events.bikes");
-
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
       // console.log(value)
@@ -180,7 +240,6 @@ var comiskeyCoords = [
     var instaOn = $(this.children[1].nextSibling.innerText)
     var instaLat = (instaAt['selector'])
     var instaLon = (instaOn['selector'])
-    console.log(instaLat,instaLon);
     map.setCenter(new google.maps.LatLng(instaLat,instaLon));
     map.setZoom(15)
   });
