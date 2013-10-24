@@ -40,11 +40,8 @@ class EventController < WebsocketRails::BaseController
         an_instagram = $redis.hmget("object", counter.to_s)
         first = an_instagram.first
         if first != nil
-          # p an_instagram
           an_instagram = an_instagram.first
-          # p an_instagram
           eval = eval(an_instagram)
-          # p eval
           send_message :instagram_success, eval, namespace: :events
           sleep (5)
         else
