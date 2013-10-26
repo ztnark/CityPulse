@@ -88,7 +88,6 @@ class EventController < WebsocketRails::BaseController
         @current_events << event
       end
     end
-    puts "hey"
     send_message :eventful_success, @current_events, namespace: :events
   end
 
