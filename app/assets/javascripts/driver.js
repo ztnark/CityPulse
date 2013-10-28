@@ -187,7 +187,6 @@ function stadiumThrob(stadium){
       else{
         getMarker(value.latitude, value.longitude, map, value);
       }
-      console.log("hey")
     });
   });
 
