@@ -187,4 +187,26 @@ class Aggregator
     end
   end
 
+  def self.eventbrite
+    eb_auth_tokens = { app_key: ENV['EVENTBRITE'] }
+    eb_client = EventbriteClient.new(eb_auth_tokens)
+    eb_daily_total = eb_client.event_search( { date:       'Today',
+                                               city:       'Chicago',
+                                               count_only: true }
+    )
+    if ( eb_daily_total['events'][0]['summary']['total_items'] ) % 100 > 0
+      pages = ( eb_daily_total['events'][0]['summary']['total_items'] / 100 ) + 1
+    else
+      pages = eb_daily_total['events'][0]['summary']['total_items'] / 100
+    end
+
+    pages.times { |page|
+      eb_client.event_search( { date:   'Today',
+                                city:   'Chicago',
+                                region: 'IL',
+                                max:    100,
+                                page:   page + 1 } )
+    }
+  end
+
 end
