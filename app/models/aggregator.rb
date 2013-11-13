@@ -206,7 +206,6 @@ class Aggregator
                                             region: 'IL',
                                             max:    100,
                                             page:   page + 1 } )
-      
     }
   end
 
