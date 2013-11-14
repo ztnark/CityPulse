@@ -96,4 +96,15 @@ class EventController < WebsocketRails::BaseController
     send_message :eventful_success, @current_events, namespace: :events
   end
 
+  def eventbrite_fetcher
+    @current_eventbrites = []
+    Eventbrite.all.each do |eventbrite|
+      if (eventbrite.start_date - Time.now) < 900 && (eventbrite.start_date - Time.now) > -7200
+        @current_eventbrites << eventbrite
+      end
+    end
+    puts @current_eventbrites.length
+    send_message :eventbrite_success, @current_eventbrites, namespace: :events
+  end
+
 end
