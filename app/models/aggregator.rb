@@ -199,7 +199,6 @@ class Aggregator
     else
       pages = eb_daily_total['events'][0]['summary']['total_items'] / 100
     end
-    eb_events = []
     pages.times { |page|
       eb_events = eb_client.event_search( { date:   'Today',
                                             city:   'Chicago',
