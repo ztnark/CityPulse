@@ -230,7 +230,7 @@ class Aggregator
                              postal_code:   eventbrite['event']['venue']['postal_code'] )
         end
       }
-      puts Eventful.count
+      puts Eventbrite.count
     }
     p "++++++++++++++++++++  this is the end of an Eventbrite request  +++++++++++++++++++++"
   end
