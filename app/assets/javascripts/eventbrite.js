@@ -7,7 +7,7 @@ function briteMarker(lat, lon, map, val) {
     icon: 'http://i.picresize.com/images/2013/11/14/dESpR.png'
   });
 
-  var contentString = (val.title).link(val.url) + "<br>" + val.venue + "<br>" + val.at_time
+  var contentString = (val.title).link(val.url) + "<br>" + val.venue + "<br>at " + val.at_time
   var infoWindowOptions = {
     content: contentString,
     maxWidth: 200
