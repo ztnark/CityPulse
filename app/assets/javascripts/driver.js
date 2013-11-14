@@ -184,11 +184,11 @@ function stadiumThrob(stadium){
 ////////TWEETS/////////////////////////////////////
 
   var tweets = new WebSocketRails('localhost:3000/websocket');
-  // tweets.trigger("events.tweets")
-  // tweets.bind("events.tweet_success", function(message){
-  //   convertTweetsToMapObjects(message);
-  //   $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
-  // })
+  tweets.trigger("events.tweets")
+  tweets.bind("events.tweet_success", function(message){
+    convertTweetsToMapObjects(message);
+    $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" +message[2] +"</div>" + message[1] + "<div class='lat'>"+ message[0][0] + "</div>" + "<div class='lon'>"+ message[0][1] +"</div></div></div>");
+  })
 
 ////////INSTAGRAMS/////////////////////////////////////
   var instagram = new WebSocketRails('localhost:3000/websocket');
@@ -196,8 +196,9 @@ function stadiumThrob(stadium){
   var colcounter = 1;
   // var idcounter = 1;
   instagram.bind("events.instagram_success", function(message){
+    var url = message.url.replace(/(width=)(\d{3})(\sheight=)(\d{3})/,"$1200$3200");
     var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
-    setMarker(message.latitude, message.longitude, map, message.url);
+    setMarker(message.latitude, message.longitude, map, url);
     // setTimeout(function(){
       // var id_remove = '#' + (idcounter - 1)
        // $(id_remove).remove()
