@@ -188,24 +188,51 @@ class Aggregator
   end
 
   def self.eventbrite
+    p "++++++++++++++++++++  this is a new Eventbrite request  +++++++++++++++++++++++++"
+    p Time.now
+
     eb_auth_tokens = { app_key: ENV['EVENTBRITE'] }
     eb_client = EventbriteClient.new(eb_auth_tokens)
     eb_daily_total = eb_client.event_search( { date:       'Today',
                                                city:       'Chicago',
                                                count_only: true }
     )
+
     if ( eb_daily_total['events'][0]['summary']['total_items'] ) % 100 > 0
       pages = ( eb_daily_total['events'][0]['summary']['total_items'] / 100 ) + 1
     else
       pages = eb_daily_total['events'][0]['summary']['total_items'] / 100
     end
+
     pages.times { |page|
       eb_events = eb_client.event_search( { date:   'Today',
                                             city:   'Chicago',
                                             region: 'IL',
                                             max:    100,
                                             page:   page + 1 } )
+      eb_events['events'].each_with_index { |eventbrite,index|
+        if index == 0
+          next
+        else
+          Eventbrite.create( title:         eventbrite['event']['title'],
+                             venue:         eventbrite['event']['venue']['name'],
+                             latitude:      eventbrite['event']['venue']['latitude'],
+                             longitude:     eventbrite['event']['venue']['longitude'],
+                             start_date:    eventbrite['event']['start_date'],
+                             at_time:       eventbrite['event']['start_date'],
+                             end_date:      eventbrite['event']['end_date'],
+                             eventbrite_id: eventbrite['event']['id'],
+                             thumb:         eventbrite['event']['logo_ssl'],
+                             url:           eventbrite['event']['url'],
+                             city:          eventbrite['event']['venue']['city'],
+                             address:       eventbrite['event']['venue']['address'],
+                             state:         eventbrite['event']['venue']['region'],
+                             postal_code:   eventbrite['event']['venue']['postal_code'] )
+        end
+      }
+      puts Eventful.count
     }
+    p "++++++++++++++++++++  this is the end of an Eventbrite request  +++++++++++++++++++++"
   end
 
 end
