@@ -7,12 +7,12 @@ function briteMarker(lat, lon, map, val) {
     icon: 'http://i.picresize.com/images/2013/11/14/dESpR.png'
   });
 
-  var contentString = (val.title).link(val.url) + "<br>" + val.venue
+  var contentString = (val.title).link(val.url) + "<br>" + val.venue + "<br>" + val.at_time
   var infoWindowOptions = {
     content: contentString,
     maxWidth: 200
   };
-  
+
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
   google.maps.event.addListener(marker,'mouseover', function(e){
     infoWindow.open(map,marker);
