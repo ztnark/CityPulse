@@ -189,7 +189,7 @@ function stadiumThrob(stadium){
   },180000);
   eventbrite.bind("events.eventbrite_success", function(message){
     $.each(message, function(index, value){
-      getMarker(value.latitude, value.longitude, map, value);
+      briteMarker(value.latitude, value.longitude, map, value);
     });
   });
 
