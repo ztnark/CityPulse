@@ -13,6 +13,8 @@ gem 'sass-rails', '~> 4.0.0'
 
 gem 'eventfulapi'
 
+gem 'eventbrite-client'
+
 gem 'instagram'
 
 # added as a new db option

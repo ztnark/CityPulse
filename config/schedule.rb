@@ -33,6 +33,10 @@ every 1.day, :at => '2:05 am' do
   runner "Aggregator.eventful", environment: 'development'
 end
 
+every 1.day, :at => '2:00 am' do
+  runner "Aggregator.eventbrite", environment: 'development'
+end
+
 every 1.minutes do
   runner "Aggregator.planes", environment: 'development'
 end
