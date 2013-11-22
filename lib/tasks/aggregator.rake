@@ -24,4 +24,9 @@ namespace :aggregator do
   task :events => :environment do
     Aggregator.eventful
   end
+
+  desc "run eventbrite"
+  task :events => :environment do
+    Aggregator.eventbrite
+  end
 end
