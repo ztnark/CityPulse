@@ -25,12 +25,7 @@ class EventController < WebsocketRails::BaseController
     end
   end
 
-  def test
-    send_message :success, "test", namespace: :events
-  end
-
   def instagram_fetcher
-   puts "in the instagram fetcher"
     @fetcher ||= Thread.new do
       counter = 0
       while true
@@ -45,7 +40,6 @@ class EventController < WebsocketRails::BaseController
           sleep (5)
         else
           sleep (2)
-          puts "no_photo"
         end
       end
     end
@@ -65,6 +59,7 @@ class EventController < WebsocketRails::BaseController
       end
     end
   end
+
 
   def bikes
     bike_handler ||= Thread.new do
@@ -88,11 +83,11 @@ class EventController < WebsocketRails::BaseController
   def eventful_fetcher
     @current_events = []
     Event.all.each do |event|
-      if (event.start_time - Time.now) < 900 && (event.start_time - Time.now) > -7200
+      if (event.start_time - (Time.now)) < 900 && (event.start_time - (Time.now)) > -5400
         @current_events << event
       end
     end
-    puts @current_events.length
+    puts "hey"
     send_message :eventful_success, @current_events, namespace: :events
   end
 

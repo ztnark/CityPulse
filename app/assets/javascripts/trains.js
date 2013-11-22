@@ -23,10 +23,10 @@ function trainMarker(lat, lon, map, line, val) {
     // $('.gm-style-iw').close();
     infoWindow.close();
   });
-  removeMarker(marker);
+  removeTrainMarker(marker);
 }
 
-function removeMarker(marker){
+function removeTrainMarker(marker){
   setTimeout(function(){marker.setMap(null)},14750);
   // setTimeout(function(){marker.fadeOut()});
 }

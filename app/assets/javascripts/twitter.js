@@ -40,14 +40,11 @@ function convertToMarkers(tweet){
   });
   addInfoWindow(marker, tweet[1])
   setTimeout(function(){ marker.setAnimation(null); }, 750);
-  // removeMarker(marker);
-
-  setTimeout(function(){marker.setMap(null)},240000);
+  removeTwitterMarker(marker);
 }
 
-function removeMarker(marker){
-  
-
+function removeTwitterMarker(marker){
+  setTimeout(function(){marker.setMap(null)},360000);
 }
 
 

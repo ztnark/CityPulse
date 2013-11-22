@@ -17,6 +17,8 @@ gem 'eventbrite-client'
 
 gem 'instagram'
 
+gem 'pusher'
+
 # added as a new db option
 gem 'redis'
 
