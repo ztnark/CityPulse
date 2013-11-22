@@ -192,7 +192,7 @@ var comiskeyCoords = [
   }
 
 ////////  EVENTBRITE   /////////////////////////////////////
-  var eventbrite = new WebSocketRails('localhost:3000/websocket');
+  var eventbrite = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
   eventbrite.trigger("events.eventbrite")
   setInterval(function(){
     eventbrite.trigger("events.eventbrite")
