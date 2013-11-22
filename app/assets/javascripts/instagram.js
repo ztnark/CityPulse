@@ -17,10 +17,10 @@ function setMarker(lat, lon, map, val) {
   google.maps.event.addListener(marker,'mouseout', function(e){
     infoWindow.close();
   });
-  google.maps.event.addListener(marker,'click', function(e){
-    var link = val.match(/(href=)(.+)(\starget)/)[2]
-    window.open(link);
-  });
+  // google.maps.event.addListener(marker,'click', function(e){
+  //   var link = val.match(/(href=)(.+)(\starget)/)[2]
+  //   window.open(link);
+  // });
   setTimeout(function(){marker.setMap(null)},240000);
 };
 
