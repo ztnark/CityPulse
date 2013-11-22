@@ -35,6 +35,7 @@ class EventController < WebsocketRails::BaseController
         first = an_instagram.first
         if first != nil
           an_instagram = an_instagram.first
+          puts an_instagram
           eval = eval(an_instagram)
           send_message :instagram_success, eval, namespace: :events
           sleep (5)
@@ -87,7 +88,6 @@ class EventController < WebsocketRails::BaseController
         @current_events << event
       end
     end
-    puts "hey"
     send_message :eventful_success, @current_events, namespace: :events
   end
 
