@@ -100,7 +100,7 @@ var comiskeyCoords = [
 
 // ////////EVENTFUL/////////////////////////////////////
 
- var eventful = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ var eventful = new WebSocketRails('localhost:3000/websocket');
   eventful.trigger("events.eventful")
   setInterval(function(){
     eventful.trigger("events.eventful")
@@ -192,7 +192,7 @@ var comiskeyCoords = [
   }
 
 ////////  EVENTBRITE   /////////////////////////////////////
-  var eventbrite = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var eventbrite = new WebSocketRails('localhost:3000/websocket');
   eventbrite.trigger("events.eventbrite")
   setInterval(function(){
     eventbrite.trigger("events.eventbrite")
@@ -204,7 +204,7 @@ var comiskeyCoords = [
   });
 
 ////////INSTAGRAMS/////////////////////////////////////
-  var instagram = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var instagram = new WebSocketRails('localhost:3000/websocket');
   instagram.trigger("events.instagram_initialize")
   var colcounter = 1;
   // var idcounter = 1;
@@ -236,7 +236,7 @@ var comiskeyCoords = [
   });
 
 // ////////TRAINS/////////////////////////////////////
-  var trains = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var trains = new WebSocketRails('localhost:3000/websocket');
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
     // console.log(message);
@@ -249,7 +249,7 @@ var comiskeyCoords = [
   })
 
 // // ////////PLANES/////////////////////////////////////
-  var planes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+  var planes = new WebSocketRails('localhost:3000/websocket');
   planes.trigger("events.planes")
   planes.bind("events.success", function(message){
     $.each(message.response.flightTracks.flightTrack,function(index, value){
@@ -260,7 +260,7 @@ var comiskeyCoords = [
 bikeMarkers = []
 // // ////////BIKES/////////////////////////////////////
 
- var bikes = new WebSocketRails('limitless-temple-4888.herokuapp.com/websocket');
+ var bikes = new WebSocketRails('localhost:3000/websocket');
 
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
