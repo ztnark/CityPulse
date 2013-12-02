@@ -1,4 +1,3 @@
-
 namespace :aggregator do
   desc "run trains"
   task :trains => :environment do
@@ -26,7 +25,7 @@ namespace :aggregator do
   end
 
   desc "run eventbrite"
-  task :events => :environment do
+  task :eventbrite => :environment do
     Aggregator.eventbrite
   end
 end
