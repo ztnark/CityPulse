@@ -1,4 +1,3 @@
-
 namespace :aggregator do
   desc "run trains"
   task :trains => :environment do
