@@ -15,32 +15,41 @@
 
  @import url(http://fonts.googleapis.com/css?family=Coda+Caption:800|Baumans);
 
+ @media (max-width: 700px) {
+  #chicago{
+    display:none;
+  }
+  #column_stable{
+    display: none;
+  }
+}
+
  body {
   overflow: hidden;
  }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(255,0,0,0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background: rgba(255,0,0,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255,0,0,0.4); 
+  background: rgba(255,0,0,0.4);
 }
 
  #chicago {
   position: absolute;
   left: 2%;
   font-family: 'Coda Caption', sans-serif;
-  color: rgb(256, 33, 51);
+  color: rgb(255, 33, 51);
   background-color: #CCC;
   padding-left: 20px;
   padding-right: 20px;
@@ -103,7 +112,6 @@
   margin-left: 8%;
   margin-right: 8%;
   background: rgba(59, 69, 87, 0.0);
-  height: ;
 }
 
 #instafeed{
@@ -168,7 +176,7 @@
 #prof {
   width: 53px;
   float: left;
-  padding-left: 10px; 
+  padding-left: 10px;
   padding-top: 10px;
   display: inline-block;
 }
@@ -206,7 +214,7 @@ footer div {
 }
 
 footer div:first-child {
-  margin-left: 18px; 
+  margin-left: 18px;
 }
 
 .power {
@@ -261,6 +269,41 @@ footer div a img {
 
 .lon {
   display: none;
+}
+
+#column1{
+  padding-top: 10px;
+  width: 100px;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+}
+
+#column2{
+  padding-top: 10px;
+  width: 100px;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+}
+
+#column3{
+  padding-top: 10px;
+  width: 100px;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+}
+
+#centerer{
+  width: 356px;
+  /*margin-left: 6%;
+  margin-right: 6%;*/
+  margin: 0 auto;
+  margin-left: 8%;
+  margin-right: 8%;
+  /*height: 100%;*/
+  background: rgba(59, 69, 87, 0.0);
 }
 
 #screenname{

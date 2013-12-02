@@ -1,7 +1,7 @@
 class Aggregator
 
   def self.trains
-    4.times do
+    40.times do
     trains_api = ENV['TRAINS_KEY']
     line = ['red','g','blue','brn','pink','org','p','y']
     trains_request = open("http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=#{trains_api}&rt=#{line[0]}&rt=#{line[1]}&rt=#{line[2]}&rt=#{line[3]}&rt=#{line[4]}&rt=#{line[5]}&rt=#{line[6]}&rt=#{line[7]}").first
@@ -13,12 +13,20 @@ class Aggregator
    end
   end
 
-  def self.bikes
-    bikes_request = open("http://divvybikes.com/stations/json").read()
-    bikes_hash = JSON.parse(bikes_request)
-    $redis.hmset("bikes", "bike_times",bikes_hash)
-    p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
-    p Time.now
+  def self.planes
+    8.times do
+      planes_request = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/ORD/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=10").read()
+      planes_hash = CobraVsMongoose.xml_to_hash(planes_request)
+      $redis.hmset("planes", "plane_times", planes_hash)
+      planes_request2 = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/MDW/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=10").read()
+      planes_hash2 = CobraVsMongoose.xml_to_hash(planes_request2)
+      $redis.hmset("planes2", "plane_times2", planes_hash2)
+      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
+      p Time.now
+      p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
+          # send_message :success, train[:ctatt], namespace: :events
+      sleep(15)
+    end
   end
 
   def self.instagram
@@ -120,15 +128,14 @@ class Aggregator
     p "done"
   end
 
-  def self.planes
-    4.times do
-      planes_request = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/ORD/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
-      planes_hash = CobraVsMongoose.xml_to_hash(planes_request)
-      $redis.hmset("planes", "plane_times", planes_hash)
-      planes_request2 = open("https://api.flightstats.com/flex/flightstatus/rest/v2/xml/airport/tracks/MDW/arr?appId=1962933e&appKey=a64909be7ac34351f562edd1acec0fba&includeFlightPlan=false&maxPositions=2&maxFlights=5").read()
-      planes_hash2 = CobraVsMongoose.xml_to_hash(planes_request2)
-      $redis.hmset("planes2", "plane_times2", planes_hash2)
-    end
+  def self.bikes
+    bikes_request = open("http://divvybikes.com/stations/json").read()
+    bikes_hash = JSON.parse(bikes_request)
+    $redis.hmset("bikes", "bike_times",bikes_hash)
+    p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
+    p Time.now
+    p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
+        # send_message :success, train[:ctatt], namespace: :events
   end
 
   def self.eventful
