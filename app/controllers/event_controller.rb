@@ -1,6 +1,12 @@
 class EventController < WebsocketRails::BaseController
 
   require 'open-uri'
+  require './config/coordinates'
+
+  def city 
+    center = COORDINATES[message]
+    send_message :city_is_set, center, namespace: :events
+  end
 
   def tweets
     TweetStream.configure do |config|
