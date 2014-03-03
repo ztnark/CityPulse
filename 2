@@ -1,71 +1,100 @@
-var styles = undefined
-function loadMap(message) {
-  var mapOptions = {
-    //41.8929153,-87.6359125
-    center: new google.maps.LatLng(message['lat'], message['long']),
-    zoom: 14,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    disableDefaultUI: true,
-    styles: styles
-  };
-   
-  var map = new google.maps.Map(document.getElementById("map-canvas"),
-    mapOptions);
-
-  var marker = new google.maps.Marker({
+var map = undefined;
+$(document).ready(function(){
+  var loadMap;
+  $( '#ny' ).click( function(event){
+    event.preventDefault();
+    $.get('/nyc', function(response){
+      console.log(response);
+      map = loadMap(response);
+    });
   });
-
-  var transitLayer = new google.maps.TransitLayer();
-  transitLayer.setMap(map);
-
-  var opt = { minZoom: 12, maxZoom: 16 };
-    map.setOptions(opt);
-
-  // map.setOptions({styles: styles});
-    return map;
-};
-
-var mapObjectArray = [];
-function convertTweetsToMapObjects(tweet_from_socket){
-  tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
-  convertToMarkers(tweet);
-};
-
-function convertToMarkers(tweet){
-  var marker = new google.maps.Marker({
-    animation: google.maps.Animation.BOUNCE,
-    position: tweet[0],
-    map: map,
-    icon: 'http://main.diabetes.org/dorg/images/hp/twitter_icon.gif',
-    title: 'tweet'
-  });
-  addInfoWindow(marker, tweet[1])
-  setTimeout(function(){ marker.setAnimation(null); }, 750);
-  removeTwitterMarker(marker);
-}
-
-function removeTwitterMarker(marker){
-  setTimeout(function(){marker.setMap(null)},360000);
-}
-
-
-function addInfoWindow(marker, message) {
-            var info = message;
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: message,
-                maxWidth: 200
-            });
-
-            google.maps.event.addListener(marker,'mouseover', function(e){
-              infoWindow.open(map,marker);
-            });
-            google.maps.event.addListener(marker,'mouseout', function(e){
-              // console.log(e);
-              // $('.gm-style-iw').close();
-              infoWindow.close();
-            });
   var marker;
+  //var x = 0;
+  // ////////////////////////////////Playing with polygons/////////////////////
+
+var unitedCenter;
+var unitedCoords = [
+    new google.maps.LatLng(41.88122,-87.676477),
+    new google.maps.LatLng(41.878866,-87.676477),
+    new google.maps.LatLng(41.878866,-87.6718),
+    new google.maps.LatLng(41.88122,-87.6718)
+  ];
+    unitedCenter = new google.maps.Polygon({
+    paths: unitedCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
+var dbc;
+var dbcCoords = [
+    new google.maps.LatLng(41.88988,-87.637929),
+    new google.maps.LatLng(41.889609,-87.637923),
+    new google.maps.LatLng(41.889613,-87.637119),
+    new google.maps.LatLng(41.889892,-87.637119)
+  ];
+    dbc = new google.maps.Polygon({
+    paths: dbcCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
+
+var soldierField;
+var soldierCoords = [
+    new google.maps.LatLng(41.864934,-87.618778),
+    new google.maps.LatLng(41.864934,-87.614207),
+    new google.maps.LatLng(41.860427,-87.614121),
+    new google.maps.LatLng(41.860379,-87.617404)
+  ];
+    soldierField = new google.maps.Polygon({
+    paths: soldierCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
+
+var wrigleyField;
+var wrigleyCoords = [
+    new google.maps.LatLng(41.948997,-87.654462),
+    new google.maps.LatLng(41.944532,-87.654338),
+    new google.maps.LatLng(41.948949,-87.657788)
+  ];
+    wrigleyField = new google.maps.Polygon({
+    paths: wrigleyCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
+
+var comiskeyField;
+var comiskeyCoords = [
+    new google.maps.LatLng(41.83076,-87.63869),
+    new google.maps.LatLng(41.827258,-87.638648),
+    new google.maps.LatLng(41.827326,-87.631481),
+    new google.maps.LatLng(41.830855,-87.631631)
+  ];
+
+    comiskeyField = new google.maps.Polygon({
+    paths: comiskeyCoords,
+    strokeColor: 'red',
+    strokeOpacity: 0.2,
+    strokeWeight: 0,
+    fillColor: 'red',
+    fillOpacity: 0.2
+  });
+
 ////////TWEETS/////////////////////////////////////
 
    var pusher = new Pusher('86bccb7dee9d1aea8897');
@@ -74,6 +103,7 @@ function addInfoWindow(marker, message) {
   //    convertTweetsToMapObjects(data.message);
     $("#feed").prepend("<div id='item'>" + "<div id='prof'><img src="+ data.message[3]+"></div><div id='tweet'><div id='screenname'><i class='icon-twitter'></i> @" + data.message[2] +"</div>" + data.message[1] + "<div class='lat'>"+ data.message[0][0] + "</div>" + "<div class='lon'>"+ data.message[0][1] +"</div></div></div>");
   })
+
 
 // ////////EVENTFUL/////////////////////////////////////
 
@@ -168,7 +198,6 @@ function addInfoWindow(marker, message) {
     },100);
   }
 
-/////////set city //////////////////////////////////
 ////////  EVENTBRITE   /////////////////////////////////////
   var eventbrite = new WebSocketRails('localhost:3000/websocket');
   eventbrite.trigger("events.eventbrite")
@@ -262,6 +291,8 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
        (bikeMarkers[i]).setMap(null);
      };
 });
+
+////////////// CENTER ON TWEET & INSTA WHEN CLICKED IN SIDEBAR //////
   $(document).on("click","#item",function(){
     var at = $(this.children[0].nextSibling.children[1].innerText)
     var on = $(this.children[0].nextSibling.children[2].innerText)
@@ -284,6 +315,7 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
 ////////////////////////////////////////////////////////////////////
 
   $('.timemode').on("click",function(){
+    console.log("clicked");
     if (x === 0){
       var styles = [
   {
@@ -321,32 +353,9 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
   }];
   x = 0;
 }
+  console.log(x)
 
-  });
+// map.setOptions({styles: styles});
+});
 
-}
-
-// function getTweets() {
-//   $.post('/tweets_supply', function(response){
-//   console.log(response);
-
-// });
-
-
-
-// $(document).ajaxStop(function () {
-//     google.maps.event.addListener(marker, 'click', function() {
-//     infowindow.open(map,marker);
-//   });
-
-// });
-// }
-
-
-
-
-
-// google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
+});
