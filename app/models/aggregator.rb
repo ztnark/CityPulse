@@ -24,7 +24,6 @@ class Aggregator
       p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
       p Time.now
       p "+++++++++++++++++++ PLANES:    this is a new request    +++++++++++++++++++++++++"
-          # send_message :success, train[:ctatt], namespace: :events
       sleep(15)
     end
   end
@@ -34,39 +33,13 @@ class Aggregator
     Instagram.configure do |config|
       config.client_id = ENV['INSTAGRAM']
     end
+  
     instagrams = []
     Instagram.media_search("41.881732","-87.63073",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
     Instagram.media_search("41.864028","-87.630301",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
     Instagram.media_search("41.882307","-87.649269",{radius: 4500, count: 10}).each {|x| instagrams.push(x)}
     counter=0
-    instagrams.shuffle.each do |ig|
-      counter += 1
-      object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-      string = object.to_s
-      # time =  Time.now.strftime("%3N")[1..2]
-      $redis.hmset("object", counter.to_s, object)
-    end
-    sleep(105)
-    p "first"
-    instagrams = []
-    Instagram.media_search("41.892019","-87.652874",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.901219","-87.645063",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.934366","-87.646093",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    counter=0
-    instagrams.shuffle.each do |ig|
-      counter += 1
-      object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
-      string = object.to_s
-      # time =  Time.now.strftime("%3N")[1..2]
-      $redis.hmset("object", counter.to_s, object)
-    end
-    sleep(115)
-    p "second"
-    instagrams = []
-    Instagram.media_search("41.894703","-87.632875",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.899686","-87.660427",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    Instagram.media_search("41.913292","-87.649527",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
-    counter=0
+
     instagrams.shuffle.each do |ig|
       counter += 1
       object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
@@ -75,7 +48,37 @@ class Aggregator
     end
 
     sleep(105)
-    p "third"
+    puts "first"
+    instagrams = []
+    Instagram.media_search("41.892019","-87.652874",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.901219","-87.645063",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.934366","-87.646093",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    counter=0
+
+    instagrams.shuffle.each do |ig|
+      counter += 1
+      object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+      string = object.to_s
+      $redis.hmset("object", counter.to_s, object)
+    end
+
+    sleep(115)
+    puts "second"
+    instagrams = []
+    Instagram.media_search("41.894703","-87.632875",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.899686","-87.660427",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    Instagram.media_search("41.913292","-87.649527",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
+    counter=0
+    
+    instagrams.shuffle.each do |ig|
+      counter += 1
+      object = {latitude: ig.to_hash['location']['latitude'],longitude: ig.to_hash['location']['longitude'],url: "<a href=#{ig.to_hash['images']['low_resolution']['url']} target='new'><img src=#{ig.to_hash['images']['low_resolution']['url']} width=100 height=100></a>", }
+      string = object.to_s
+      $redis.hmset("object", counter.to_s, object)
+    end
+
+    sleep(105)
+    puts "third"
     instagrams = []
 
     Instagram.media_search("41.845616","-87.62043",{radius: 4500, count: 11}).each {|x| instagrams.push(x)}
@@ -135,7 +138,6 @@ class Aggregator
     p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
     p Time.now
     p "+++++++++++++++++++ BIKES:    this is a new request    +++++++++++++++++++++++++"
-        # send_message :success, train[:ctatt], namespace: :events
   end
 
   def self.eventful
