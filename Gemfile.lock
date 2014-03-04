@@ -250,7 +250,7 @@ DEPENDENCIES
   pg
   pry
   pusher
-  rails
+  rails (= 4.0.0)
   rails_12factor
   redis
   redis-kit

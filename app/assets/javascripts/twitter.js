@@ -1,7 +1,6 @@
 var styles = undefined
 function loadMap(message) {
   var mapOptions = {
-    //41.8929153,-87.6359125
     center: new google.maps.LatLng(message['lat'], message['long']),
     zoom: 14,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -21,11 +20,11 @@ function loadMap(message) {
   var opt = { minZoom: 12, maxZoom: 16 };
     map.setOptions(opt);
 
-  // map.setOptions({styles: styles});
     return map;
 };
 
 var mapObjectArray = [];
+
 function convertTweetsToMapObjects(tweet_from_socket){
   tweet = [new google.maps.LatLng(tweet_from_socket[0][0],tweet_from_socket[0][1]),tweet_from_socket[1],tweet_from_socket[2]]
   convertToMarkers(tweet);
@@ -66,6 +65,7 @@ function addInfoWindow(marker, message) {
               infoWindow.close();
             });
   var marker;
+
 ////////TWEETS/////////////////////////////////////
 
    var pusher = new Pusher('86bccb7dee9d1aea8897');
@@ -168,7 +168,6 @@ function addInfoWindow(marker, message) {
     },100);
   }
 
-/////////set city //////////////////////////////////
 ////////  EVENTBRITE   /////////////////////////////////////
   var eventbrite = new WebSocketRails('localhost:3000/websocket');
   eventbrite.trigger("events.eventbrite")
@@ -185,19 +184,10 @@ function addInfoWindow(marker, message) {
   var instagram = new WebSocketRails('localhost:3000/websocket');
   instagram.trigger("events.instagram_initialize")
   var colcounter = 1;
-  // var idcounter = 1;
   instagram.bind("events.instagram_success", function(message){
     var url = message.url.replace(/(width=)(\d{3})(\sheight=)(\d{3})/,"$1250$3250");
     var $that = $("#instafeed #column" + colcounter).prepend("<div id='instaitem'>" + "<div class='instagram'>" + message.url + "</div><div class='lat'>" + message.latitude + "</div>" + "<div class='lon'>"+ message.longitude +"</div></div>");
     setMarker(message.latitude, message.longitude, map, url);
-    // setTimeout(function(){
-      // var id_remove = '#' + (idcounter - 1)
-       // $(id_remove).remove()
-     // },10000);
-    // setTimeout(function(){
-    //   $that.remove();
-    //   console.log("test")
-    // },120000)
     if (colcounter===3){
       colcounter = 1
     }
@@ -205,23 +195,15 @@ function addInfoWindow(marker, message) {
       colcounter +=1
     }
 
-    // if (idcounter === 25){
-    //   idcounter = 1
-    // }
-    // else {
-    //   idcounter += 1
-    // }
   });
 
 // ////////TRAINS/////////////////////////////////////
   var trains = new WebSocketRails('localhost:3000/websocket');
   trains.trigger("events.trains")
   trains.bind("events.success", function(message){
-    // console.log(message);
     $.each(message.ctatt.route,function(index, value){
       $.each(value.train,function(ind, val){
         trainMarker(val.lat.$, val.lon.$, map, index, 'Train: ' + val.rn.$ + '<br>' + 'Headed to ' + val.destNm.$ + '<br>' + 'Next Stop: ' + val.nextStaNm.$)
-        // + ' in ' + Math.round(((new Date(val.arrT.$.replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")) - new Date()) / 60000 )) + ' minutes' )
       });
     })
   })
@@ -243,7 +225,6 @@ bikeMarkers = []
   bikes.trigger("events.bikes");
   bikes.bind("events.success", function(message){
     $.each(message.stationBeanList,function(index, value){
-      // console.log(value)
     bikeMarkers.push(bikeMarker(value.latitude, value.longitude, map, value));
     });
   });
@@ -281,72 +262,4 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
     map.setCenter(new google.maps.LatLng(instaLat,instaLon));
     map.setZoom(15)
   });
-////////////////////////////////////////////////////////////////////
-
-  $('.timemode').on("click",function(){
-    if (x === 0){
-      var styles = [
-  {
-    "stylers": [
-      { "invert_lightness": true },
-      { "lightness": 23 }
-    ]
-  },{
-    "featureType": "road",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "stylers": [
-      { "lightness": 19 }
-    ]
-  }]
-  x = 1
-    }
-    else{
-      var styles = [
-      {
-    "stylers": [
-      { "invert_lightness": true }
-    ]
-  },{
-    "featureType": "road",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "stylers": [
-      { "lightness": 19 }
-    ]
-  }];
-  x = 0;
 }
-
-  });
-
-}
-
-// function getTweets() {
-//   $.post('/tweets_supply', function(response){
-//   console.log(response);
-
-// });
-
-
-
-// $(document).ajaxStop(function () {
-//     google.maps.event.addListener(marker, 'click', function() {
-//     infowindow.open(map,marker);
-//   });
-
-// });
-// }
-
-
-
-
-
-// google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
