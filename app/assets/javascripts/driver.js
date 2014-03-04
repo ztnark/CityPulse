@@ -1,5 +1,4 @@
 var map = undefined;
-var city = undefined;
 
 $(document).ready(function(){
   $(document).on("click", ".city", function(){
