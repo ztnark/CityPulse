@@ -10,7 +10,6 @@ $ ->
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     initialize: ->
-      console.log @.myOptions
 
 
   class MapView extends Backbone.View
@@ -25,15 +24,13 @@ $ ->
       'click .city' : "show_map",
 
     initialize: ->
+      console.log @.model
       @model.view = @
       @.render()
-
 
     render: ->
       i = new google.maps.Map $(@.tagName)[0], @.myOptions
       i
-      console.log @model
-      console.log i
 
     
   mapview = new MapView

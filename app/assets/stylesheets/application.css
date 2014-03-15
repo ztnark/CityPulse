@@ -69,7 +69,6 @@
   width: calc(100%);
   float: left;
   position: relative;
-  display: none;
   /*z-index: 1;*/
 }
 
