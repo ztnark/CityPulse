@@ -13,12 +13,11 @@ define ['backbone', 'models/map'], (Backbone, MapModel) ->
       'click .city' : "show_map",
 
     initialize: ->
-      console.log 'in initialize'
       console.log @.model
       @model.view = @
       @.render()
 
+      console.log 'in initialize'
     render: ->
-      console.log 'in render'
-      i = new google.maps.Map $(@.tagName)[0], @.myOptions
+      new google.maps.Map $(@.tagName)[0], @.myOptions
 

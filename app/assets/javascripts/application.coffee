@@ -9,8 +9,9 @@ require.config
     backbone: 'backbone-min'
     app: 'application'
 
-require ['jquery', 'backbone', 'router', 'views/map'], ($, Backbone, Router, MapView) ->
+require ['jquery', 'backbone', 'router', 'views/map', 'sockets'], ($, Backbone, Router, MapView, Sockets) ->
   router = new Router
   router.bind("index", new MapView)
+  twitter = new Sockets
   alert "The app has started with requirejs. yay!!"
 
