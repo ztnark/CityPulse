@@ -13,5 +13,4 @@ require ['jquery', 'backbone', 'router', 'views/map', 'sockets'], ($, Backbone, 
   router = new Router
   router.bind("index", new MapView)
   twitter = new Sockets
-  alert "The app has started with requirejs. yay!!"
 
