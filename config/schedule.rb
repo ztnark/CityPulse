@@ -20,27 +20,28 @@
 # sends all output to this file. check here if you are not sure how crons are running
 set :output, 'log/cron.log'
 
+job_type :rbenv_runner, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
+                         cd :path && bin/rails runner -e :environment ':task' :output }
 every 10.minutes do
-  runner "Aggregator.instagram", environment: 'development'
+  rbenv_runner "Aggregator.instagram", environment: 'development'
 end
 
-
 every 1.minutes do
-  runner "Aggregator.trains", environment: 'development'
+  rbenv_runner "Aggregator.trains", environment: 'development'
 end
 
 every 1.day, :at => '2:05 am' do
-  runner "Aggregator.eventful", environment: 'development'
+  rbenv_runner "Aggregator.eventful", environment: 'development'
 end
 
 every 1.day, :at => '2:00 am' do
-  runner "Aggregator.eventbrite", environment: 'development'
+  rbenv_runner "Aggregator.eventbrite", environment: 'development'
 end
 
 every 1.minutes do
-  runner "Aggregator.planes", environment: 'development'
+  rbenv_runner "Aggregator.planes", environment: 'development'
 end
 
 every 5.minutes do
-  runner "Aggregator.bikes", environment: 'development'
+  rbenv_runner "Aggregator.bikes", environment: 'development'
 end
