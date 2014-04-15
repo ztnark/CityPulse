@@ -9,7 +9,7 @@ require.config
     backbone: 'backbone-min'
     app: 'application'
 
-require ['jquery', 'backbone', 'router', 'views/map', 'sockets'], ($, Backbone, Router, MapView, Sockets) ->
+require ['jquery', 'backbone', 'router', 'views/map', 'sockets', 'websocket_rails/main'], ($, Backbone, Router, MapView, Sockets, WebSocketRails) ->
   router = new Router
   router.bind("index", new MapView)
   twitter = new Sockets
