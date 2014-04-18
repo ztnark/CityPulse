@@ -1,3 +1,11 @@
 define ['backbone'], (Backbone) ->
   class Instagram extends Backbone.Model
-    constructor: (Instagram) ->
+    constructor: (instagram) ->
+      @url = instagram.url
+      @coordinates = [instagram.latitude, instagram.longitude]
+
+
+    initialize: ->
+
+
+
