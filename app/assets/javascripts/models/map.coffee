@@ -6,3 +6,4 @@ define ['backbone'], (Backbone) ->
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     initialize: ->
+
