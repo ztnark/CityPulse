@@ -57,6 +57,8 @@ class EventController < WebsocketRails::BaseController
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
       send_message :success, train, namespace: :events
+      puts '+++++ this is a train block  +++++++++++'
+      p train
       sleep(15)
       end
     end
