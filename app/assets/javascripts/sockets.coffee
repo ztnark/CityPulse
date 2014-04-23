@@ -1,4 +1,4 @@
-define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram', 'views/instagram', 'views/train', 'models/train'], ($, Backbone, Tweet, TweetView, Instagram, InstagramView, TrainView, Train) ->
+define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram', 'views/instagram', 'views/train', 'models/train', 'models/eventful', 'views/eventful'], ($, Backbone, Tweet, TweetView, Instagram, InstagramView, TrainView, Train, Eventful, EventfulView) ->
 
   class Sockets extends Backbone.Model
     pusher: new Pusher('86bccb7dee9d1aea8897')
@@ -18,17 +18,18 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
       train_channel = new WebSocketRails('localhost:3000/websocket')
       train_channel.trigger('events.trains')
       train_channel.bind "events.success", (message) ->
-        console.log message
         $.each message.ctatt.route, (index, value) ->
           $.each value.train, (ind, val) ->
             tr = new Train(val, ind)
             new TrainView(tr)
-            # trainMarker val.lat.$, val.lon.$, map, index, "Train: " + val.rn.$ + "<br>" + "Headed to " + val.destNm.$ + "<br>" + "Next Stop: " + val.nextStaNm.$
-            return
-          return
-        return
 
-      
+      eventful = new WebSocketRails("localhost:3000/websocket")
+      eventful.trigger "events.eventful"
+      eventful.bind "events.eventful_success", (message) ->
+        $.each message, (index, value) ->
+          event = new Eventful(value)
+          new EventfulView(event)
+          
       twitter_channel =  @.pusher.subscribe('twitter_channel')
       twitter_channel.bind 'twitter_event', (data) ->
         t = new Tweet(data['message'])

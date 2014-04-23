@@ -92,6 +92,7 @@ class EventController < WebsocketRails::BaseController
       end
     end
     send_message :eventful_success, @current_events, namespace: :events
+    puts "EVENTS have been sent++++++++++++++++"
   end
 
   def eventbrite_fetcher
