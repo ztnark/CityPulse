@@ -1,4 +1,4 @@
-define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram', 'views/instagram', 'views/train', 'models/train', 'models/eventful', 'views/eventful'], ($, Backbone, Tweet, TweetView, Instagram, InstagramView, TrainView, Train, Eventful, EventfulView) ->
+define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram', 'views/instagram', 'views/train', 'models/train', 'models/eventful', 'views/eventful', 'models/eventbrite', 'views/eventbrite', 'models/divvy', 'views/divvy'], ($, Backbone, Tweet, TweetView, Instagram, InstagramView, TrainView, Train, Eventful, EventfulView, Eventbrite, EventbriteView, Divvy, DivvyView) ->
 
   class Sockets extends Backbone.Model
     pusher: new Pusher('86bccb7dee9d1aea8897')
@@ -30,6 +30,25 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
           event = new Eventful(value)
           new EventfulView(event)
           
+      eventbrite = new WebSocketRails("localhost:3000/websocket")
+      eventbrite.trigger "events.eventbrite"
+      eventbrite.bind "events.eventbrite_success", (message) ->
+        console.log message
+        $.each message, (index, value) ->
+          console.log value
+          eb = new Eventbrite(value)
+          console.log 'this is eb'
+          console.log eb
+          new EventbriteView(eb)
+
+      # divvy_stations = []VgcV
+      divvy = new WebSocketRails("localhost:3000/websocket")
+      divvy.trigger "events.bikes"
+      divvy.bind "events.success", (message) ->
+        $.each message.stationBeanList, (index, value) ->
+          d = new Divvy(value)
+          new DivvyView(d)
+
       twitter_channel =  @.pusher.subscribe('twitter_channel')
       twitter_channel.bind 'twitter_event', (data) ->
         t = new Tweet(data['message'])
