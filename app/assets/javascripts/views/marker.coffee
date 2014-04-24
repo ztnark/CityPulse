@@ -12,6 +12,9 @@ define ['backbone', 'views/map'], (Backbone, Map) ->
       options = { content: data.text,
       maxWidth: 200 }
 
+      @time_animation(point)
+      @set_expiration(point, data.timeout)
+
       window = new google.maps.InfoWindow(options)
 
       google.maps.event.addListener point, "mouseover", (e) ->
@@ -22,3 +25,14 @@ define ['backbone', 'views/map'], (Backbone, Map) ->
 
       google.maps.event.addListener point, "click", (e) ->
         window.open Map.get(), point
+
+    time_animation: (marker) ->
+      setTimeout (->
+        marker.setAnimation null
+      ), 750
+
+    set_expiration: (marker, timeout) ->
+      setTimeout (->
+        marker.setMap null
+      ), timeout
+      

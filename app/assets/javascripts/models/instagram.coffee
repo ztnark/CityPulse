@@ -3,6 +3,8 @@ define ['backbone'], (Backbone) ->
     constructor: (instagram) ->
       @url = instagram.url
       @coordinates = [instagram.latitude, instagram.longitude]
+      @timeout = 240000
+      @text = instagram.url
 
 
     initialize: ->

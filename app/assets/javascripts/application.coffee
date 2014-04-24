@@ -13,4 +13,3 @@ require ['jquery', 'backbone', 'router', 'views/map', 'sockets', 'websocket_rail
   router = new Router
   router.bind("index", Map.get())
   twitter = new Sockets
-

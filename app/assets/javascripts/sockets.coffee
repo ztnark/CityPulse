@@ -35,10 +35,7 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
       eventbrite.bind "events.eventbrite_success", (message) ->
         console.log message
         $.each message, (index, value) ->
-          console.log value
           eb = new Eventbrite(value)
-          console.log 'this is eb'
-          console.log eb
           new EventbriteView(eb)
 
       # divvy_stations = []VgcV
