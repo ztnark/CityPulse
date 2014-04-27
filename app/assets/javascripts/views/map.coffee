@@ -12,6 +12,7 @@ define ['backbone'], (Backbone) ->
         center: new google.maps.LatLng 41.892915, -87.635912
         zoom: 14
         mapTypeId: google.maps.MapTypeId.ROADMAP
+        disableDefaultUI: true
         styles: @styles
       map = new google.maps.Map $('#map-canvas')[0], myOptions
       transitLayer = new google.maps.TransitLayer()

@@ -2,13 +2,13 @@ define ['backbone', 'views/map'], (Backbone, Map) ->
   class DivvyView extends Backbone.View
 
     initialize: (divvy) ->
-      console.log 'divvy time'
       latlng = new google.maps.LatLng(divvy.coordinates[0], divvy.coordinates[1])
       point = new google.maps.Marker(
         position: latlng
         map: Map.get()
         icon: divvy.icon
       )
+
       options = { content: "#{divvy.station_name} <br> Available Bikes: #{divvy.available_bikes} <br> Available Docks: #{divvy.available_docks}", 
       maxWidth: 200 }
 
