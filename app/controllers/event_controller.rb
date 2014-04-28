@@ -1,6 +1,12 @@
 class EventController < WebsocketRails::BaseController
 
   require 'open-uri'
+  require './config/coordinates'
+
+  def city 
+    center = COORDINATES[message]
+    send_message :city_is_set, center, namespace: :events
+  end
 
   def tweets
     TweetStream.configure do |config|
@@ -10,14 +16,9 @@ class EventController < WebsocketRails::BaseController
       config.oauth_token_secret = ENV['TWITTER_SECRET']
       config.auth_method        = :oauth
     end
-    # puts "cats"
+
     @tweets = []
     TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
-      # puts "#{status.text}"
-      # puts "#{status[:user][:screen_name]}"
-      # puts "#{status[:geo][:coordinates]}"
-      # puts "#{status[:user][:profile_image_url_https]}"
-      # puts " ++++++++++++++++++++++++++"
       @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
       if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
         send_message :tweet_success, @tweet, namespace: :events
@@ -56,6 +57,8 @@ class EventController < WebsocketRails::BaseController
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
       send_message :success, train, namespace: :events
+      puts '+++++ this is a train block  +++++++++++'
+      p train
       sleep(15)
       end
     end
@@ -89,6 +92,7 @@ class EventController < WebsocketRails::BaseController
       end
     end
     send_message :eventful_success, @current_events, namespace: :events
+    puts "EVENTS have been sent++++++++++++++++"
   end
 
   def eventbrite_fetcher

@@ -6,7 +6,11 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'requirejs-rails', :git => 'https://github.com/coderanger/requirejs-rails.git' # See https://github.com/jwhitley/requirejs-rails/pull/59
+
 gem 'tweetstream'
+
+gem 'pry'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -76,6 +80,12 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+group :development do
+  gem "better_errors"
+  gem 'binding_of_caller'
+end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
