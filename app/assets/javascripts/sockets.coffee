@@ -33,12 +33,10 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
       eventbrite = new WebSocketRails("localhost:3000/websocket")
       eventbrite.trigger "events.eventbrite"
       eventbrite.bind "events.eventbrite_success", (message) ->
-        console.log message
         $.each message, (index, value) ->
           eb = new Eventbrite(value)
           new EventbriteView(eb)
 
-      # divvy_stations = []VgcV
       divvy = new WebSocketRails("localhost:3000/websocket")
       divvy.trigger "events.bikes"
       divvy.bind "events.success", (message) ->
@@ -46,7 +44,8 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
           d = new Divvy(value)
           new DivvyView(d)
 
-      twitter_channel =  @.pusher.subscribe('twitter_channel')
-      twitter_channel.bind 'twitter_event', (data) ->
-        t = new Tweet(data['message'])
+      twitter_channel = new WebSocketRails("localhost:3000/websocket")
+      twitter_channel.trigger "events.tweets"
+      twitter_channel.bind 'events.tweet_success', (data) ->
+        t = new Tweet(data)
         new TweetView (t)

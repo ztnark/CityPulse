@@ -17,9 +17,8 @@ class EventController < WebsocketRails::BaseController
       config.auth_method        = :oauth
     end
 
-    @tweets = []
     TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
-      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name],status[:user][:profile_image_url_https]]
+      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name], status[:user][:profile_image_url_https]]
       if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
         send_message :tweet_success, @tweet, namespace: :events
       end
@@ -57,8 +56,6 @@ class EventController < WebsocketRails::BaseController
       train_data = $redis.hmget("trains", "train_times")
       train = eval(train_data.first)
       send_message :success, train, namespace: :events
-      puts '+++++ this is a train block  +++++++++++'
-      p train
       sleep(15)
       end
     end
