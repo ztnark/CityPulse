@@ -12,7 +12,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 
 set :domain, '107.170.178.218'
 set :deploy_to, '/var/www/citypulse.io'
-set :repository, 'git://ztnark/CityPulse/'
+set :repository, 'git@github.com:ztnark/CityPulse.git'
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
@@ -20,7 +20,7 @@ set :branch, 'master'
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-#   set :user, 'foobar'    # Username in the server to SSH to.
+set :user, 'root'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
