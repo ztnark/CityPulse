@@ -25,13 +25,12 @@ gem 'pusher'
 
 # added as a new db option
 gem 'redis'
+gem 'mina', github: 'nadarei/mina'
 
 # added because redis is a goddamn mess
 gem 'redis-kit'
 
 gem 'unicorn'
-
-gem 'gemoji'
 
 gem 'rails_12factor'
 
@@ -45,8 +44,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-
-gem "koala", "~> 1.7.0rc1"
 
 gem "flightstats-flex", "~> 0.3.0"
 
