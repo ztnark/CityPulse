@@ -48,7 +48,7 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'RAILS_ENV=production rails:db_migrate'
+    invoke :'rake:db_migrate'
     invoke :'rails:assets_precompile'
 
     to :launch do
