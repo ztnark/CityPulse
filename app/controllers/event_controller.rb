@@ -4,6 +4,7 @@ class EventController < WebsocketRails::BaseController
   require './config/coordinates'
 
   def city 
+    puts "hello deployed successfully"
     center = COORDINATES[message]
     send_message :city_is_set, center, namespace: :events
   end
