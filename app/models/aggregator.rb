@@ -1,5 +1,8 @@
 class Aggregator
 
+  require 'open-uri'
+
+
   def self.trains
     40.times do
     trains_api = ENV['TRAINS_KEY']

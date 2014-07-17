@@ -47,5 +47,6 @@ define ['jquery', 'backbone', 'models/tweet', 'views/tweet', 'models/instagram',
       twitter_channel = new WebSocketRails("localhost:3000/websocket")
       twitter_channel.trigger "events.tweets"
       twitter_channel.bind 'events.tweet_success', (data) ->
+        console.log 'tweet'
         t = new Tweet(data)
         new TweetView (t)

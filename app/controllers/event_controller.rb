@@ -8,22 +8,36 @@ class EventController < WebsocketRails::BaseController
     send_message :city_is_set, center, namespace: :events
   end
 
-  def tweets
-    TweetStream.configure do |config|
-      config.consumer_key       = ENV['TWITTER_CONSUMER']
-      config.consumer_secret    = ENV['TWITTER_CONSUMER_SECRET']
-      config.oauth_token        = ENV['TWITTER_OAUTH_TOKEN']
-      config.oauth_token_secret = ENV['TWITTER_SECRET']
-      config.auth_method        = :oauth
-    end
+  # def tweets
+  #   TweetStream.configure do |config|
+  #     config.consumer_key       = ENV['TWITTER_CONSUMER']
+  #     config.consumer_secret    = ENV['TWITTER_CONSUMER_SECRET']
+  #     config.oauth_token        = ENV['TWITTER_OAUTH_TOKEN']
+  #     config.oauth_token_secret = ENV['TWITTER_SECRET']
+  #     config.auth_method        = :oauth
+  #   end
 
-    TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
-      @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name], status[:user][:profile_image_url_https]]
-      if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
-        send_message :tweet_success, @tweet, namespace: :events
+  #   TweetStream::Client.new.locations(-87.739906, 41.816073, -87.639656, 41.956139) do |status, client|
+  #     @tweet = [status[:geo][:coordinates], status.text, status[:user][:screen_name], status[:user][:profile_image_url_https]]
+  #     if @tweet[0][0] < 42.022686 && @tweet[0][0] > 41.774084 && @tweet[0][1] > -87.957573 && @tweet[0][1] < -87.501812 && @tweet[1][0] != "@"
+  #       send_message :tweet_success, @tweet, namespace: :events
+  #     end
+  #   end
+  # end
+
+  def tweets
+    handles = []
+    while true
+      last_tweet = eval($redis.hmget("tweets", "recent_tweet").first)
+      unless handles.include?(last_tweet[2])
+        send_message :tweet_success, last_tweet, namespace: :events
+        handles << last_tweet[2]
+        sleep(2)
       end
+      sleep(2)
     end
   end
+  
 
   def instagram_fetcher
     @fetcher ||= Thread.new do
@@ -51,6 +65,7 @@ class EventController < WebsocketRails::BaseController
   end
 
   def trains
+    puts "train Controller"
     train_handler ||= Thread.new do
       while true
       train_data = $redis.hmget("trains", "train_times")
